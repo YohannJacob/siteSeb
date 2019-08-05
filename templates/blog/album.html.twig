@@ -3,8 +3,17 @@
 
 {% block body %}
     <div class="album">
-        <img alt="" class="mini" src="https://via.placeholder.com/250">
-        <p>Lorem ipsum dolor sit amet.</p>
+            <h3>{{ album.title }}</h3>
+            <p>{{ album.Subtitle }}</p>
+            <img alt="" class="mini" src="{{ album.cover }}">
+            <p>{{ album.Scenario }}</p>
+            <p>{{ album.Dessin }}</p>
+            <p>{{ album.Couleur }}</p>
+            <p>{{ album.date }}</p>
+
+            <p>{{ album.content }}</p>
+            <img alt="" class="mini" src="{{ album.image1 }}">
+            <img alt="" class="mini" src="{{ album.image2 }}">
     </div>
 
 {% endblock %}

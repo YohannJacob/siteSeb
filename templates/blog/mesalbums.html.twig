@@ -1,41 +1,24 @@
 {% extends 'base.html.twig' %}
-{% block title %}Mes albums{% endblock %}
+{% block title %}Mes albums
+{% endblock %}
 
 {% block body %}
 
     <div class="div header">
         <h3 class="titre">Consulter mes albums</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quaerat at quam, dicta nostrum alias provident earum adipisci, odio autem ratione dolorum. Itaque inventore corporis eius incidunt odio, necessitatibus voluptas quasi. Dignissimos eius minus vitae culpa. Odio eius ab at!</p>
-    </div>
-    <div class="album">
-        <img alt="" class="mini" src="https://via.placeholder.com/250">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <a class="btn btn-primary" href="{{ path('album') }}">En savoir plus</a>
-
     </div>
 
-    <div class="album">
-        <img alt="" class="mini" src="https://via.placeholder.com/250">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <a class="btn btn-primary" href="{{ path('album') }}">En savoir plus</a>
-    </div>
+    {% for album in albums %}
+        <div class="album">
+            <h3>{{ album.title }}</h3>
+            <p>{{ album.Subtitle }}</p>
+            <img alt="" class="mini" src="{{ album.cover }}">
+            <p>{{ album.content | raw}}</p>
 
-    <div class="album">
-        <img alt="" class="mini" src="https://via.placeholder.com/250">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <a class="btn btn-primary" href="{{ path('album') }}">En savoir plus</a>
-    </div>
+            <a class="btn btn-primary" href="{{ path('album') }}">En savoir plus</a>
 
-    <div class="album">
-        <img alt="" class="mini" src="https://via.placeholder.com/250">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <a class="btn btn-primary" href="{{ path('album') }}">En savoir plus</a>
-    </div>
+        </div>
+    {% endfor %}
 
-    <div class="album">
-        <img alt="" class="mini" src="https://via.placeholder.com/250">
-        <p>Lorem ipsum dolor sit amet.</p>
-        <a class="btn btn-primary" href="{{ path('album') }}">En savoir plus</a>
-    </div>
 
 {% endblock %}

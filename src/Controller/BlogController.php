@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Albums;
 
 class BlogController extends AbstractController
 {
@@ -25,7 +26,13 @@ class BlogController extends AbstractController
      */
     public function mesAlbums()
     {
-        return $this->render('blog/mesalbums.html.twig');
+        $repo = $this->getDoctrine()->getRepository(Albums::class);
+        $albums = $repo->findAll();
+
+        return $this->render('blog/mesalbums.html.twig',[
+            'controller_name' => 'BlogController',
+            "albums"=>$albums,
+        ]);
     }
 
     /**

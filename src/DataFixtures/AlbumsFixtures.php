@@ -20,7 +20,7 @@ class AlbumsFixtures extends Fixture
                         ->setCouleur("coloriste")
                         ->setDate(new \DateTime())
                         ->setContent("<p>Texte de présentation de l'album de quelques lignes.</p>")
-                        ->setCover("https://via.placeholder.com/375x309")
+                        ->setCover("https://via.placeholder.com/309x375")
                         ->setImage1("https://via.placeholder.com/568x378")
                         ->setImage2("https://via.placeholder.com/568x378");
             $manager->persist($album);
