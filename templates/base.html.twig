@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="IE=edge" http-equiv="X-UA-Compatible">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <meta
+        content="XXX" name="description">
+
+        <!-- Twitter Card data -->
+        <meta content="summary" name="twitter:card">
+        <meta content="@billetalaska" name="twitter:site"/>
+        <meta content="XXX" name="twitter:title"/>
+        <meta content="XXX" name="twitter:description"/>
+        <meta
+        content="http://www.yohannjacob.fr/Openclassrooms/Projet4/img/photo1.jpg" name="twitter:image:src"/>
+
+        <!-- Open Graph data -->
+        <meta content="XXX" property="og:title"/>
+        <meta content="website" property="og:type"/>
+        <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5/index.html" property="og:url"/>
+        <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5//images/equipe.jpg" property="og:image"/>
+        <meta content="XXX" property="og:description"/>
+
+        <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
+        <link rel="stylesheet" href="{{ asset('web/css/base.css') }}" type="text/css"/>
+        <link href="{{ asset('web/css/style.css') }}" rel="stylesheet"/>
+
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+        {% block stylesheets %}
+
+        {% endblock %}
+    </head>
+    <body>
+        {# Mise en place de la navbar au dessus du block body#}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Sébastien Mao</a>
+            <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor03" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mesAlbums">Mes albums</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/aPropos">A propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div
+            class="container-fluid">
+            {# body #}
+            {% block body %}{% endblock %}
+
+            {# Footer #}
+            <footer>©Studio-Yaho 2019</footer>
+        </div>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

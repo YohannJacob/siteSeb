@@ -1,0 +1,266 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    /* height: 40vh; */
+    overflow-x: hidden;
+}
+
+/* CSS du header */
+
+#accueil {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    height: 120px;
+    width: 100%;
+}
+
+#logo {
+    margin-left: 80px;
+}
+
+#titre {
+    top: 10px;
+    width: 450px;
+    font-size: 28px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 400;
+}
+
+#titre .em {
+    position: relative;
+    top: -9px;
+}
+
+/* CSS du slider photo */
+
+.slider {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 650px;
+    overflow-x: hidden;
+
+}
+
+.slide {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.slide1 {
+    height: 650px;
+    background-image: url("../images/slider/bg1.jpg");
+}
+
+.slide2 {
+    background-image: url("../images/slider/bg2.jpg");
+    display: none;
+    height: 650px;
+}
+
+.slide3 {
+    background-image: url("../images/slider/bg3.jpg");
+    display: none;
+    height: 650px;
+}
+
+.mySlides {
+    display: none
+}
+
+.w3-left {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translatex(-50%);
+    left: 30px;
+    color: #000;
+}
+
+.w3-right {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translatex(-50%);
+    right: 15px;
+    color: #000;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 0%);
+}
+
+.titre {
+    text-align: center;
+    color: red;
+    padding: 30px 0 30px 0;
+}
+
+h1 a {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 28px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 400;
+    text-decoration: none;
+    color: #59B589;
+
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 30px 0 30px 0;
+
+}
+
+.badge {
+    height: 13px;
+    width: 13px;
+    margin: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #fff;
+
+}
+
+
+.actif {
+    background-color: #59B589 !important;
+}
+
+.hover-white {
+    background-color: rgba(89, 181, 137, 0.4);
+}
+
+.hover-white:hover {
+    background-color: rgba(40, 40, 40, 0.8);
+}
+
+.activite {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* CSS du footer */
+footer {
+    width: 100%;
+    height: 30px;
+    background-color: rgba(89, 181, 137, 0.5)!important;
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 28px;
+}
+
+footer p {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #fff;
+    padding: 20px 0 0 0;
+    text-align: center;
+    line-height: 16px;
+}
+
+/* ------ RESPONSIVE entre 1024px et 1200px ------ */
+@media screen and (min-width: 1024px) and (max-width:1200px) {}
+
+/* ------ RESPONSIVE 1024px ------ */
+@media screen and (min-width: 768px) and (max-width: 1023px) {}
+
+/* ------ RESPONSIVE mobile et tablette en dessous de 768px ------ */
+@media screen and (max-width: 769px) {
+    .slide1 {
+        height: 650px;
+        background-image: url("../images/slider/bg1-tab.jpg");
+    }
+
+    .slide2 {
+        height: 650px;
+        background-image: url("../images/slider/bg2-tab.jpg");
+    }
+
+    .slide3 {
+        height: 650px;
+        background-image: url("../images/slider/bg3-tab.jpg");
+    }
+
+    .w3-left,
+    .w3-right {
+        top: 25%;
+    }
+
+    #titre {
+        font-size: 24px;
+    }
+
+    #logo {
+        margin-left: 45px;
+        margin-right: 60px;
+        width: 170px;
+    }
+}
+
+/* ------ RESPONSIVE mobile en dessous de 425px ------ */
+@media screen and (max-width: 426px) {
+    .slide1 {
+        background-image: url("../images/slider/bg1-mob.jpg");
+    }
+
+    .slide2 {
+        background-image: url("../images/slider/bg2-mob.jpg");
+    }
+
+    .slide3 {
+        background-image: url("../images/slider/bg3-mob.jpg");
+    }
+
+    .navigation {
+        bottom: 150px;
+    }
+
+    .titre {
+        position: absolute;
+        bottom: -60px;
+        padding: 0px;
+        text-align: center;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: 100vw;
+    }
+
+    .w3-left,
+    .w3-right {
+        display: none;
+    }
+
+    #titre {
+        font-size: 18px;
+    }
+
+    #logo {
+        margin-left: 25px;
+        margin-right: 55px;
+        width: 320px;
+    }
+}
