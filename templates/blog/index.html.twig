@@ -3,18 +3,29 @@
 {% block title %}Sébastien Mao auteur de Bande déssinée{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+ <div class="div header">
+        <h3 class="titre">mes actualités</h3>
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="row">
+        {% for new in news %}
+            <div class="col-lg-4 offset-lg-1 marg-30 border">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img alt="" class="mini" src="{{ new.image }}">
+                    </div>
+                    <div class="col-lg-9">
+                        <h3>{{ new.title }}</h3>
+                        <p>Le {{ new.createdAt | localizeddate('none', 'none', null, null, 'dd MMMM') }}</p>
+                        <p>{{ new.content | raw| truncate(50, true, '...')}}</p>
+                        <a class="btn btn-primary" href="{{ path('news', {'id': new.id}) }}">En savoir plus</a>
+                    
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/work/Documents/Work/WIP/Formations/OpenClassroom/DevelopeurJunior/PHP/Projet5/MAO/siteSeb/src/Controller/BlogController.php'|file_link(0) }}">src/Controller/BlogController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/work/Documents/Work/WIP/Formations/OpenClassroom/DevelopeurJunior/PHP/Projet5/MAO/siteSeb/templates/blog/index.html.twig'|file_link(0) }}">templates/blog/index.html.twig</a></code></li>
-    </ul>
-</div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

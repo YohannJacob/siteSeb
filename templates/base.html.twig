@@ -21,20 +21,16 @@
         <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5/index.html" property="og:url"/>
         <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5//images/equipe.jpg" property="og:image"/>
         <meta content="XXX" property="og:description"/>
-
         <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
         <link rel="stylesheet" href="{{ asset('web/css/base.css') }}" type="text/css"/>
-        <link href="{{ asset('web/css/style.css') }}" rel="stylesheet"/>
+        <link href="{{ asset('web/css/style.css')}}" rel="stylesheet"/>
 
         <title>
             {% block title %}{% endblock %}
         </title>
-        {% block stylesheets %}
-
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {# Mise en place de la navbar au dessus du block body#}
@@ -47,18 +43,18 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/">Home
+                        <a class="nav-link" href="{{ path('home')}}">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/mesAlbums">Mes albums</a>
+                        <a class="nav-link" href="{{ path('mesAlbums')}}">Mes albums</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/aPropos">A propos</a>
+                        <a class="nav-link" href="{{ path('aPropos')}}">A propos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Contact</a>
+                        <a class="nav-link" href="{{ path('contact')}}">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -69,7 +65,8 @@
             {% block body %}{% endblock %}
 
             {# Footer #}
-            <footer>©Studio-Yaho 2019</footer>
+            <div class="row footer">©Studio-Yaho 2019</div>
+
         </div>
         {% block javascripts %}{% endblock %}
     </body>

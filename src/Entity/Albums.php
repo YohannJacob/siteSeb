@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlbumsRepository")
@@ -18,6 +19,12 @@ class Albums
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Assert\Length(
+     *      min = 2,
+     *      max = 70,
+     *      minMessage = "Le titre de l'album dit contenir au minimum {{ limit }} caractères",
+     *      maxMessage = "Le titre de l'album dit contenir au maximum {{ limit }} caractères"
+     * )
      */
     private $title;
 
@@ -58,41 +65,49 @@ class Albums
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url 
      */
     private $image1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $image2;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $image3;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $image4;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * * @Assert\Url
      */
     private $image5;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $image6;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url 
      */
     private $video1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url 
      */
     private $video2;
 

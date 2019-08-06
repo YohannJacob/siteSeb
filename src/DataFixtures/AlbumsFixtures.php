@@ -14,7 +14,7 @@ class AlbumsFixtures extends Fixture
         for ($i = 1; $i <= 5; $i++){
             $album = new Albums();
             $album->setTitle("Titre de l'album n°$i")
-                        ->setSubtitle("SousTitre n°$1")
+                        ->setSubtitle("SousTitre n°$i")
                         ->setScenario("Sébastien Mao")
                         ->setDessin("dessinateur")
                         ->setCouleur("coloriste")
@@ -22,7 +22,11 @@ class AlbumsFixtures extends Fixture
                         ->setContent("<p>Texte de présentation de l'album de quelques lignes.</p>")
                         ->setCover("https://via.placeholder.com/309x375")
                         ->setImage1("https://via.placeholder.com/568x378")
-                        ->setImage2("https://via.placeholder.com/568x378");
+                        ->setImage2("https://via.placeholder.com/568x378")
+                        ->setImage3("https://via.placeholder.com/568x378")
+                        ->setImage4("https://via.placeholder.com/568x378")
+                        ->setImage5("https://via.placeholder.com/568x378")
+                        ->setImage6("https://via.placeholder.com/568x378");
             $manager->persist($album);
             }
 

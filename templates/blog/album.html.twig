@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
-{% block title %}Album : { title } {% endblock %}
+{% block title %} Album : {{ album.title }} {% endblock %}
 
 {% block body %}
     <div class="album">
@@ -9,11 +9,12 @@
             <p>{{ album.Scenario }}</p>
             <p>{{ album.Dessin }}</p>
             <p>{{ album.Couleur }}</p>
-            <p>{{ album.date }}</p>
+            <p>{{ album.date | date('d/m/Y') }}</p>
 
-            <p>{{ album.content }}</p>
+            <p>{{ album.content | raw }}</p>
             <img alt="" class="mini" src="{{ album.image1 }}">
             <img alt="" class="mini" src="{{ album.image2 }}">
+            <img alt="" class="mini" src="{{ album.image3 }}">
     </div>
 
 {% endblock %}

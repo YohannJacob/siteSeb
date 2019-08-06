@@ -1,24 +1,29 @@
 {% extends 'base.html.twig' %}
-{% block title %}Mes albums
-{% endblock %}
+{% block title %} Mes albums {% endblock %}
 
 {% block body %}
-
     <div class="div header">
         <h3 class="titre">Consulter mes albums</h3>
     </div>
 
-    {% for album in albums %}
-        <div class="album">
-            <h3>{{ album.title }}</h3>
-            <p>{{ album.Subtitle }}</p>
-            <img alt="" class="mini" src="{{ album.cover }}">
-            <p>{{ album.content | raw}}</p>
+    <div class="row">
+        {% for album in albums %}
+            <div class="col-lg-4 offset-lg-1 marg-30 border">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <img alt="" class="mini" src="{{ album.cover }}">
+                    </div>
+                    <div class="col-lg-9">
+                        <h3>{{ album.title }}</h3>
+                        <p>{{ album.Subtitle }}</p>
+                        <p>{{ album.content | raw | truncate(90, true, '...') }}</p>
+                        <a class="btn btn-primary" href="{{ path('album', {'id': album.id}) }}">En savoir plus</a>
+                        <a class="btn btn-primary" href="{{ path('editAlbum', {'id': album.id}) }}">Edit</a>
+                    </div>
 
-            <a class="btn btn-primary" href="{{ path('album') }}">En savoir plus</a>
-
-        </div>
-    {% endfor %}
-
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

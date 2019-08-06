@@ -6,7 +6,12 @@ body {
     /* height: 40vh; */
     overflow-x: hidden;
 }
-
+/* .marg-30{
+    margin-bottom: 30px;
+}
+.border{
+    border: #000 3px;
+} */
 /* CSS du header */
 
 #accueil {

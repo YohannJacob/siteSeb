@@ -4,7 +4,13 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Albums;
+use App\Entity\News;
+use App\Repository\AlbumsRepository;
+use App\Form\NewAlbumType;
+
 
 class BlogController extends AbstractController
 {
@@ -15,8 +21,11 @@ class BlogController extends AbstractController
      */
     public function index()
     {
+        $repo = $this->getDoctrine()->getRepository(News::class);
+        $news = $repo->findAll();
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
+            "news" => $news,
         ]);
     }
 
@@ -24,23 +33,38 @@ class BlogController extends AbstractController
     /**
      * @Route("/mesAlbums", name="mesAlbums")
      */
-    public function mesAlbums()
+    public function mesAlbums(AlbumsRepository $repo)
     {
-        $repo = $this->getDoctrine()->getRepository(Albums::class);
         $albums = $repo->findAll();
 
-        return $this->render('blog/mesalbums.html.twig',[
+        return $this->render('blog/mesalbums.html.twig', [
             'controller_name' => 'BlogController',
-            "albums"=>$albums,
+            "albums" => $albums,
         ]);
     }
 
     /**
-     * @Route("/album/12", name="album")
+     * @Route("/album/{id}  ", name="album")
      */
-    public function album()
+    public function album($id)
     {
-        return $this->render('blog/album.html.twig');
+        $repo = $this->getDoctrine()->getRepository(Albums::class);
+        $album = $repo->find($id);
+        return $this->render('blog/album.html.twig', [
+            "album" => $album,
+        ]);
+    }
+
+    /**
+     * @Route("/news/{id}  ", name="news")
+     */
+    public function news($id)
+    {
+        $repo = $this->getDoctrine()->getRepository(News::class);
+        $news = $repo->find($id);
+        return $this->render('blog/news.html.twig', [
+            "news" => $news,
+        ]);
     }
 
     /**
@@ -71,11 +95,49 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/createAlbum", name="createAlbum")
+     * @Route("/newAlbum", name="newAlbum")
+     * @Route("/newAlbum/{id}/edit", name="editAlbum")
+
      */
-    public function createAlbum()
+    public function formAlbum(Albums $album = null, Request $request, ObjectManager $manager)
     {
-        return $this->render('blog/createAlbum.html.twig');
+        if(!$album){
+            $album = new Albums();
+        }
+        // $form = $this->createFormBuilder($album)
+        //     ->add('title')
+        //     ->add('Subtitle')
+        //     ->add('Scenario')
+        //     ->add('Dessin')
+        //     ->add('Couleur')
+        //     ->add('date')
+        //     ->add('content')
+        //     ->add('cover')
+        //     ->add('image1')
+        //     ->add('image2')
+        //     ->add('image3')
+        //     ->add('image4')
+        //     ->add('image5')
+        //     ->add('image6')
+        //     ->add('video1')
+        //     ->add('video2')
+        //     ->getForm();
+
+        $form = $this->createForm(NewAlbumType::class, $album);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($album);
+            $manager->flush();
+
+            return $this->redirectToRoute('album', ['id' => $album->getId()]);
+        }
+
+        return $this->render('blog/createAlbum.html.twig', [
+            'formAlbum' => $form->createView(),
+            'editMode' => $album->getId() !== null,
+        ]);
     }
 
     /**
