@@ -22,7 +22,7 @@
         <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5//images/equipe.jpg" property="og:image"/>
         <meta content="XXX" property="og:description"/>
         <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:800&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
         <link rel="stylesheet" href="{{ asset('web/css/base.css') }}" type="text/css"/>
         <link href="{{ asset('web/css/style.css')}}" rel="stylesheet"/>
@@ -34,7 +34,7 @@
     </head>
     <body>
         {# Mise en place de la navbar au dessus du block body#}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
             <a class="navbar-brand" href="/">Sébastien Mao</a>
             <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor03" data-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
@@ -60,7 +60,7 @@
             </div>
         </nav>
         <div
-            class="container-fluid">
+            class="container">
             {# body #}
             {% block body %}{% endblock %}
 
