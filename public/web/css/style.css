@@ -3,22 +3,98 @@ body {
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
-    /* height: 40vh; */
-    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #2C2C2C;
 }
+
+.container-fluid {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 h3 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
-    font-size: 38px;
+    font-size: 55px;
     line-height: 60px;
     text-align: left;
     color: #ea1053;
-    text-transform: uppercase;   
+    text-transform: uppercase;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.bg-light {
+    background-color: #fff !important;
+}
+
+.nav-link {
+    color: #2C2C2C !important;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    color: #ea1053 !important;
+}
+
+.nav-item {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+main {
+    flex-grow: 1;
+    /* Ne fonctionne pas; est censé placer le footer tout en bas qq soit le contenu */
 }
 
 
+/* CSS du footer */
 
+footer {
+    width: 100%;
+    height: 150px;
+}
 
+footer ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+.whiteFooter {
+    background-color: #fff !important;
+    color: #2C2C2C;
+}
+
+footer p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 28px;
+    padding: 20px 0 0 0;
+}
+
+#sticky-footer {
+    flex-shrink: none;
+}
+
+footer .copi{
+    position: absolute;
+    bottom: -100px;
+    color: #ea1053 !important;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+}
 /* CSS du header */
 
 #accueil {
@@ -140,29 +216,6 @@ h3 {
     text-align: center;
 }
 
-/* CSS du footer */
-footer {
-    width: 100%;
-    height: 30px;
-    background-color: rgba(89, 181, 137, 0.5) !important;
-    position: relative;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    color: #fff;
-    text-align: center;
-    font-size: 14px;
-    line-height: 28px;
-}
-
-footer p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #fff;
-    padding: 20px 0 0 0;
-    text-align: center;
-    line-height: 16px;
-}
 
 /* ------ RESPONSIVE entre 1024px et 1200px ------ */
 @media screen and (min-width: 1024px) and (max-width:1200px) {}

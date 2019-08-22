@@ -21,11 +21,11 @@ class BlogController extends AbstractController
      */
     public function index()
     {
-        $repo = $this->getDoctrine()->getRepository(News::class);
-        $news = $repo->findAll();
+        $repo = $this->getDoctrine()->getRepository(Albums::class);
+        $albums = $repo->findAll();
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
-            "news" => $news,
+            'albums' => $albums,
         ]);
     }
 
@@ -39,7 +39,7 @@ class BlogController extends AbstractController
 
         return $this->render('blog/mesalbums.html.twig', [
             'controller_name' => 'BlogController',
-            "albums" => $albums,
+            'albums' => $albums,
         ]);
     }
 
@@ -51,7 +51,7 @@ class BlogController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Albums::class);
         $album = $repo->find($id);
         return $this->render('blog/album.html.twig', [
-            "album" => $album,
+            'album' => $album,
         ]);
     }
 
@@ -63,16 +63,32 @@ class BlogController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(News::class);
         $news = $repo->find($id);
         return $this->render('blog/news.html.twig', [
-            "news" => $news,
+            'news' => $news,
         ]);
     }
 
     /**
-     * @Route("/aPropos", name="aPropos")
+     * @Route("/biographie", name="biographie")
      */
-    public function aPropos()
+    public function biographie()
     {
-        return $this->render('blog/apropos.html.twig');
+        return $this->render('blog/biographie.html.twig');
+    }
+
+    /**
+     * @Route("/agenda", name="agenda")
+     */
+    public function agenda()
+    {
+        return $this->render('blog/contact.html.twig');
+    }
+
+    /**
+     * @Route("/makingOf", name="makingOf")
+     */
+    public function makingOf()
+    {
+        return $this->render('blog/makingOf.html.twig');
     }
 
     /**
@@ -101,7 +117,7 @@ class BlogController extends AbstractController
      */
     public function formAlbum(Albums $album = null, Request $request, ObjectManager $manager)
     {
-        if(!$album){
+        if (!$album) {
             $album = new Albums();
         }
         // $form = $this->createFormBuilder($album)

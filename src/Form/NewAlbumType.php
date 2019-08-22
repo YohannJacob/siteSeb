@@ -20,6 +20,7 @@ class NewAlbumType extends AbstractType
             ->add('date')
             ->add('content')
             ->add('cover')
+            ->add('buyLink')
             ->add('image1')
             ->add('image2')
             ->add('image3')

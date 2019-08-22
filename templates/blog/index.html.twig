@@ -1,31 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Sébastien Mao auteur de Bande déssinée{% endblock %}
+{% block title %}Sébastien Mao auteur de Bande déssinée
+{% endblock %}
 
 {% block body %}
- <div class="div header">
-        <h3 class="titre">mes actualités</h3>
-    </div>
-
     <div class="row">
-        {% for new in news %}
-            <div class="col-lg-4 offset-lg-1 mb-5 border">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <img alt="" class="mini" src="{{ new.image }}">
+        <div class="col-md-3 align-self-center">
+            <h3 class="titre text-center">mes albums</h3>
+        </div>
+        <div class="col-md-9 ">
+            <div class="row">
+                {% for album in albums %}
+                    <div class="col-md-4 mb-5">
+                        <img alt="{{ album.title }}" class="mini" src="{{ album.cover }}">
                     </div>
-                    <div class="col-lg-9">
-                        <h3>{{ new.title }}</h3>
-                        <p>Le {{ new.createdAt | localizeddate('none', 'none', null, null, 'dd MMMM') }}</p>
-                        <p>{{ new.content | raw| truncate(50, true, '...')}}</p>
-                        <a class="btn btn-primary" href="{{ path('news', {'id': new.id}) }}">En savoir plus</a>
-                    
-
-                    </div>
-
-                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+        </div>
 
+    </div>
 {% endblock %}

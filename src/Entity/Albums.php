@@ -64,6 +64,11 @@ class Albums
     private $cover;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $buyLink;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Url 
      */
@@ -208,6 +213,18 @@ class Albums
     public function setCover(string $cover): self
     {
         $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getBuyLink(): ?string
+    {
+        return $this->buyLink;
+    }
+
+    public function setBuyLink(string $buyLink): self
+    {
+        $this->cover = $buyLink;
 
         return $this;
     }
