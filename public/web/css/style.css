@@ -1,12 +1,14 @@
 body {
+    --red: #ea1053;
+    --black: #2C2C2C;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: #2C2C2C;
+    color: var(--black);
 }
 
 .container-fluid {
@@ -14,17 +16,66 @@ body {
     padding-left: 0px;
 }
 
+/* CSS génériques des typos */
+
 h3 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 55px;
     line-height: 60px;
     text-align: left;
-    color: #ea1053;
+    color: var(--red);
     text-transform: uppercase;
 }
 
+h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    text-align: left;
+    color: var(--red);
+    text-transform: uppercase;
+}
+
+p {
+
+    font-size: 16px;
+    line-height: 21px;
+    text-align: left;
+    color: var(--black);
+
+
+}
+
+.bold {
+    font-weight: 800;
+}
+
+/* CSS des types de paragraphes */
+
+.subTitle {
+    font-family: 'Arvo', serif;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 25px;
+    text-align: left;
+    color: var(--black);
+
+}
+
+.dateParution {
+    font-weight: 600;
+    color: var(--red);
+}
+
+/* Css du header */
+
+.navbar {
+    padding-top: 25px;
+}
+
 .navbar-nav {
+
     display: flex;
     justify-content: space-evenly;
 }
@@ -34,12 +85,12 @@ h3 {
 }
 
 .nav-link {
-    color: #2C2C2C !important;
+    color: var(--black) !important;
 }
 
 .nav-link:focus,
 .nav-link:hover {
-    color: #ea1053 !important;
+    color: var(--red) !important;
 }
 
 .nav-item {
@@ -49,9 +100,23 @@ h3 {
     text-transform: uppercase;
 }
 
-main {
-    flex-grow: 1;
-    /* Ne fonctionne pas; est censé placer le footer tout en bas qq soit le contenu */
+#accueil {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFF;
+    height: 120px;
+    width: 100%;
+}
+
+#logo {
+    margin-left: 80px;
+}
+
+
+#titre .em {
+    position: relative;
+    top: -9px;
 }
 
 
@@ -71,11 +136,6 @@ footer ul {
     transform: translateY(-50%)
 }
 
-.whiteFooter {
-    background-color: #fff !important;
-    color: #2C2C2C;
-}
-
 footer p {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -87,134 +147,45 @@ footer p {
     flex-shrink: none;
 }
 
-footer .copi{
-    position: absolute;
-    bottom: -100px;
-    color: #ea1053 !important;
-    left: 50%;
+footer .copi {
+    position: relative;
+    bottom: -90px;
+    left: 100%;
     transform: translateX(-50%);
     font-size: 12px;
 }
-/* CSS du header */
 
-#accueil {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    height: 120px;
-    width: 100%;
+.whiteFooter {
+    background-color: #fff !important;
+    color: var(--black);
 }
 
-#logo {
-    margin-left: 80px;
+.whiteFooter .copi {
+    color: var(--red) !important;
 }
 
+.redFooter {
+    background-color: var(--red) !important;
 
-
-#titre .em {
-    position: relative;
-    top: -9px;
 }
+
+.redFooter .nav-link {
+    color: #FFF !important;
+}
+
+.redFooter .nav-link:focus,
+.redFooter .nav-link:hover {
+    color: var(--black) !important;
+}
+
+.redFooter .copi {
+    color: #FFF !important;
+}
+
 
 /* CSS du slider photo */
 
-.slider {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 650px;
-    overflow-x: hidden;
 
-}
-
-.slide {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.slide1 {
-    height: 650px;
-    background-image: url("../images/slider/bg1.jpg");
-}
-
-.slide2 {
-    background-image: url("../images/slider/bg2.jpg");
-    display: none;
-    height: 650px;
-}
-
-.slide3 {
-    background-image: url("../images/slider/bg3.jpg");
-    display: none;
-    height: 650px;
-}
-
-.mySlides {
-    display: none
-}
-
-.w3-left {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translatex(-50%);
-    left: 30px;
-    color: #000;
-}
-
-.w3-right {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translatex(-50%);
-    right: 15px;
-    color: #000;
-}
-
-.navigation {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translate(-50%, 0%);
-}
-
-
-.badge {
-    height: 13px;
-    width: 13px;
-    margin: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    background-color: #fff;
-
-}
-
-
-.actif {
-    background-color: #59B589 !important;
-}
-
-.hover-white {
-    background-color: rgba(89, 181, 137, 0.4);
-}
-
-.hover-white:hover {
-    background-color: rgba(40, 40, 40, 0.8);
-}
-
-.activite {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
 
 
 /* ------ RESPONSIVE entre 1024px et 1200px ------ */
@@ -224,78 +195,7 @@ footer .copi{
 @media screen and (min-width: 768px) and (max-width: 1023px) {}
 
 /* ------ RESPONSIVE mobile et tablette en dessous de 768px ------ */
-@media screen and (max-width: 769px) {
-    .slide1 {
-        height: 650px;
-        background-image: url("../images/slider/bg1-tab.jpg");
-    }
-
-    .slide2 {
-        height: 650px;
-        background-image: url("../images/slider/bg2-tab.jpg");
-    }
-
-    .slide3 {
-        height: 650px;
-        background-image: url("../images/slider/bg3-tab.jpg");
-    }
-
-    .w3-left,
-    .w3-right {
-        top: 25%;
-    }
-
-    #titre {
-        font-size: 24px;
-    }
-
-    #logo {
-        margin-left: 45px;
-        margin-right: 60px;
-        width: 170px;
-    }
-}
+@media screen and (max-width: 769px) {}
 
 /* ------ RESPONSIVE mobile en dessous de 425px ------ */
-@media screen and (max-width: 426px) {
-    .slide1 {
-        background-image: url("../images/slider/bg1-mob.jpg");
-    }
-
-    .slide2 {
-        background-image: url("../images/slider/bg2-mob.jpg");
-    }
-
-    .slide3 {
-        background-image: url("../images/slider/bg3-mob.jpg");
-    }
-
-    .navigation {
-        bottom: 150px;
-    }
-
-    .titre {
-        position: absolute;
-        bottom: -60px;
-        padding: 0px;
-        text-align: center;
-        left: 50%;
-        transform: translate(-50%, 0%);
-        width: 100vw;
-    }
-
-    .w3-left,
-    .w3-right {
-        display: none;
-    }
-
-    #titre {
-        font-size: 18px;
-    }
-
-    #logo {
-        margin-left: 25px;
-        margin-right: 55px;
-        width: 320px;
-    }
-}
+@media screen and (max-width: 426px) {}

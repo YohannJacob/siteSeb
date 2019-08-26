@@ -12,7 +12,9 @@
             <div class="row">
                 {% for album in albums %}
                     <div class="col-md-4 mb-5">
-                        <img alt="{{ album.title }}" class="mini" src="{{ album.cover }}">
+                        <a href="{{ path('album', {'id': album.id}) }}">
+                            <img alt="{{ album.title }}" class="mini" src="{{ album.cover }}">
+                        </a>
                     </div>
                 {% endfor %}
             </div>

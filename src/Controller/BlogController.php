@@ -29,27 +29,29 @@ class BlogController extends AbstractController
         ]);
     }
 
-
+// Méthode simplifié avec injection de dépendances - on créée la variable repo en appelant la fonction
     /**
      * @Route("/mesAlbums", name="mesAlbums")
      */
     public function mesAlbums(AlbumsRepository $repo)
     {
         $albums = $repo->findAll();
-
         return $this->render('blog/mesalbums.html.twig', [
             'controller_name' => 'BlogController',
             'albums' => $albums,
         ]);
     }
 
+// Méthode très simpliée à utiliser lorsque l'on appell un Id
+
     /**
      * @Route("/album/{id}  ", name="album")
      */
-    public function album($id)
+    public function album(Albums $album) // au lieu de public function album($id)
+
     {
-        $repo = $this->getDoctrine()->getRepository(Albums::class);
-        $album = $repo->find($id);
+        // $repo = $this->getDoctrine()->getRepository(Albums::class);
+        // $album = $repo->find($id);
         return $this->render('blog/album.html.twig', [
             'album' => $album,
         ]);
