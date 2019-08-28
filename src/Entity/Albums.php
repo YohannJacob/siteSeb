@@ -4,9 +4,14 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AlbumsRepository")
+ * @Vich\Uploadable
+ * @ORM\Entity
  */
 class Albums
 {
@@ -49,6 +54,11 @@ class Albums
     private $Couleur;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $buyLink;
+
+    /**
      * @ORM\Column(type="date")
      */
     private $date;
@@ -59,62 +69,24 @@ class Albums
     private $content;
 
     /**
+     * @var string|null 
      * @ORM\Column(type="string", length=255)
      */
-    private $cover;
+    private $coverName;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $buyLink;
-
-    /**
+     * @var File
+     * @Vich\UploadableField(mapping="cover_image", fileNameProperty="coverName")
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url 
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
+
      */
-    private $image1;
+    private $coverFile;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    private $image2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
-     */
-    private $image3;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
-     */
-    private $image4;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * * @Assert\Url
-     */
-    private $image5;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
-     */
-    private $image6;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url 
-     */
-    private $video1;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url 
-     */
-    private $video2;
+    private $updated_at;
 
     public function getId(): ?int
     {
@@ -205,15 +177,45 @@ class Albums
         return $this;
     }
 
-    public function getCover(): ?string
+    /**
+     * @return File|UploadedFile
+     */
+    public function getCoverFile()
     {
-        return $this->cover;
+        return $this->coverFile;
     }
 
-    public function setCover(string $cover): self
-    {
-        $this->cover = $cover;
+    /**
+     * @param null|string $coverFile
+     * @return Albums
+     */
 
+    public function setCoverFile(?File $coverFile= null) : void
+    {
+        $this->coverFile = $coverFile;
+
+        if (null !== $coverFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    /**
+     * @return null|string
+     */
+
+    public function getCoverName()
+    {
+        return $this->coverName;
+    }
+
+    /**
+     * @param null|string $coverName
+     * @return Albums
+     */
+    public function setCoverName($coverName)
+    {
+        $this->coverName = $coverName;
         return $this;
     }
 
@@ -224,103 +226,19 @@ class Albums
 
     public function setBuyLink(string $buyLink): self
     {
-        $this->cover = $buyLink;
+        $this->buyLink = $buyLink;
 
         return $this;
     }
 
-    public function getImage1(): ?string
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->image1;
+        return $this->updated_at;
     }
 
-    public function setImage1(?string $image1): self
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
-        $this->image1 = $image1;
-
-        return $this;
-    }
-
-    public function getImage2(): ?string
-    {
-        return $this->image2;
-    }
-
-    public function setImage2(?string $image2): self
-    {
-        $this->image2 = $image2;
-
-        return $this;
-    }
-
-    public function getImage3(): ?string
-    {
-        return $this->image3;
-    }
-
-    public function setImage3(?string $image3): self
-    {
-        $this->image3 = $image3;
-
-        return $this;
-    }
-
-    public function getImage4(): ?string
-    {
-        return $this->image4;
-    }
-
-    public function setImage4(?string $image4): self
-    {
-        $this->image4 = $image4;
-
-        return $this;
-    }
-
-    public function getImage5(): ?string
-    {
-        return $this->image5;
-    }
-
-    public function setImage5(?string $image5): self
-    {
-        $this->image5 = $image5;
-
-        return $this;
-    }
-
-    public function getImage6(): ?string
-    {
-        return $this->image6;
-    }
-
-    public function setImage6(?string $image6): self
-    {
-        $this->image6 = $image6;
-
-        return $this;
-    }
-
-    public function getVideo1(): ?string
-    {
-        return $this->video1;
-    }
-
-    public function setVideo1(?string $video1): self
-    {
-        $this->video1 = $video1;
-
-        return $this;
-    }
-
-    public function getVideo2(): ?string
-    {
-        return $this->video2;
-    }
-
-    public function setVideo2(?string $video2): self
-    {
-        $this->video2 = $video2;
+        $this->updated_at = $updated_at;
 
         return $this;
     }

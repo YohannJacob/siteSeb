@@ -29,7 +29,7 @@ class BlogController extends AbstractController
         ]);
     }
 
-// Méthode simplifié avec injection de dépendances - on créée la variable repo en appelant la fonction
+    // Méthode simplifié avec injection de dépendances - on créée la variable repo en appelant la fonction
     /**
      * @Route("/mesAlbums", name="mesAlbums")
      */
@@ -42,7 +42,7 @@ class BlogController extends AbstractController
         ]);
     }
 
-// Méthode très simpliée à utiliser lorsque l'on appell un Id
+    // Méthode très simpliée à utiliser lorsque l'on appell un Id
 
     /**
      * @Route("/album/{id}  ", name="album")
@@ -122,24 +122,6 @@ class BlogController extends AbstractController
         if (!$album) {
             $album = new Albums();
         }
-        // $form = $this->createFormBuilder($album)
-        //     ->add('title')
-        //     ->add('Subtitle')
-        //     ->add('Scenario')
-        //     ->add('Dessin')
-        //     ->add('Couleur')
-        //     ->add('date')
-        //     ->add('content')
-        //     ->add('cover')
-        //     ->add('image1')
-        //     ->add('image2')
-        //     ->add('image3')
-        //     ->add('image4')
-        //     ->add('image5')
-        //     ->add('image6')
-        //     ->add('video1')
-        //     ->add('video2')
-        //     ->getForm();
 
         $form = $this->createForm(NewAlbumType::class, $album);
 
@@ -159,11 +141,13 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/updateAlbum", name="updateAlbum")
+     * @Route("/updateAlbum/{id}", name="updateAlbum")
      */
-    public function updateAlbum()
+    public function updateAlbum(Albums $album)
     {
-        return $this->render('blog/updateAlbum.html.twig');
+        return $this->render('blog/updateAlbum.html.twig', [
+            'album' => $album,
+        ]);
     }
 
     /**

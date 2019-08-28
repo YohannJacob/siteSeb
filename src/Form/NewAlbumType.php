@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Albums;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,6 +14,7 @@ class NewAlbumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('coverFile', VichFileType::class)
             ->add('title')
             ->add('subtitle')
             ->add('scenario')
@@ -19,17 +22,7 @@ class NewAlbumType extends AbstractType
             ->add('Couleur')
             ->add('date')
             ->add('content')
-            ->add('cover')
-            ->add('buyLink')
-            ->add('image1')
-            ->add('image2')
-            ->add('image3')
-            ->add('image4')
-            ->add('image5')
-            ->add('image6')
-            ->add('video1')
-            ->add('video2')
-        ;
+            ->add('buyLink');
     }
 
     public function configureOptions(OptionsResolver $resolver)

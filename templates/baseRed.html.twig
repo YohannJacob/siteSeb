@@ -26,8 +26,8 @@
         <link href="https://fonts.googleapis.com/css?family=Arvo:400,700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
-        <link rel="stylesheet" href="{{ asset('web/css/base.css') }}" type="text/css"/>
-        <link href="{{ asset('web/css/style.css')}}" rel="stylesheet"/>
+        <link rel="stylesheet" href="{{ asset('css/base.css') }}" type="text/css"/>
+        <link href="{{ asset('css/style.css')}}" rel="stylesheet"/>
 
         <title>
             {% block title %}{% endblock %}
@@ -93,7 +93,7 @@
         {# Footer #}
         <div class="container-fluid">
             <footer class="redFooter" id="sticky-footer">
-                <ul class="col-md-11 offset-md-1 align-self-center">
+                <ul class="col-md-10 offset-md-1 align-self-center">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
                     </li>
@@ -124,10 +124,12 @@
                             <i class="fab fa-instagram"></i>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link copi" href="http://studio-yaho.fr">
+                            <small>&copy; Studio-Yaho.fr 2019</small>
+                        </a>
+                    </li>
                 </ul>
-                <div class="copi">
-                    <small>&copy; Studio-Yaho 2019</small>
-                </div>
 
 
             </footer>

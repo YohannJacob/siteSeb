@@ -7,8 +7,8 @@
 {% block body %}
     <div class="container-fluid album">
         <div class="row">
-            <div class="col-md-4">
-                <img alt="" class="mini" src="{{ album.cover }}">
+            <div class="col-md-4 coverBig">
+                <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
             </div>
             <div class="col-md-7 offset-md-1">
                 <h4>{{ album.title }}</h4>
@@ -36,12 +36,10 @@
             </div>
         </div>
         <div class="col-md-12 text-center ">
-                <h4 class="text-center pt-5 mb-5">mes albums publiés</h4>
 
-
-            <img alt="" class="mini" src="{{ album.image1 }}">
+            {# <img alt="" class="mini" src="{{ album.image1 }}">
             <img alt="" class="mini" src="{{ album.image2 }}">
-            <img alt="" class="mini" src="{{ album.image3 }}">
+            <img alt="" class="mini" src="{{ album.image3 }}"> #}
         </div>
 
     </div>

@@ -119,6 +119,18 @@ p {
     top: -9px;
 }
 
+/* CSS des images */
+.cover img{
+    width: 270px;
+    height: auto;
+    border : 1px solid #2C2C2C;
+}
+
+.coverBig img{
+    width: 372px;
+    height: auto;
+    border : 1px solid #2C2C2C;
+}
 
 /* CSS du footer */
 
@@ -147,21 +159,17 @@ footer p {
     flex-shrink: none;
 }
 
-footer .copi {
-    position: relative;
-    bottom: -90px;
-    left: 100%;
-    transform: translateX(-50%);
+.copi {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
     font-size: 12px;
+    line-height: 15px;
+    text-transform: lowercase;
 }
 
 .whiteFooter {
     background-color: #fff !important;
     color: var(--black);
-}
-
-.whiteFooter .copi {
-    color: var(--red) !important;
 }
 
 .redFooter {

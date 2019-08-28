@@ -6,14 +6,14 @@
 {% block body %}
     <div class="row">
         <div class="col-md-3 align-self-center">
-            <h3 class="titre text-center">mes albums</h3>
+            <h3 class="text-center">mes albums</h3>
         </div>
         <div class="col-md-9 ">
             <div class="row">
-                {% for album in albums %}
-                    <div class="col-md-4 mb-5">
+                {% for album in albums |reverse %}
+                    <div class="col-md-4 mb-5 cover">
                         <a href="{{ path('album', {'id': album.id}) }}">
-                            <img alt="{{ album.title }}" class="mini" src="{{ album.cover }}">
+                            <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
                         </a>
                     </div>
                 {% endfor %}
