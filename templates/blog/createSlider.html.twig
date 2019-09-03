@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% form_theme formSlider 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}
+    Créer un album
+{% endblock %}
+
+{% block body %}
+
+    <form method="post" enctype="multipart/form-data">
+        {{ form_start(formSlider)}}
+        {{ form_end(formSlider) }}
+
+
+        <div class="my-custom-class-for-errors"></div>
+
+        <button class="btn btn-primary" type="submit">
+            {% if editMode %}
+                Modifier
+            {% else %}
+                Publier
+            {% endif %}
+        </button>
+
+    </form>
+{% endblock %}

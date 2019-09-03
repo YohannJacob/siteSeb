@@ -8,8 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Albums;
 use App\Entity\News;
+use App\Entity\Slider;
 use App\Repository\AlbumsRepository;
 use App\Form\NewAlbumType;
+use App\Form\SliderType;
 
 
 class BlogController extends AbstractController
@@ -23,9 +25,13 @@ class BlogController extends AbstractController
     {
         $repo = $this->getDoctrine()->getRepository(Albums::class);
         $albums = $repo->findAll();
+        $repo2 = $this->getDoctrine()->getRepository(Slider::class);
+        $sliders = $repo2->findAll();
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
             'albums' => $albums,
+            'sliders' =>$sliders,
+
         ]);
     }
 
@@ -111,6 +117,35 @@ class BlogController extends AbstractController
     {
         return $this->render('blog/admin.html.twig');
     }
+
+/**
+     * @Route("/newSlider", name="newSlider")
+     * @Route("/newSlider/{id}/edit", name="editSlider")
+
+     */
+    public function formSlider(Slider $slider = null, Request $request, ObjectManager $manager)
+    {
+        if (!$slider) {
+            $slider = new Slider();
+        }
+
+        $form = $this->createForm(SliderType::class, $slider);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($slider);
+            $manager->flush();
+
+            return $this->redirectToRoute('slider', ['id' => $slider->getId()]);
+        }
+
+        return $this->render('blog/createSlider.html.twig', [
+            'formSlider' => $form->createView(),
+            'editMode' => $slider->getId() !== null,
+        ]);
+    }
+
 
     /**
      * @Route("/newAlbum", name="newAlbum")

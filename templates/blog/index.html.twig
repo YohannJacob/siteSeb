@@ -4,12 +4,71 @@
 {% endblock %}
 
 {% block body %}
+    <div class="trait"></div>
+
+    <!-- Slider Bannière -->
+    <div class="row mb-5">
+        <div class="col-md-9 offset-2 slider">
+            {% for slider in sliders %}
+                {% if slider.position == 1 %}
+                    <div class="mySlides slide slide1">
+                        <div class="col-md-6 textSlide">
+                            <h1>{{slider.title | upper}}</h1>
+                            <h2>{{slider.subtitle | upper }}</h2>
+                        </div>
+                        <img src="../img/slider/bg1.jpg" alt="1">
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+            {% for slider in sliders %}
+                {% if slider.position == 2 %}
+                    <div class="mySlides slide slide1">
+                        <div class="col-md-6 textSlide">
+                            <h1>{{slider.title | upper}}</h1>
+                            <h2>{{slider.subtitle | upper }}</h2>
+                        </div>
+                        <img src="../img/slider/bg1.jpg" alt="1">
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% for slider in sliders %}
+                {% if slider.position == 3 %}
+                    <div class="mySlides slide slide1">
+                        <div class="col-md-6 textSlide">
+                            <h1>{{slider.title | upper}}</h1>
+                            <h2>{{slider.subtitle | upper }}</h2>
+                        </div>
+                        <img src="../img/slider/bg1.jpg" alt="1">
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {# <div class="w3-left" onclick="sliderPhoto.previous()">
+                                                                                                                                                <i class="fas fa-chevron-left fa-2x"></i>
+                                                                                                                                            </div>
+                                                                                                                                            <div class="w3-right" onclick="sliderPhoto.next()">
+                                                                                                                                                <i class="fas fa-chevron-right fa-2x "></i>
+                                                                                                                                            </div> #}
+
+            <div
+                class="col-md-3 offset-9 navigation ">
+                <!-- <span class="badge hover-white" onclick="sliderPhoto.currentDiv()"></span> -->
+                <span class="bulle hover-white" onclick="sliderPhoto.current(0)"></span>
+                <span class="bulle hover-white" onclick="sliderPhoto.current(1)"></span>
+                <span class="bulle hover-white" onclick="sliderPhoto.current(2)"></span>
+            </div>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-md-3 align-self-center">
-            <h3 class="text-center">mes albums</h3>
+            <h2 class="text-center">mes albums</h2>
         </div>
         <div class="col-md-9 ">
-            <div class="row">
+            <div class="row mt-5">
                 {% for album in albums |reverse %}
                     <div class="col-md-4 mb-5 cover">
                         <a href="{{ path('album', {'id': album.id}) }}">
@@ -21,4 +80,6 @@
         </div>
 
     </div>
+    <!-- Slider tuto en haut de page -->
+    <script src="js/slider.js"></script>
 {% endblock %}
