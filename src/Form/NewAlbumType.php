@@ -3,11 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Albums;
+
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class NewAlbumType extends AbstractType
 {

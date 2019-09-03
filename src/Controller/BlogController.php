@@ -5,11 +5,13 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Albums;
 use App\Entity\News;
 use App\Entity\Slider;
 use App\Repository\AlbumsRepository;
+use App\Repository\SliderRepository;
 use App\Form\NewAlbumType;
 use App\Form\SliderType;
 
@@ -30,7 +32,7 @@ class BlogController extends AbstractController
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
             'albums' => $albums,
-            'sliders' =>$sliders,
+            'sliders' => $sliders,
 
         ]);
     }
@@ -118,54 +120,50 @@ class BlogController extends AbstractController
         return $this->render('blog/admin.html.twig');
     }
 
-/**
+    /**
      * @Route("/newSlider", name="newSlider")
-     * @Route("/newSlider/{id}/edit", name="editSlider")
-
      */
     public function formSlider(Slider $slider = null, Request $request, ObjectManager $manager)
     {
-        if (!$slider) {
-            $slider = new Slider();
-        }
+        $slider = new Slider();
 
         $form = $this->createForm(SliderType::class, $slider);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $manager->persist($slider);
             $manager->flush();
-
-            return $this->redirectToRoute('slider', ['id' => $slider->getId()]);
+           
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('blog/createSlider.html.twig', [
             'formSlider' => $form->createView(),
-            'editMode' => $slider->getId() !== null,
         ]);
     }
-
 
     /**
      * @Route("/newAlbum", name="newAlbum")
      * @Route("/newAlbum/{id}/edit", name="editAlbum")
-
      */
     public function formAlbum(Albums $album = null, Request $request, ObjectManager $manager)
     {
         if (!$album) {
             $album = new Albums();
         }
-
         $form = $this->createForm(NewAlbumType::class, $album);
-
         $form->handleRequest($request);
+
+        // Pour essayer de réparer le edit
+        // $album->setCoverName(
+        //     new File($this->getParameter('cover_image').'/'.$album->getCoverName())
+        // );
 
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($album);
             $manager->flush();
-
+            
             return $this->redirectToRoute('album', ['id' => $album->getId()]);
         }
 
@@ -173,6 +171,7 @@ class BlogController extends AbstractController
             'formAlbum' => $form->createView(),
             'editMode' => $album->getId() !== null,
         ]);
+ 
     }
 
     /**

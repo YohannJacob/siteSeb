@@ -10,7 +10,9 @@
 
 
     <form method="post" enctype="multipart/form-data">
-        {{ form_start(formAlbum)}}
+
+    {{ form_rest(formAlbum) }}
+        {# {{ form_start(formAlbum)}}
 
         <div class="row">
             <div class="col" id="some-custom-id">
@@ -21,7 +23,6 @@
 
         <div class="my-custom-class-for-errors"></div>
 
-        {{ form_row(formAlbum.title, {'attr': {'placeholder': "Titre de l'album"}}) }}
         {{ form_row(formAlbum.subtitle, {'attr': {'placeholder': "Sous-titre de l'album"}}) }}
         {{ form_row(formAlbum.scenario, {'attr': {'placeholder': "Scénariste"}}) }}
         {{ form_row(formAlbum.dessin, {'attr': {'placeholder': "Déssinateur"}}) }}
@@ -29,6 +30,7 @@
         {{ form_row(formAlbum.date) }}
         {{ form_row(formAlbum.content, {'attr': {'placeholder': "Texte de présentation"}}) }}
         {{ form_row(formAlbum.buyLink, {'attr': {'placeholder': "Lien Bamboo de vente"}}) }}
+        {{ form_row(formAlbum.coverFile, {'attr': {'placeholder': "Lien de l'image"}}) }} #}
 
         <button class="btn btn-primary" type="submit">
             {% if editMode %}
@@ -37,19 +39,6 @@
                 Publier
             {% endif %}
         </button>
-
-        {# {{ form_end(formAlbum) }} #}
-        {# {{ form_rest(formAlbum) }}
-                                        
-                                                <button class="btn btn-primary" type="submit">
-                                                    {% if editMode %}
-                                                        Modifier
-                                                    {% else %}
-                                                        Publier
-                                                    {% endif %}
-                                                </button> #}
     </form>
-
-    {# {{ form(formAlbum)}} #}
 
 {% endblock %}

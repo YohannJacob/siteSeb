@@ -3,14 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SliderRepository")
- * @Vich\Uploadable
+ * @ORM\Entity
  */
 class Slider
 {
@@ -37,17 +34,12 @@ class Slider
     private $image;
 
     /**
-     * @ORM\Column(type="string", length=1)
+     * @ORM\Column(type="string", length=2)
      */
     private $position;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Albums")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Album;
 
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -97,18 +89,6 @@ class Slider
     public function setPosition(string $position): self
     {
         $this->position = $position;
-
-        return $this;
-    }
-
-    public function getAlbum(): ?Albums
-    {
-        return $this->Album;
-    }
-
-    public function setAlbum(?Albums $Album): self
-    {
-        $this->Album = $Album;
 
         return $this;
     }
