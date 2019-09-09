@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -86,6 +88,16 @@ class Albums
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\MakingOf", mappedBy="Album")
+     */
+    private $makingOf;
+
+    public function __construct()
+    {
+        $this->makingOf = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -238,6 +250,37 @@ class Albums
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MakingOf[]
+     */
+    public function getMakingOf(): Collection
+    {
+        return $this->makingOf;
+    }
+
+    public function addMakingOf(MakingOf $makingOf): self
+    {
+        if (!$this->makingOf->contains($makingOf)) {
+            $this->makingOf[] = $makingOf;
+            $makingOf->setAlbum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMakingOf(MakingOf $makingOf): self
+    {
+        if ($this->makingOf->contains($makingOf)) {
+            $this->makingOf->removeElement($makingOf);
+            // set the owning side to null (unless already changed)
+            if ($makingOf->getAlbum() === $this) {
+                $makingOf->setAlbum(null);
+            }
+        }
 
         return $this;
     }

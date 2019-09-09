@@ -10,10 +10,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Albums;
 use App\Entity\News;
 use App\Entity\Slider;
+use App\Entity\MakingOf;
 use App\Repository\AlbumsRepository;
 
 use App\Form\NewAlbumType;
 use App\Form\SliderType;
+use App\Form\MakingOfType;
 
 
 class BlogController extends AbstractController
@@ -185,6 +187,31 @@ class BlogController extends AbstractController
             'formSlider' => $form->createView(),
         ]);
     }
+
+ /**
+     * @Route("/newMakingOf", name="newMakingOf")
+     */
+    public function formMakingOf(MakingOf $makingOf = null, Request $request, ObjectManager $manager)
+    {
+
+        if (!$makingOf) {
+            $makingOf = new MakingOf();
+        }
+        $form = $this->createForm(MakingOfType::class, $makingOf);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($makingOf);
+            $manager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('blog/createMakingOf.html.twig', [
+            'formMakingOf' => $form->createView(),
+        ]);
+    }
+
 
     /**
      * @Route("/createNews", name="createNews")
