@@ -11,7 +11,7 @@ use App\Entity\Albums;
 use App\Entity\News;
 use App\Entity\Slider;
 use App\Repository\AlbumsRepository;
-use App\Repository\SliderRepository;
+
 use App\Form\NewAlbumType;
 use App\Form\SliderType;
 
@@ -121,29 +121,6 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/newSlider", name="newSlider")
-     */
-    public function formSlider(Slider $slider = null, Request $request, ObjectManager $manager)
-    {
-        $slider = new Slider();
-
-        $form = $this->createForm(SliderType::class, $slider);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            
-            $manager->persist($slider);
-            $manager->flush();
-           
-            return $this->redirectToRoute('index');
-        }
-
-        return $this->render('blog/createSlider.html.twig', [
-            'formSlider' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/newAlbum", name="newAlbum")
      * @Route("/newAlbum/{id}/edit", name="editAlbum")
      */
@@ -174,6 +151,7 @@ class BlogController extends AbstractController
  
     }
 
+
     /**
      * @Route("/updateAlbum/{id}", name="updateAlbum")
      */
@@ -181,6 +159,30 @@ class BlogController extends AbstractController
     {
         return $this->render('blog/updateAlbum.html.twig', [
             'album' => $album,
+        ]);
+    }
+
+    /**
+     * @Route("/newSlider", name="newSlider")
+     */
+    public function formSlider(Slider $slider = null, Request $request, ObjectManager $manager)
+    {
+
+        if (!$slider) {
+            $slider = new Slider();
+        }
+        $form = $this->createForm(SliderType::class, $slider);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($slider);
+            $manager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('blog/createSlider.html.twig', [
+            'formSlider' => $form->createView(),
         ]);
     }
 

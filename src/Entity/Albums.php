@@ -79,7 +79,6 @@ class Albums
      * @Vich\UploadableField(mapping="cover_image", fileNameProperty="coverName")
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
-
      */
     private $coverFile;
 

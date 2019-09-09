@@ -11,6 +11,14 @@ vich_uploader:
             delete_on_update: true
             delete_on_remove: true
 
+        slider_image:
+            uri_prefix: /img/slider
+            upload_destination: '%kernel.project_dir%/public/img/slider'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
 
     #mappings:
     #    products:

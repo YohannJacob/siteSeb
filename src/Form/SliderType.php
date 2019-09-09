@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Slider;
-
 use Symfony\Component\Form\AbstractType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +13,11 @@ class SliderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('subtitle')
-            ->add('image')
-            ->add('position')
+            ->add('ImageFile', VichFileType::class)
+            ->add('Title')
+            ->add('SubTitle')
+            ->add('Position')
+            ->add('Link')
         ;
     }
 

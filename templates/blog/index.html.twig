@@ -16,7 +16,7 @@
                             <h1>{{slider.title | upper}}</h1>
                             <h2>{{slider.subtitle | upper }}</h2>
                         </div>
-                        <img src="../img/slider/bg1.jpg" alt="1">
+                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
                 {% endif %}
             {% endfor %}
@@ -29,7 +29,7 @@
                             <h1>{{slider.title | upper}}</h1>
                             <h2>{{slider.subtitle | upper }}</h2>
                         </div>
-                        <img src="../img/slider/bg1.jpg" alt="1">
+                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
                 {% endif %}
             {% endfor %}
@@ -41,7 +41,7 @@
                             <h1>{{slider.title | upper}}</h1>
                             <h2>{{slider.subtitle | upper }}</h2>
                         </div>
-                        <img src="../img/slider/bg1.jpg" alt="1">
+                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
                 {% endif %}
             {% endfor %}

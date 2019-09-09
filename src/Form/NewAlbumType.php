@@ -25,7 +25,8 @@ class NewAlbumType extends AbstractType
             ->add('Couleur')
             ->add('date')
             ->add('content')
-            ->add('buyLink');
+            ->add('buyLink')
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
