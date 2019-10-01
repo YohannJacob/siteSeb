@@ -2,30 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\MakingOf;
-use App\Entity\Albums;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\News;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
-class MakingOfType extends AbstractType
+class NewsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Content')
-            ->add('album', EntityType::class,[
-                'class' => Albums::class,
-                'choice_label' => 'title',
-            ])    
+            ->add('title')
+            ->add('content')
+            ->add('ImageFile', VichFileType::class)
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => MakingOf::class,
+            'data_class' => News::class,
         ]);
     }
 }

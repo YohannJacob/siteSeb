@@ -8,13 +8,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Albums;
+use App\Entity\MakingOf;
 use App\Entity\News;
 use App\Entity\Slider;
-use App\Entity\MakingOf;
+
 use App\Repository\AlbumsRepository;
+use App\Repository\MakingOfRepository;
+use App\Repository\NewsRepository;
+use App\Repository\SliderRepository;
 
 use App\Form\NewAlbumType;
 use App\Form\SliderType;
+use App\Form\NewsType;
 use App\Form\MakingOfType;
 
 
@@ -31,10 +36,13 @@ class BlogController extends AbstractController
         $albums = $repo->findAll();
         $repo2 = $this->getDoctrine()->getRepository(Slider::class);
         $sliders = $repo2->findAll();
+        $repo3 = $this->getDoctrine()->getRepository(News::class);
+        $news = $repo3->findAll();
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
             'albums' => $albums,
             'sliders' => $sliders,
+            'news' => $news,
 
         ]);
     }
@@ -216,9 +224,23 @@ class BlogController extends AbstractController
     /**
      * @Route("/createNews", name="createNews")
      */
-    public function createNews()
+    public function createNews(News $news = null, Request $request, ObjectManager $manager)
     {
-        return $this->render('blog/createNews.html.twig');
+        if (!$news) {
+            $news = new News();
+        }
+        $form = $this->createForm(NewsType::class, $news);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($news);
+            $manager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+        return $this->render('blog/createNews.html.twig', [
+            'formNews' => $form->createView(),
+        ]);
     }
 
     /**

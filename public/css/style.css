@@ -15,8 +15,19 @@ body {
     padding-right: 0px;
     padding-left: 0px;
 }
- 
-.trait{
+
+.no-gutter {
+    padding-right: 0;
+    padding-left: 0;
+}
+.btn-primary{
+    width: 100%;
+    background-color: var(--red) !important;
+    border: var(--red) !important;
+
+
+}
+.trait {
     width: 7px;
     height: 270px;
     background-color: var(--red);
@@ -26,16 +37,17 @@ body {
     z-index: 15;
 
 }
+
 /* CSS génériques des typos */
 
-h1{
-font-family: 'Montserrat', sans-serif;
-font-weight: 800;
-font-size: 82px;
-text-align: left;
-color: var(--black);
-border-bottom: 7px solid var(--red);
-width: 100%
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 82px;
+    text-align: left;
+    color: var(--black);
+    border-bottom: 7px solid var(--red);
+    width: 100%
 }
 
 h2 {
@@ -167,7 +179,7 @@ p {
 
 .slide1 img,
 .slide2 img,
-.slide3 img{
+.slide3 img {
     filter: opacity(30%);
 }
 
@@ -175,7 +187,7 @@ p {
     display: none
 }
 
-.textSlide{
+.textSlide {
     position: absolute;
     top: 40%;
     transform: translateY(-40%);
@@ -185,7 +197,7 @@ p {
 }
 
 .textSlide h1,
-.textSlide h2{
+.textSlide h2 {
     margin-bottom: 10px;
     text-align: right;
 }
@@ -227,7 +239,7 @@ p {
 }
 
 .actif {
-    background-color: var(--red)!important;
+    background-color: var(--red) !important;
 }
 
 .hover-white {
@@ -236,6 +248,62 @@ p {
 
 .hover-white:hover {
     background-color: var(--black);
+}
+
+/* CSS de l'agenda */
+
+.carte_agenda {
+    border: 2px solid var(--red);
+}
+
+.contenu_agenda {
+    margin: 25px 0 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link {
+    width: 60px;
+    height: 60px;
+    border-radius: 100% 0 0 0;
+    text-decoration: none;
+    padding: 10px 30px;
+    color: #FFF;
+   padding: 26px;
+    overflow: hidden;
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    transition-duration: 0.2s;
+    background: var(--red);
+
+
+}
+
+.link:hover {
+    color:#FFF;
+    box-shadow: 0 4 2px var(--red);
+    z-index: 3;
+}
+
+.link span {
+    content: "";
+    border-radius: 50%;
+    width: 0px;
+    height: 0px;
+    transform: translate(-40%, -50%);
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.1s;
+    background: var(--black);
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.link:hover span {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
 }
 
 /* CSS du footer */

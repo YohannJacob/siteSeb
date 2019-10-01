@@ -22,10 +22,9 @@ class MakingOf
     private $Content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Albums", inversedBy="makingOf")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Albums", inversedBy="makingOf", cascade={"persist", "remove"})
      */
-    private $Album;
+    private $album;
 
     public function getId(): ?int
     {
@@ -46,12 +45,12 @@ class MakingOf
 
     public function getAlbum(): ?Albums
     {
-        return $this->Album;
+        return $this->album;
     }
 
-    public function setAlbum(?Albums $Album): self
+    public function setAlbum(?Albums $album): self
     {
-        $this->Album = $Album;
+        $this->album = $album;
 
         return $this;
     }

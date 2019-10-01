@@ -90,14 +90,9 @@ class Albums
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\MakingOf", mappedBy="Album")
+     * @ORM\OneToOne(targetEntity="App\Entity\MakingOf", mappedBy="album", cascade={"persist", "remove"})
      */
     private $makingOf;
-
-    public function __construct()
-    {
-        $this->makingOf = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -254,32 +249,19 @@ class Albums
         return $this;
     }
 
-    /**
-     * @return Collection|MakingOf[]
-     */
-    public function getMakingOf(): Collection
+    public function getMakingOf(): ?MakingOf
     {
         return $this->makingOf;
     }
 
-    public function addMakingOf(MakingOf $makingOf): self
+    public function setMakingOf(?MakingOf $makingOf): self
     {
-        if (!$this->makingOf->contains($makingOf)) {
-            $this->makingOf[] = $makingOf;
-            $makingOf->setAlbum($this);
-        }
+        $this->makingOf = $makingOf;
 
-        return $this;
-    }
-
-    public function removeMakingOf(MakingOf $makingOf): self
-    {
-        if ($this->makingOf->contains($makingOf)) {
-            $this->makingOf->removeElement($makingOf);
-            // set the owning side to null (unless already changed)
-            if ($makingOf->getAlbum() === $this) {
-                $makingOf->setAlbum(null);
-            }
+        // set (or unset) the owning side of the relation if necessary
+        $newAlbum = $makingOf === null ? null : $this;
+        if ($newAlbum !== $makingOf->getAlbum()) {
+            $makingOf->setAlbum($newAlbum);
         }
 
         return $this;

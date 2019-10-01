@@ -4,82 +4,119 @@
 {% endblock %}
 
 {% block body %}
-    <div class="trait"></div>
+<div class="trait"></div>
 
-    <!-- Slider Bannière -->
-    <div class="row mb-5">
-        <div class="col-md-9 offset-2 slider">
-            {% for slider in sliders %}
-                {% if slider.position == 1 %}
-                    <div class="mySlides slide slide1">
-                        <div class="col-md-6 textSlide">
-                            <h1>{{slider.title | upper}}</h1>
-                            <h2>{{slider.subtitle | upper }}</h2>
-                        </div>
-                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
-                    </div>
-                {% endif %}
-            {% endfor %}
-
-
-            {% for slider in sliders %}
-                {% if slider.position == 2 %}
-                    <div class="mySlides slide slide1">
-                        <div class="col-md-6 textSlide">
-                            <h1>{{slider.title | upper}}</h1>
-                            <h2>{{slider.subtitle | upper }}</h2>
-                        </div>
-                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
-                    </div>
-                {% endif %}
-            {% endfor %}
-
-            {% for slider in sliders %}
-                {% if slider.position == 3 %}
-                    <div class="mySlides slide slide1">
-                        <div class="col-md-6 textSlide">
-                            <h1>{{slider.title | upper}}</h1>
-                            <h2>{{slider.subtitle | upper }}</h2>
-                        </div>
-                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
-                    </div>
-                {% endif %}
-            {% endfor %}
-
-            {# <div class="w3-left" onclick="sliderPhoto.previous()">
-                                                                                                                                                <i class="fas fa-chevron-left fa-2x"></i>
-                                                                                                                                            </div>
-                                                                                                                                            <div class="w3-right" onclick="sliderPhoto.next()">
-                                                                                                                                                <i class="fas fa-chevron-right fa-2x "></i>
-                                                                                                                                            </div> #}
-
-            <div
-                class="col-md-3 offset-9 navigation ">
-                <!-- <span class="badge hover-white" onclick="sliderPhoto.currentDiv()"></span> -->
-                <span class="bulle hover-white" onclick="sliderPhoto.current(0)"></span>
-                <span class="bulle hover-white" onclick="sliderPhoto.current(1)"></span>
-                <span class="bulle hover-white" onclick="sliderPhoto.current(2)"></span>
+<!-- Slider Bannière -->
+<div class="row mb-5">
+    <div class="col-md-9 offset-2 slider">
+        {% for slider in sliders %}
+        {% if slider.position == 1 %}
+        <div class="mySlides slide slide1">
+            <div class="col-md-6 textSlide">
+                <h1>{{slider.title | upper}}</h1>
+                <h2>{{slider.subtitle | upper }}</h2>
             </div>
+            <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
         </div>
+        {% endif %}
+        {% endfor %}
 
-    </div>
-    <div class="row">
-        <div class="col-md-3 align-self-center">
-            <h2 class="text-center">mes albums</h2>
-        </div>
-        <div class="col-md-9 ">
-            <div class="row mt-5">
-                {% for album in albums |reverse %}
-                    <div class="col-md-4 mb-5 cover">
-                        <a href="{{ path('album', {'id': album.id}) }}">
-                            <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
-                        </a>
-                    </div>
-                {% endfor %}
+
+        {% for slider in sliders %}
+        {% if slider.position == 2 %}
+        <div class="mySlides slide slide1">
+            <div class="col-md-6 textSlide">
+                <h1>{{slider.title | upper}}</h1>
+                <h2>{{slider.subtitle | upper }}</h2>
             </div>
+            <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
         </div>
+        {% endif %}
+        {% endfor %}
 
+        {% for slider in sliders %}
+        {% if slider.position == 3 %}
+        <div class="mySlides slide slide1">
+            <div class="col-md-6 textSlide">
+                <h1>{{slider.title | upper}}</h1>
+                <h2>{{slider.subtitle | upper }}</h2>
+            </div>
+            <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {# <div class="w3-left" onclick="sliderPhoto.previous()">
+                                                                                                                                                                                                                                    <i class="fas fa-chevron-left fa-2x"></i>
+                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                <div class="w3-right" onclick="sliderPhoto.next()">
+                                                                                                                                                                                                                                    <i class="fas fa-chevron-right fa-2x "></i>
+                                                                                                                                                                                                                                </div> #}
+
+        <div class="col-md-3 offset-9 navigation ">
+            <!-- <span class="badge hover-white" onclick="sliderPhoto.currentDiv()"></span> -->
+            <span class="bulle hover-white" onclick="sliderPhoto.current(0)"></span>
+            <span class="bulle hover-white" onclick="sliderPhoto.current(1)"></span>
+            <span class="bulle hover-white" onclick="sliderPhoto.current(2)"></span>
+        </div>
     </div>
-    <!-- Slider tuto en haut de page -->
-    <script src="js/slider.js"></script>
+
+</div>
+<div class="row mb-5">
+    <div class="col-md-3 align-self-center">
+        <h2 class="text-center">mes albums</h2>
+    </div>
+    <div class="col-md-9 ">
+        <div class="row mt-5">
+            {% for album in albums |reverse %}
+            <div class="col-md-4 mb-5 cover">
+                <a href="{{ path('album', {'id': album.id}) }}">
+                    <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 align-self-center mb-5">
+        <h2 class="text-center">mon agenda</h2>
+    </div>
+</div>
+
+<div class="row">
+    {% for news in news|slice(0, 2) %}
+    <div class="col-md-5 offset-1 carte_agenda">
+        <div class="row">
+
+            <div class="col-md-4 no-gutter">
+                <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+            </div>
+
+            <div class="col-md-8 contenu_agenda">
+                <h4 class="mb-3">{{ news.title|e }}</h4>
+                <p>{{ news.content|e }}</p>
+            </div>
+            <a href="#" id="btn" class="link"><i class="fas fa-eye fa-lg"></i><span></span></a>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="col-md-3 offset-md-9 no-gutter mt-4">
+        <!-- Lien à faire - créer la page -->
+        <a href="{{ path('album', {'id': album.id}) }}">
+            <button type="button" class="btn btn-primary ">Voir l'agenda complet</button>
+        </a>
+    </div>
+</div>
+
+
+
+
+</div>
+
+
+
+<!-- Slider tuto en haut de page -->
+<script src="js/slider.js"></script>
 {% endblock %}

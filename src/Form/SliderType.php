@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class SliderType extends AbstractType
 {
@@ -16,8 +18,15 @@ class SliderType extends AbstractType
             ->add('ImageFile', VichFileType::class)
             ->add('Title')
             ->add('SubTitle')
-            ->add('Position')
             ->add('Link')
+            ->add('Position', ChoiceType::class, [
+                'choices'  => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                ],
+            ]);
+
         ;
     }
 

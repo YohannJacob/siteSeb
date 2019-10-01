@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Albums;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;

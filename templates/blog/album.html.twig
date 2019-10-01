@@ -16,31 +16,35 @@
                 <p>Scénario :
                     <span class="bold">
                         {{ album.Scenario }}
-                    </<span>
+                        <span></p>
+                        <p>Déssin :
+                            <span class="bold">
+                                {{ album.Dessin }}
+                            </span>
+                        </p>
+                        <p>Couleur :
+                            <span class="bold">
+                                {{ album.Couleur }}
+                            </span>
+                        </p>
+                        <p class="dateParution pt-3 pb-3">Paru le :
+                            {{ album.date | date('d/m/Y') }}
+                        </p>
+                        <p class="contenu pb-3">{{ album.content | raw }}</p>
+                        <a name="" id="" class="btn btn-primary" href="{{ album.buyLink }}" role="button">Acheter</a>
+                    </div>
                 </p>
-                <p>Déssin :
-                    <span class="bold">
-                        {{ album.Dessin }}
-                    </span>
-                </p>
-                <p>Couleur :
-                    <span class="bold">
-                        {{ album.Couleur }}
-                    </span>
-                </p>
-                <p class="dateParution pt-3 pb-3">Paru le :
-                    {{ album.date | date('d/m/Y') }}
-                </p>
-                <p class="contenu pb-3">{{ album.content | raw }}</p>
-                <a name="" id="" class="btn btn-primary" href="{{ album.buyLink }}" role="button">Acheter</a>
             </div>
-        </div>
-        <div
-            class="col-md-12 text-center ">{# <img alt="" class="mini" src="{{ album.image1 }}">
-                            <img alt="" class="mini" src="{{ album.image2 }}">
-                            <img alt="" class="mini" src="{{ album.image3 }}"> #}
+            <div
+                class="col-md-12 text-center ">{# <img alt="" class="mini" src="{{ album.image1 }}">
+                                                                                        <img alt="" class="mini" src="{{ album.image2 }}">
+                                                                                        <img alt="" class="mini" src="{{ album.image3 }}"> #}
+            </div>
+            {% if album.makingOf.content is defined %}
+                <div class="col-md-12 text-center ">
+                    {{album.makingOf.content}}
+                </div>
+            {% endif %}
         </div>
 
-    </div>
-
-{% endblock %}
+    {% endblock %}
