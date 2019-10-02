@@ -55,9 +55,9 @@ class Slider
     private $Position;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Albums", inversedBy="sliders")
      */
-    private $Link;
+    private $album;
 
     public function getId(): ?int
     {
@@ -142,18 +142,6 @@ class Slider
         return $this;
     }
 
-    public function getLink(): ?string
-    {
-        return $this->Link;
-    }
-
-    public function setLink(string $Link): self
-    {
-        $this->Link = $Link;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
@@ -162,6 +150,18 @@ class Slider
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getAlbum(): ?Albums
+    {
+        return $this->album;
+    }
+
+    public function setAlbum(?Albums $album): self
+    {
+        $this->album = $album;
 
         return $this;
     }

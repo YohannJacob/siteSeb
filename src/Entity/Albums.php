@@ -94,6 +94,16 @@ class Albums
      */
     private $makingOf;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Slider", mappedBy="album")
+     */
+    private $sliders;
+
+    public function __construct()
+    {
+        $this->sliders = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -262,6 +272,37 @@ class Albums
         $newAlbum = $makingOf === null ? null : $this;
         if ($newAlbum !== $makingOf->getAlbum()) {
             $makingOf->setAlbum($newAlbum);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Slider[]
+     */
+    public function getSliders(): Collection
+    {
+        return $this->sliders;
+    }
+
+    public function addSlider(Slider $slider): self
+    {
+        if (!$this->sliders->contains($slider)) {
+            $this->sliders[] = $slider;
+            $slider->setAlbum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSlider(Slider $slider): self
+    {
+        if ($this->sliders->contains($slider)) {
+            $this->sliders->removeElement($slider);
+            // set the owning side to null (unless already changed)
+            if ($slider->getAlbum() === $this) {
+                $slider->setAlbum(null);
+            }
         }
 
         return $this;

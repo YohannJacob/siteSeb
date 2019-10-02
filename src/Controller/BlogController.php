@@ -76,6 +76,18 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @Route("/allNews  ", name="allNews")
+     */
+    public function allNews()
+    {
+        $repo = $this->getDoctrine()->getRepository(News::class);
+        $news = $repo->findAll();
+        return $this->render('blog/allNews.html.twig', [
+            'news' => $news,
+        ]);
+    }
+
+    /**
      * @Route("/news/{id}  ", name="news")
      */
     public function news($id)
@@ -95,13 +107,6 @@ class BlogController extends AbstractController
         return $this->render('blog/biographie.html.twig');
     }
 
-    /**
-     * @Route("/agenda", name="agenda")
-     */
-    public function agenda()
-    {
-        return $this->render('blog/contact.html.twig');
-    }
 
     /**
      * @Route("/makingOf", name="makingOf")
@@ -236,7 +241,7 @@ class BlogController extends AbstractController
             $manager->persist($news);
             $manager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('allNews');
         }
         return $this->render('blog/createNews.html.twig', [
             'formNews' => $form->createView(),

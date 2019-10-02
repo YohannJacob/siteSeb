@@ -49,6 +49,16 @@ class News
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $Date;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $Place;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,6 +138,30 @@ class News
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->Date;
+    }
+
+    public function setDate(\DateTimeInterface $Date): self
+    {
+        $this->Date = $Date;
+
+        return $this;
+    }
+
+    public function getPlace(): ?string
+    {
+        return $this->Place;
+    }
+
+    public function setPlace(string $Place): self
+    {
+        $this->Place = $Place;
 
         return $this;
     }

@@ -11,6 +11,10 @@ body {
     color: var(--black);
 }
 
+/* .container{
+    height: 100vh;
+} */
+
 .container-fluid {
     padding-right: 0px;
     padding-left: 0px;
@@ -59,6 +63,16 @@ h2 {
     color: var(--red);
     text-transform: uppercase;
 }
+
+h3 {
+    font-family: 'Arvo', serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: left;
+    color: var(--black);
+    margin-bottom: 30px;
+}
+
 
 h4 {
     font-family: 'Montserrat', sans-serif;
@@ -277,8 +291,9 @@ p {
     bottom: -2px;
     transition-duration: 0.2s;
     background: var(--red);
-
-
+}
+.old_event{
+    opacity: 0.3;
 }
 
 .link:hover {

@@ -1,13 +1,23 @@
-{% extends "base.html.twig" %}
+{% extends "baseRed.html.twig" %}
 {% block title %} News {% endblock %}
 
 {% block body %}
-    <div class="album">
-            <h3>{{ news.title }}</h3>
-            <img alt="" class="mini" src="{{ news.image }}">
-            <p>{{ news.createdAt | date('d/m/Y') }}</p>
+<div class="container-fluid album">
+    <div class="row mb-5">
+        <div class="col-md-4 coverBig">
+            <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+        </div>
+        <div class="col-md-7 offset-md-1">
+            <h4 class="mb-4">{{ news.title }}</h4>
+            <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place }}</p>
+            <p class="dateParution"><i class="far fa-clock"></i> : {{ news.date|date('d/m/Y à H:i')}}</p>
+            <p class="contenu pb-3 mt-4">{{ news.content | raw }}</p>
 
-            <p>{{ news.content | raw }}</p>
+        </div>
+
+        </p>
     </div>
+
+</div>
 
 {% endblock %}
