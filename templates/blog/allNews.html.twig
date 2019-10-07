@@ -7,7 +7,15 @@
     <h3 class="col-md-12 mb-5 no-gutter">Évènements à venir</h3>
 
     {% for news in news %}
-    {%if news.Date|date('d/m/Y à H:i') < "now"|date('d/m/Y à H:i')%}
+    {# {% set difference = date( "now" | date('Y-m-d') ).diff(date(news.Date|date('Y-m-d'))) %} #}
+    {# {{ dump(difference) }} #}
+    {# {{ dump("now"|date('Y-m-d')) }} #}
+
+    {# {{  dump(news.Date|date('Y-m-d')) }} #}
+
+
+    {% if ("now"|date('Y-m-d', "Europe/Paris")) < (news.Date|date('Y-m-d', "Europe/Paris")) %}
+
     <div class="col-md-5 carte_agenda mb-5 ">
         <div class="row">
             <div class="col-md-4 no-gutter">
@@ -17,8 +25,8 @@
             <div class="col-md-8 contenu_agenda">
                 <h4 class="mb-3">{{ news.title }}</h4>
                 <p class="mb-2">{{ news.content }}</p>
-                <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place }}</p>
-                <p class="dateParution"><i class="far fa-clock"></i> : {{ news.date|date('d/m/Y à H:i')}}</p>
+                <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place }} </p>
+                <p class="dateParution"><i class="far fa-clock"></i> : {{ news.date|date('d/m/Y à H:i')}} </p>
             </div>
             <a href="{{ path('news', {'id': news.id}) }}" id="btn" class="link"><i
                     class="fas fa-eye fa-lg"></i><span></span></a>
@@ -29,7 +37,9 @@
 
     <h3 class="col-md-12 mb-5 no-gutter">Évènements passés</h3>
     {% for news in news %}
-    {%if news.Date|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')%}
+    {% if ("now"|date('Y-m-d', "Europe/Paris")) > (news.Date|date('Y-m-d', "Europe/Paris"))  %}
+
+
     <div class="col-md-5 carte_agenda old_event mb-5">
         <div class="row">
             <div class="col-md-4 no-gutter">
@@ -44,7 +54,7 @@
             </div>
         </div>
     </div>
-    {% endif %}     
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

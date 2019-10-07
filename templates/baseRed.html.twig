@@ -1,139 +1,152 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta content="IE=edge" http-equiv="X-UA-Compatible">
-        <meta content="width=device-width, initial-scale=1" name="viewport">
-        <meta
-        content="XXX" name="description">
 
-        <!-- Twitter Card data -->
-        <meta content="summary" name="twitter:card">
-        <meta content="@billetalaska" name="twitter:site"/>
-        <meta content="XXX" name="twitter:title"/>
-        <meta content="XXX" name="twitter:description"/>
-        <meta
-        content="http://www.yohannjacob.fr/Openclassrooms/Projet4/img/photo1.jpg" name="twitter:image:src"/>
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="XXX" name="description">
 
-        <!-- Open Graph data -->
-        <meta content="XXX" property="og:title"/>
-        <meta content="website" property="og:type"/>
-        <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5/index.html" property="og:url"/>
-        <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5//images/equipe.jpg" property="og:image"/>
-        <meta content="XXX" property="og:description"/>
-        <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:800&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Arvo:400,700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
-        <link rel="stylesheet" href="{{ asset('css/base.css') }}" type="text/css"/>
-        <link href="{{ asset('css/style.css')}}" rel="stylesheet"/>
+    <!-- Twitter Card data -->
+    <meta content="summary" name="twitter:card">
+    <meta content="@billetalaska" name="twitter:site" />
+    <meta content="XXX" name="twitter:title" />
+    <meta content="XXX" name="twitter:description" />
+    <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet4/img/photo1.jpg" name="twitter:image:src" />
 
-        <title>
-            {% block title %}{% endblock %}
-        </title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {# Mise en place de la navbar au dessus du block body#}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-            <a class="navbar-brand" href="{{ path('home')}}">Sébastien Mao</a>
-            <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarColor03" data-toggle="collapse" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <!-- Open Graph data -->
+    <meta content="XXX" property="og:title" />
+    <meta content="website" property="og:type" />
+    <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5/index.html" property="og:url" />
+    <meta content="http://www.yohannjacob.fr/Openclassrooms/Projet5//images/equipe.jpg" property="og:image" />
+    <meta content="XXX" property="og:description" />
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}" type="text/css" />
+    <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
 
-            <div class="collapse navbar-collapse" id="navbarColor03">
-                <ul class="navbar-nav mr-auto col-md-10 offset-md-2 align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('biographie')}}">Biographie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('allNews')}}">Agenda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('makingOf')}}">Making-Of</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('contact')}}">Contact</a>
-                    </li>
-                    <li class="nav-item pl-5">
-                        <a class="nav-link" href="http://facebook.fr">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://twitter.fr">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://instagram.fr">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('admin')}}">
-                            <i class="fas fa-user-circle"></i>
-                        </a>
-                    </li>
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    {% block stylesheets %}{% endblock %}
+</head>
 
-                </ul>
-            </div>
-        </nav>
-        <div class="container">
-            <main>
-                {# body #}
-                {% block body %}{% endblock %}
-            </main>
+<body>
+    {# Mise en place de la navbar au dessus du block body#}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+        <a class="navbar-brand ml-2" href="{{ path('home')}}">            
+            <img alt="bulles" src="../img/logo-bulles.gif">
+        </a>
+        <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler" data-target="#navbarColor03" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto col-md-10 offset-md-2 align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('biographie')}}">Biographie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('allNews')}}">Agenda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('makingOf')}}">Making-Of</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('contact')}}">Contact</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link" href="http://facebook.fr">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://twitter.fr">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://instagram.fr">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('admin')}}">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                </li>
+
+            </ul>
         </div>
-        {# Footer #}
-        <div class="container-fluid">
-            <footer class="redFooter" id="sticky-footer">
-                <ul class="col-md-10 offset-md-1 align-self-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('biographie')}}">Biographie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('allNews')}}">Agenda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('makingOf')}}">Making-Of</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('contact')}}">Contact</a>
-                    </li>
-                    <li class="nav-item pl-5">
-                        <a class="nav-link" href="http://facebook.fr">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://twitter.fr">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://instagram.fr">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link copi" href="http://studio-yaho.fr">
-                            <small>&copy; Studio-Yaho.fr 2019</small>
-                        </a>
-                    </li>
-                </ul>
+    </nav>
+    <div class="container">
+        <main>
+            {# body #}
+            {% block body %}{% endblock %}
+        </main>
+    </div>
 
-            </footer>
-        </div>
+    <div class="container-fluid">
+        <main>
+            {# press #}
+            {% block press %}{% endblock %}
+        </main>
 
-        {% block javascripts %}{% endblock %}
-    </body>
+    </div>
+
+    {# Footer #}
+    <div class="container-fluid">
+        <footer class="redFooter" id="sticky-footer">
+            <ul class="col-md-10 offset-md-1 align-self-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('biographie')}}">Biographie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('allNews')}}">Agenda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('makingOf')}}">Making-Of</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('contact')}}">Contact</a>
+                </li>
+                <li class="nav-item pl-5">
+                    <a class="nav-link" href="http://facebook.fr">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://twitter.fr">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://instagram.fr">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link copi" href="http://studio-yaho.fr">
+                        <small>&copy; Studio-Yaho.fr 2019</small>
+                    </a>
+                </li>
+            </ul>
+
+        </footer>
+    </div>
+
+    {% block javascripts %}{% endblock %}
+</body>
+
 </html>

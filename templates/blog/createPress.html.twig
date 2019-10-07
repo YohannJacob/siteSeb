@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+{% form_theme formPress 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}
+   Ajouter une critique Presse
+{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une critique Presse</h1>
+    <form method="post" enctype="multipart/form-data">
+        {{ form_rest(formPress) }}
+
+        <button class="btn btn-primary" type="submit">Publier</button>
+    </form>
+
+{% endblock %}

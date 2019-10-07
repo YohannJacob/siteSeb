@@ -11,16 +11,19 @@ use App\Entity\Albums;
 use App\Entity\MakingOf;
 use App\Entity\News;
 use App\Entity\Slider;
+use App\Entity\Press;
 
 use App\Repository\AlbumsRepository;
 use App\Repository\MakingOfRepository;
 use App\Repository\NewsRepository;
 use App\Repository\SliderRepository;
+use App\Repository\PressRepository;
 
 use App\Form\NewAlbumType;
 use App\Form\SliderType;
 use App\Form\NewsType;
 use App\Form\MakingOfType;
+use App\Form\PressType;
 
 
 class BlogController extends AbstractController
@@ -245,6 +248,30 @@ class BlogController extends AbstractController
         }
         return $this->render('blog/createNews.html.twig', [
             'formNews' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/createPress", name="createPress")
+     */
+    public function formPress(Press $press = null, Request $request, ObjectManager $manager)
+    {
+
+        if (!$press) {
+            $press = new Press();
+        }
+        $form = $this->createForm(PressType::class, $press);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($press);
+            $manager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('blog/createPress.html.twig', [
+            'formPress' => $form->createView(),
         ]);
     }
 

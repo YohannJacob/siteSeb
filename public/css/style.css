@@ -321,6 +321,17 @@ p {
     opacity: 1;
 }
 
+
+/* CSS de l'espace press */
+.press{
+    min-height: 790px;
+    background-color: var(--red);
+    width: 100%;
+}
+.press img{
+    position: absolute;
+    width: 100%;
+}
 /* CSS du footer */
 
 footer {

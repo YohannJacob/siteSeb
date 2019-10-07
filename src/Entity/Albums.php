@@ -99,9 +99,15 @@ class Albums
      */
     private $sliders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Press", mappedBy="album")
+     */
+    private $presses;
+
     public function __construct()
     {
         $this->sliders = new ArrayCollection();
+        $this->presses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -302,6 +308,37 @@ class Albums
             // set the owning side to null (unless already changed)
             if ($slider->getAlbum() === $this) {
                 $slider->setAlbum(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Press[]
+     */
+    public function getPresses(): Collection
+    {
+        return $this->presses;
+    }
+
+    public function addPress(Press $press): self
+    {
+        if (!$this->presses->contains($press)) {
+            $this->presses[] = $press;
+            $press->setAlbum($this);
+        }
+
+        return $this;
+    }
+
+    public function removePress(Press $press): self
+    {
+        if ($this->presses->contains($press)) {
+            $this->presses->removeElement($press);
+            // set the owning side to null (unless already changed)
+            if ($press->getAlbum() === $this) {
+                $press->setAlbum(null);
             }
         }
 
