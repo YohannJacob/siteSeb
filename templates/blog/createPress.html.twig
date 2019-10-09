@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "baseBack.html.twig" %}
 {% form_theme formPress 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}
@@ -6,11 +6,21 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Ajouter une critique Presse</h1>
+<h1 class="mb-5">{% if editMode %}
+        Modification d'
+    {% else %}
+        Ajouter
+    {% endif %} une critique Presse</h1>
     <form method="post" enctype="multipart/form-data">
         {{ form_rest(formPress) }}
 
-        <button class="btn btn-primary" type="submit">Publier</button>
+        <button class="btn btn-primary" type="submit">
+                {% if editMode %}
+                    Modifier
+                {% else %}
+                    Publier
+                {% endif %}
+            </button>
     </form>
 
 {% endblock %}

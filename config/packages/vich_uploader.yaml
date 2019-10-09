@@ -29,6 +29,15 @@ vich_uploader:
             delete_on_update: true
             delete_on_remove: true
 
+        detail_image:
+            uri_prefix: /img/detail
+            upload_destination: '%kernel.project_dir%/public/img/detail'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
     #mappings:
     #    products:
     #        uri_prefix: /images/products

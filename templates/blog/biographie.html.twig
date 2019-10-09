@@ -1,0 +1,22 @@
+{% extends "baseFront.html.twig" %}
+{% block title %} Biographie {% endblock %}
+
+{% block body %}
+<div class="container-fluid album">
+    {% for detail in details %}
+    <div class="row mb-5">
+        <div class="col-md-4 coverBig">
+            <img alt="Sebastien Mao" class="mini" src="{{ vich_uploader_asset(detail, 'ImageFile')}}">
+        </div>
+        <div class="col-md-7 offset-md-1">
+            <h4 class="mb-4">Sébastien Mao</h4>
+            <p class="contenu pb-3 mt-4">{{ detail.bio | raw }}</p>
+
+        </div>
+
+        </p>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

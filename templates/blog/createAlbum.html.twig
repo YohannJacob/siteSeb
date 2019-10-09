@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "baseBack.html.twig" %}
 {% form_theme formAlbum 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}
@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Création d'un album</h1>
+<h1 class="mb-5">{% if editMode %}
+        Modification
+    {% else %}
+        Création
+    {% endif %} d'un album</h1>
 
 
     <form method="post" enctype="multipart/form-data">

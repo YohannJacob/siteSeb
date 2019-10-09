@@ -1,14 +1,24 @@
-{% extends "base.html.twig" %}
+{% extends "baseBack.html.twig" %}
 {% form_theme formMakingOf 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}Créer un Making-Of{% endblock %}
 
 {% block body %}
-    <h1>Création d'un Making-Of</h1>
-    <form method="post" enctype="multipart/form-data">
-        {{ form_rest(formMakingOf) }}
+<h1 class="mb-5">{% if editMode %}
+    Modification
+    {% else %}
+    Création
+    {% endif %}d'un Making-Of</h1>
+<form method="post" enctype="multipart/form-data">
+    {{ form_rest(formMakingOf) }}
 
-        <button class="btn btn-primary" type="submit">Publier</button>
-    </form>
+    <button class="btn btn-primary" type="submit">
+        {% if editMode %}
+        Modifier
+        {% else %}
+        Publier
+        {% endif %}
+    </button>
+</form>
 
 {% endblock %}

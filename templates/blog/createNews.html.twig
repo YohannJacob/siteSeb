@@ -1,14 +1,24 @@
-{% extends "base.html.twig" %}
+{% extends "baseBack.html.twig" %}
 {% form_theme formNews 'bootstrap_4_layout.html.twig' %}
 
 {% block title %} Créer une news {% endblock %}
 
 {% block body %}
-    <h1>Création d'une News</h1>
+    <h1 class="mb-5">{% if editMode %}
+            Modification
+        {% else %}
+            Création
+        {% endif %} d'une News</h1>
     <form method="post" enctype="multipart/form-data">
         {{ form_rest(formNews) }}
 
-        <button class="btn btn-primary" type="submit">Publier</button>
+        <button class="btn btn-primary" type="submit">
+                {% if editMode %}
+                    Modifier
+                {% else %}
+                    Publier
+                {% endif %}
+            </button>
     </form>
 
 {% endblock %}

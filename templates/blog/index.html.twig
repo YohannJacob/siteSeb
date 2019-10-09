@@ -1,4 +1,4 @@
-{% extends 'baseRed.html.twig' %}
+{% extends 'baseFront.html.twig' %}
 
 {% block title %}Sébastien Mao auteur de Bande déssinée
 {% endblock %}
@@ -51,7 +51,8 @@
             </div>
         </a>
         {% endif %}
-        {% endfor %}                                                                                                                                                            </div> #}
+        {% endfor %}                                                                                                                                                            
+    </div> 
 
         <div class="col-md-3 offset-9 navigation ">
             <!-- <span class="badge hover-white" onclick="sliderPhoto.currentDiv()"></span> -->
@@ -87,9 +88,8 @@
 
 <div class="row">
     {% for news in news|slice(0, 2) %}
-    <div class="col-md-5 offset-1 carte_agenda">
+    <div class="col-md-4 offset-1 carte_agenda">
         <div class="row">
-
             <div class="col-md-4 no-gutter">
                 <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
             </div>

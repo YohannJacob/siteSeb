@@ -1,0 +1,127 @@
+{% extends "baseBack.html.twig" %}
+{% block title %}
+Administration du site
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid album">
+    <div class="row mb-5">
+        {# Les albums #}
+        <div class="col-md-12">
+            <h3 class="text-center mb-5">Administration du site</h3>
+            <h2 class="text-center mb-4">mes albums</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4 offset-md-4 mb-4">
+                <a class="d-flex align-items-center" href="{{ path('newAlbum')}}">
+                    <button type="button" class="btn btn-dark mb-2">Ajouter un nouvel album</button>
+                </a>
+            </div>
+        </div>
+
+        {% for album in albums %}
+        <div class="col-md-3 mb-5 cover">
+            <a href="{{ path('editAlbum', {'id': album.id}) }}">
+                <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
+            </a>
+            <a href="{{ path('editAlbum', {'id': album.id}) }}">
+                <button type="button" class="btn btn-primary mt-2 mb-2">Modifier l'album</button>
+            </a>
+        </div>
+
+        {% endfor %}
+    </div>
+    {# L'Agenda #}
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">mon Agenda</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4 offset-md-4 mb-4">
+                <a class="d-flex align-items-center" href="{{ path('createNews')}}">
+                    <button type="button" class="btn btn-dark mb-2">Ajouter un évènement</button>
+                </a>
+            </div>
+        </div>
+
+        {% for news in news %}
+        <div class="col-md-5 d-flex justify-content-between ml-5 mb-4 carte_agenda">
+            <div class="row">
+                <div class="col-md-4 no-gutter">
+                    <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+                </div>
+
+                <div class="col-md-8 contenu_agenda">
+                    <h4 class="mb-3">{{ news.title|e }}</h4>
+                    <p class="mb-2">{{ news.content|e }}</p>
+                    <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place|e }}</p>
+                    <p class="dateParution"><i class="far fa-clock"></i> :
+                        {{ news.date|e|date('d/m/Y à H:i')}}
+                    </p>
+                </div>
+                <a href="{{ path('editNews', {'id': news.id}) }}" id="btn" class="link"><i
+                        class="fas fa-eye fa-lg"></i><span></span></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {# Les making-Of #}
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">Les Making-Of</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4 offset-md-4 mb-4">
+                <a class="d-flex align-items-center" href="{{ path('newMakingOf')}}">
+                    <button type="button" class="btn btn-dark mb-2">Ajouter un making-Of</button>
+                </a>
+            </div>
+        </div>
+
+        {% for allMakingOf in allMakingOfs %}
+        <div class="col-md-3 mb-5 cover">
+            <a href="{{ path('editMakingOf', {'id': allMakingOf.id}) }}">
+                <img alt="{{ allMakingOf.album.title }}" class="mini"
+                    src="{{ vich_uploader_asset(allMakingOf.album, 'coverFile')}}">
+            </a>
+            <a href="{{ path('editMakingOf', {'id': allMakingOf.id}) }}">
+                <button type="button" class="btn btn-primary mt-2 mb-2">Modifier le Making-Of</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {# Personaliser le site #}
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="text-center">Divers</h2>
+            <p class="text-center mb-4">Ici vous pouvez, changer la biographie, la photo, le contact press ainsi que les
+                liens Instagram, facebook et Twitter</p>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4 offset-md-4 mb-4">
+                {% for detail in details %}
+                <a class="d-flex align-items-center" href="{{ path('createDetail', {'id': details.id}) }}">
+                    <button type="button" class="btn btn-dark mb-2">Personaliser le site</button>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 mb-2">
+        <a href="{{ path('createPress')}}">
+            <button type="button" class="btn btn-dark mb-2">Ajouter une critique</button>
+        </a>
+        <a href="{{ path('createDetail')}}">
+            <button type="button" class="btn btn-dark mb-2">Personaliser le site</button>
+        </a>
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}

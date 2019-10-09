@@ -16,7 +16,7 @@ class NewAlbumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('coverFile', VichFileType::class)
+            ->add('coverFile', FileType::class, array('data_class' => null))
             ->add('title')
             ->add('subtitle')
             ->add('scenario')

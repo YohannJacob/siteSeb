@@ -1,0 +1,17 @@
+{% extends "baseFront.html.twig" %}
+{% block title %}
+{{ makingOfs.album.title }} le Making-of
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-12 align-self-center mb-5">
+        <h2 class="text-center">" {{ makingOfs.album.title }} "<br> le Making-Of</h2>
+    </div>
+
+    <div class="col-md-12 align-self-center mb-5">
+        {{ makingOfs.content }}
+    </div>
+</div>
+{% endblock %}

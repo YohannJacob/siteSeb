@@ -1,19 +1,21 @@
 {% extends 'baseFront.html.twig' %}
 {% block title %}
-    Mes albums
+    Making-Of
 {% endblock %}
 
 {% block body %}
     <section class="mb-5">
-        <h4>mes albums</h4>
+        <h4>Making-Of</h4>
     </section>
     <div class="container-fluid">
         <div class="row">
-            {% for album in albums |reverse %}
+            {% for allMakingOf in allMakingOfs %}
                 <div class="col-lg-3 mb-5 cover">
-                    <a href="{{ path('album', {'id': album.id}) }}">
-                        <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
+                    
+                    <a href="{{ path('makingOf', {'id': allMakingOf.id}) }}">
+                        <img alt="{{ allMakingOf.album.title }}" class="mini" src="{{ vich_uploader_asset(allMakingOf.album, 'coverFile')}}">
                     </a>
+
                 </div>
             {% endfor %}
         </div>

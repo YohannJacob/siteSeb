@@ -1,18 +1,14 @@
 {% extends "baseBack.html.twig" %}
-{% form_theme formSlider 'bootstrap_4_layout.html.twig' %}
+{% form_theme formDetail 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}
-    Créer un Slider
+   Personaliser le site
 {% endblock %}
 
 {% block body %}
-    <h1>{% if editMode %}
-            Modification
-        {% else %}
-            Création
-        {% endif %} d'un slider</h1>
+    <h1>Personaliser le site</h1>
     <form method="post" enctype="multipart/form-data">
-        {{ form_rest(formSlider) }}
+        {{ form_rest(formDetail) }}
 
         <button class="btn btn-primary" type="submit">
                 {% if editMode %}

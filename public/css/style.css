@@ -24,13 +24,20 @@ body {
     padding-right: 0;
     padding-left: 0;
 }
-.btn-primary{
+.btn-primary {
     width: 100%;
     background-color: var(--red) !important;
     border: var(--red) !important;
-
-
+    font-weight: 800;
 }
+
+.btn-dark {
+    width: 100%;
+    background-color: var(--black) !important;
+    border: var(--black) !important;
+    font-weight: 800;
+}
+
 .trait {
     width: 7px;
     height: 270px;
