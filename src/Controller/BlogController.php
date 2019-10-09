@@ -271,8 +271,36 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/createPress", name="createPress")
+     * @Route("/createDetail", name="createDetail")
+     * @Route("/createDetail/{id}/edit", name="editDetail")
      */
+    public function createDetail(Detail $detail = null, Request $request, ObjectManager $manager)
+    {
+
+        if (!$detail) {
+            $detail = new Detail();
+        }
+        $form = $this->createForm(DetailType::class, $detail);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($detail);
+            $manager->flush();
+
+            return $this->redirectToRoute('createDetail', ['id' => $detail->getId()]);
+        }
+
+        return $this->render('blog/createDetail.html.twig', [
+            'controller_name' => 'BlogController',
+            'formDetail' => $form->createView(),
+            'editMode' => $detail->getId() !== null,
+        ]);
+    }
+
+/**
+ * @Route("/createPress", name="createPress")
+ * @Route("/createPress/{id}/edit", name="editPress")
+ */
     public function formPress(Press $press = null, Request $request, ObjectManager $manager)
     {
 
@@ -286,7 +314,7 @@ class BlogController extends AbstractController
             $manager->persist($press);
             $manager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('createDetail', ['id' => $detail->getId()]);
         }
 
         return $this->render('blog/createPress.html.twig', [
@@ -294,39 +322,5 @@ class BlogController extends AbstractController
             'formPress' => $form->createView(),
             'editMode' => $press->getId() !== null,
         ]);
-    }
-
-    /**
-     * @Route("/createDetail", name="createDetail")
-     */
-    public function formDetail(Press $detail = null, Request $request, ObjectManager $manager)
-    {
-
-        if (!$detail) {
-            $detail = new Detail();
-        }
-        $form = $this->createForm(DetailType::class, $detail);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $manager->persist($detail);
-            $manager->flush();
-
-            return $this->redirectToRoute('home');
-        }
-
-        return $this->render('blog/createDetail.html.twig', [
-            'controller_name' => 'BlogController',
-            'formDetail' => $form->createView(),
-            'editMode' => $detail->getId() !== null,
-        ]);
-    }
-
-    /**
-     * @Route("/updateNews", name="updateNews")
-     */
-    public function updateNews()
-    {
-        return $this->render('blog/updateNews.html.twig');
     }
 }

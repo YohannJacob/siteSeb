@@ -102,20 +102,44 @@ Administration du site
         <div class="col-md-12">
             <div class="col-md-4 offset-md-4 mb-4">
                 {% for detail in details %}
-                <a class="d-flex align-items-center" href="{{ path('createDetail', {'id': details.id}) }}">
+
+                <a class="d-flex align-items-center" href="{{ path('editDetail', {'id': detail.id}) }}">
                     <button type="button" class="btn btn-dark mb-2">Personaliser le site</button>
+
                 </a>
                 {% endfor %}
             </div>
         </div>
     </div>
 
+    {# Les critiques press #}
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">Les critiques press</h2>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4 offset-md-4 mb-4">
+                <a class="d-flex align-items-center" href="{{ path('createPress')}}">
+                    <button type="button" class="btn btn-dark mb-2">Ajouter une critique</button>
+                </a>
+            </div>
+        </div>
+
+        {% for press in press %}
+        <div class="col-md-2 mb-5 cover">
+                <img alt="{{ press.album.title }}" class="mini"
+                    src="{{ vich_uploader_asset(press.album, 'coverFile')}}">
+            <h3 class="text-center mt-2">{{press.journal}}</h3>
+            <a href="{{ path('editPress', {'id': press.id}) }}">
+                <button type="button" class="btn btn-primary mt-2 mb-2">Modifier la critique</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
     <div class="col-md-3 mb-2">
         <a href="{{ path('createPress')}}">
             <button type="button" class="btn btn-dark mb-2">Ajouter une critique</button>
-        </a>
-        <a href="{{ path('createDetail')}}">
-            <button type="button" class="btn btn-dark mb-2">Personaliser le site</button>
         </a>
     </div>
 
