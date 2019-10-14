@@ -124,15 +124,21 @@ class Detail
         return $this;
     }
 
-    public function getImageName(): ?string
+   /**
+     * @return null|string
+     */
+    public function getImageName()
     {
         return $this->ImageName;
     }
 
-    public function setImageName(string $ImageName): self
+    /**
+     * @param null|string $ImageName
+     * @return Detail
+     */
+    public function setImageName($ImageName)
     {
         $this->ImageName = $ImageName;
-
         return $this;
     }
 

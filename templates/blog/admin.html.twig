@@ -31,6 +31,32 @@ Administration du site
 
         {% endfor %}
     </div>
+
+    {# Le slider #}
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">Le slider</h2>
+        </div>
+        
+        {% for slider in sliders %}
+        <div class="col-md-12 ml-5 mb-4 carte_agenda">
+            <div class="row">
+                <div class="col-md-4 no-gutter">
+                    <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                </div>
+
+                <div class="col-md-8 contenu_agenda">
+                    <h4 class="mb-3">Image N°{{ slider.position }}</h4>
+                    <h4 class="mb-3">Titre : {{ slider.title }}</h4>
+                    <p class="mb-2">Sous-titre : {{ slider.subTitle }}</p>
+
+                </div>
+                <a href="{{ path('editSlider', {'id': slider.id}) }}" id="btn" class="link"><i class="fas fa-pencil-alt"></i><span></span></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
     {# L'Agenda #}
     <div class="row mb-5">
         <div class="col-md-12">
@@ -59,8 +85,7 @@ Administration du site
                         {{ news.date|e|date('d/m/Y à H:i')}}
                     </p>
                 </div>
-                <a href="{{ path('editNews', {'id': news.id}) }}" id="btn" class="link"><i
-                        class="fas fa-eye fa-lg"></i><span></span></a>
+                <a href="{{ path('editNews', {'id': news.id}) }}" id="btn" class="link"><i class="fas fa-pencil-alt"></i><span></span></a>
             </div>
         </div>
         {% endfor %}
@@ -92,26 +117,6 @@ Administration du site
         {% endfor %}
     </div>
 
-    {# Personaliser le site #}
-    <div class="row mb-5">
-        <div class="col-md-12">
-            <h2 class="text-center">Divers</h2>
-            <p class="text-center mb-4">Ici vous pouvez, changer la biographie, la photo, le contact press ainsi que les
-                liens Instagram, facebook et Twitter</p>
-        </div>
-        <div class="col-md-12">
-            <div class="col-md-4 offset-md-4 mb-4">
-                {% for detail in details %}
-
-                <a class="d-flex align-items-center" href="{{ path('editDetail', {'id': detail.id}) }}">
-                    <button type="button" class="btn btn-dark mb-2">Personaliser le site</button>
-
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-
     {# Les critiques press #}
     <div class="row mb-5">
         <div class="col-md-12">
@@ -137,12 +142,25 @@ Administration du site
         {% endfor %}
     </div>
 
-    <div class="col-md-3 mb-2">
-        <a href="{{ path('createPress')}}">
-            <button type="button" class="btn btn-dark mb-2">Ajouter une critique</button>
-        </a>
-    </div>
-
+        {# Personaliser le site #}
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h2 class="text-center">Divers</h2>
+                <p class="text-center mb-4">Ici vous pouvez, changer la biographie, la photo, le contact presse ainsi que les
+                    liens Instagram, facebook et Twitter</p>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-4 offset-md-4 mb-4">
+                    {% for detail in details %}
+    
+                    <a class="d-flex align-items-center" href="{{ path('editDetail', {'id': detail.id}) }}">
+                        <button type="button" class="btn btn-dark mb-2">Personaliser le site</button>
+    
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
 
 </div>
 

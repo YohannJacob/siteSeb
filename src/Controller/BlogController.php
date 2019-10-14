@@ -60,13 +60,14 @@ class BlogController extends AbstractController
     /**
      * @Route("/albums/{id} ", name="album")
      */
-    public function album(Albums $album) // au lieu de public function album($id)
+    public function album(Albums $album, DetailRepository $detailRepository) // au lieu de public function album($id)
 
     {
         // $repo = $this->getDoctrine()->getRepository(Albums::class);
         // $album = $repo->find($id);
         return $this->render('blog/album.html.twig', [
             'album' => $album,
+            'details' => $detailRepository->findAll(),
         ]);
     }
 
@@ -172,6 +173,7 @@ class BlogController extends AbstractController
 
     /**
      * @Route("/newSlider", name="newSlider")
+     * @Route("/newSlider/{id}/edit", name="editSlider")
      */
     public function formSlider(Slider $slider = null, Request $request, ObjectManager $manager)
     {
@@ -186,11 +188,13 @@ class BlogController extends AbstractController
             $manager->persist($slider);
             $manager->flush();
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('blog/createSlider.html.twig', [
             'formSlider' => $form->createView(),
+            'editMode' => $slider->getId() !== null,
+
         ]);
     }
 
@@ -209,7 +213,7 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($album);
             $manager->flush();
-            return $this->redirectToRoute('album', ['id' => $album->getId()]);
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('blog/createAlbum.html.twig', [
@@ -234,7 +238,7 @@ class BlogController extends AbstractController
             $manager->persist($news);
             $manager->flush();
 
-            return $this->redirectToRoute('allNews', ['id' => $news->getId()]);
+            return $this->redirectToRoute('admin');
         }
         return $this->render('blog/createNews.html.twig', [
             'controller_name' => 'BlogController',
@@ -260,7 +264,7 @@ class BlogController extends AbstractController
             $manager->persist($makingOf);
             $manager->flush();
 
-            return $this->redirectToRoute('makingOf', ['id' => $makingOf->getId()]);
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('blog/createMakingOf.html.twig', [
@@ -287,7 +291,7 @@ class BlogController extends AbstractController
             $manager->persist($detail);
             $manager->flush();
 
-            return $this->redirectToRoute('createDetail', ['id' => $detail->getId()]);
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('blog/createDetail.html.twig', [
@@ -314,7 +318,7 @@ class BlogController extends AbstractController
             $manager->persist($press);
             $manager->flush();
 
-            return $this->redirectToRoute('createDetail', ['id' => $detail->getId()]);
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('blog/createPress.html.twig', [

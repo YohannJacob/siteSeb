@@ -53,7 +53,7 @@ Album :
 
         {% if album.makingOf.content is defined %}
         <div class="col-md-12 text-center ">
-            {{album.makingOf.content}}
+            {{album.makingOf.content|raw }}
         </div>
         {% endif %}
     </div>
