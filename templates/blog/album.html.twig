@@ -5,58 +5,59 @@ Album :
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid album">
-    <div class="row">
-        <div class="col-md-4 coverBig">
-            <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
-        </div>
-        <div class="col-md-7 offset-md-1">
-            <h4>{{ album.title }}</h4>
-            <p class="subTitle pt-3 pb-3">{{ album.Subtitle }}</p>
-            <p>Scénario :
-                <span class="bold">
-                    {{ album.Scenario }}
-                    <span></p>
-            <p>Déssin :
-                <span class="bold">
-                    {{ album.Dessin }}
-                </span>
-            </p>
-            <p>Couleur :
-                <span class="bold">
-                    {{ album.Couleur }}
-                </span>
-            </p>
-            <p class="dateParution pt-3 pb-3">Paru le :
-                {{ album.date | date('d/m/Y') }}
-            </p>
-            <p class="contenu pb-3">{{ album.content | raw }}</p>
-            <div class="b-col-md-1 offset-md-3">
-                <a name="" id="" class="btn btn-primary" href="{{ album.buyLink }}" role="button">Acheter</a>
-            </div>
-        </div>
+<div class="container no-gutter album">
+  <div class="row">
+    <div class="col-md-4 coverBig">
+      <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
+    </div>
+    <div class="col-md-7 offset-md-1">
+      <h4>{{ album.title }}</h4>
+      <p class="subTitle pt-3 pb-3">{{ album.Subtitle }}</p>
+      <p>Scénario :
+        <span class="bold">
+          {{ album.Scenario }}
+          <span></p>
+      <p>Déssin :
+        <span class="bold">
+          {{ album.Dessin }}
+        </span>
+      </p>
+      <p>Couleur :
+        <span class="bold">
+          {{ album.Couleur }}
+        </span>
+      </p>
+      <p class="dateParution pt-3 pb-3">Paru le :
+        {{ album.date | date('d/m/Y') }}
+      </p>
+      <p class="contenu pb-3">{{ album.content | raw }}</p>
+      <div class="col-md-3 offset-md-9">
+        <a name="" id="" class="btn btn-primary" href="{{ album.buyLink }}" role="button">Acheter</a>
+      </div>
+    </div>
 
-        </p>
-    </div>
-    <div class="row mt-5">
-        <div class="col-md-12 align-self-center mb-5">
-            <h2 class="text-center">Extraits de l’album</h2>
-        </div>
-        <div class="col-md-12 text-center ">
-            Les photos
-        </div>
-    </div>
-    <div class="row mt-5">
-        <div class="col-md-12 align-self-center mb-5">
-            <h2 class="text-center">making-of</h2>
-        </div>
+    </p>
+  </div>
 
-        {% if album.makingOf.content is defined %}
-        <div class="col-md-12 text-center ">
-            {{album.makingOf.content|raw }}
-        </div>
-        {% endif %}
+  <div class="row mt-5">
+    <div class="col-md-12 align-self-center mb-5">
+      <h2 class="text-center">Extraits de l’album</h2>
     </div>
+    <div class="col-md-12 text-center ">
+      Les photos
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-md-12 align-self-center mb-5">
+      <h2 class="text-center">making-of</h2>
+    </div>
+
+    {% if album.makingOf.content is defined %}
+    <div class="col-md-12 text-center ">
+      {{album.makingOf.content|raw }}
+    </div>
+    {% endif %}
+  </div>
 
 </div>
 
@@ -65,15 +66,51 @@ Album :
 
 {% block press %}
 <div class="row">
-    <div class="row mt-5 press">
-        <div class="col-md-12 mb-5">
-            <img alt="bulles" src="../img/bulles.png">
-        </div>
-
-        {# Slider press #}
-        <div class="col-md-12 text-center ">
-            Ici le slider press
-        </div>
+  <div class="row press">
+    <div class="col-md-12 mb-5">
+      <img alt="bulles" src="../img/bulles.png">
     </div>
-</div>
-{% endblock %}
+
+    {# Slider press #}
+    <div class="col-md-12 align-self-center mt-5 mb-5">
+    </div>
+
+    <!-- Start Carousel -->
+    {% if presses|length != 0 %}
+
+{# {{ dump(presses.id.album) }} #}
+      <div class="col-md-6 offset-3">
+        <div id="carousel" class="carousel slide mt-3 mb-2" data-ride="carousel">
+            <i class="fas fa-quote-right"></i>
+          <ol class="carousel-indicators">
+            {% for press in presses %}
+            <li data-target=".carousel" data-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active"
+              {% endif %}></li>
+            {% endfor %}
+          </ol>
+          <div class="col-md-12 carousel-inner align-items-center">
+            {% for press in presses %}
+            <div class="col-md-12 carousel-item {% if loop.index0 == 0 %} active {% endif %}">
+              <p class="journal mb-5">{{ press.journal }}</p>
+              <p class="critique">{{ press.content }}</p>
+            </div>
+            {% endfor %}
+          </div>
+          <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </a>
+          <a class="carousel-control-next" href="#carousel" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </a>
+        </div>
+      </div>
+    {% else %}
+    <div class="row justify-content-center">
+      <div class="d-inline-block text-center no-medias">
+        <p class="mt-3 ml-3 mr-3">Pas de médias pour ce trick</p>
+      </div>
+    </div>
+    {% endif %}
+    <!-- End Carousel -->
+  </div>
+  {% endblock %}

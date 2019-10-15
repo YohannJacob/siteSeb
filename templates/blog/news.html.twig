@@ -2,7 +2,7 @@
 {% block title %} News {% endblock %}
 
 {% block body %}
-<div class="container-fluid album">
+<div class="container no-gutter album">
     <div class="row mb-5">
         <div class="col-md-4 coverBig">
             <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
@@ -14,7 +14,6 @@
             <p class="contenu pb-3 mt-4">{{ news.content | raw }}</p>
 
         </div>
-
         </p>
     </div>
 

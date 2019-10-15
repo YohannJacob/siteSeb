@@ -24,6 +24,7 @@ body {
     padding-right: 0;
     padding-left: 0;
 }
+
 .btn-primary {
     width: 100%;
     background-color: var(--red) !important;
@@ -273,6 +274,11 @@ p {
 
 /* CSS de l'agenda */
 
+.agenda {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .carte_agenda {
     border: 2px solid var(--red);
 }
@@ -291,7 +297,7 @@ p {
     text-decoration: none;
     padding: 10px 30px;
     color: #FFF;
-   padding: 26px;
+    padding: 26px;
     overflow: hidden;
     position: absolute;
     right: -2px;
@@ -299,12 +305,13 @@ p {
     transition-duration: 0.2s;
     background: var(--red);
 }
-.old_event{
+
+.old_event {
     opacity: 0.3;
 }
 
 .link:hover {
-    color:#FFF;
+    color: #FFF;
     box-shadow: 0 4 2px var(--red);
     z-index: 3;
 }
@@ -330,15 +337,17 @@ p {
 
 
 /* CSS de l'espace press */
-.press{
+.press {
     min-height: 790px;
     background-color: var(--red);
     width: 100%;
 }
-.press img{
+
+.press img {
     position: absolute;
     width: 100%;
 }
+
 /* CSS du footer */
 
 footer {
@@ -398,10 +407,51 @@ footer p {
 }
 
 
-/* CSS du slider photo */
+/* CSS du slider press */
+.carousel-inner {
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFF;
+    min-height: 380px;
+    padding: 50px;
+}
+.carousel-item p{
+    text-align: center;
+}
 
+.carousel-indicators{
+    bottom: -40px;
 
+}
+.carousel-control-prev {
+    left: -15%;
+}
+.carousel-control-next {
+    right: -15%;
+}
 
+.critique{
+        font-family: 'Arvo', serif;
+        font-weight: 400;
+        font-size: 22px;
+        color: var(--black);
+}
+.journal{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--black);
+    text-transform: uppercase;
+}
+
+.fa-quote-right{
+    position: absolute;
+    top: 35px;
+    left:35px;
+    font-size: 65px;
+    color:var(--red);
+    z-index: 15;
+ }
 
 /* ------ RESPONSIVE entre 1024px et 1200px ------ */
 @media screen and (min-width: 1024px) and (max-width:1200px) {}

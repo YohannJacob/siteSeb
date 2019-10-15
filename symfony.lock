@@ -120,6 +120,12 @@
     "jms/metadata": {
         "version": "2.0.0"
     },
+    "knplabs/knp-menu": {
+        "version": "2.6.0"
+    },
+    "knplabs/knp-menu-bundle": {
+        "version": "v2.3.0"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
     },

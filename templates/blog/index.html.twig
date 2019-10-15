@@ -1,7 +1,6 @@
 {% extends 'baseFront.html.twig' %}
 
-{% block title %}Sébastien Mao auteur de Bande déssinée
-{% endblock %}
+{% block title %}Sébastien Mao auteur de Bande déssinée{% endblock %}
 
 {% block body %}
 <div class="trait"></div>
@@ -51,68 +50,71 @@
             </div>
         </a>
         {% endif %}
-        {% endfor %}                                                                                                                                                            
-    </div> 
+        {% endfor %}
+    </div>
 
-        <div class="col-md-3 offset-9 navigation ">
-            <!-- <span class="badge hover-white" onclick="sliderPhoto.currentDiv()"></span> -->
-            <span class="bulle hover-white" onclick="sliderPhoto.current(0)"></span>
-            <span class="bulle hover-white" onclick="sliderPhoto.current(1)"></span>
-            <span class="bulle hover-white" onclick="sliderPhoto.current(2)"></span>
+    <div class="col-md-2 offset-8 navigation ">
+        <!-- <span class="badge hover-white" onclick="sliderPhoto.currentDiv()"></span> -->
+        <span class="bulle hover-white" onclick="sliderPhoto.current(0)"></span>
+        <span class="bulle hover-white" onclick="sliderPhoto.current(1)"></span>
+        <span class="bulle hover-white" onclick="sliderPhoto.current(2)"></span>
+    </div>
+</div>
+
+</div>
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-md-3 align-self-center">
+            <h2 class="text-center">mes albums</h2>
+        </div>
+        <div class="col-md-9 ">
+            <div class="row mt-5">
+                {% for album in albums |reverse %}
+                <div class="col-md-4 mb-5 cover">
+                    <a href="{{ path('album', {'id': album.id}) }}">
+                        <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
 </div>
-<div class="row mb-5">
-    <div class="col-md-3 align-self-center">
-        <h2 class="text-center">mes albums</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 align-self-center mb-5">
+            <h2 class="text-center">mon agenda</h2>
+        </div>
     </div>
-    <div class="col-md-9 ">
-        <div class="row mt-5">
-            {% for album in albums |reverse %}
-            <div class="col-md-4 mb-5 cover">
-                <a href="{{ path('album', {'id': album.id}) }}">
-                    <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
-                </a>
+
+    <div class="row agenda">
+        {% for news in news|slice(0, 2) %}
+        <div class="col-md-5 carte_agenda">
+            <div class="row">
+                <div class="col-md-4 no-gutter">
+                    <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+                </div>
+
+                <div class="col-md-8 contenu_agenda">
+                    <h4 class="mb-3">{{ news.title|e }}</h4>
+                    <p class="mb-2">{{ news.content|e }}</p>
+                    <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place|e }}</p>
+                    <p class="dateParution"><i class="far fa-clock"></i> : {{ news.date|e|date('d/m/Y à H:i')}}</p>
+                </div>
+                <a href="{{ path('news', {'id': news.id}) }}" id="btn" class="link"><i
+                        class="fas fa-eye fa-lg"></i><span></span></a>
             </div>
-            {% endfor %}
+        </div>
+        {% endfor %}
+        <div class="col-md-3 offset-md-8 mt-4 mb-5">
+            <!-- Lien à faire - créer la page -->
+            <a href="{{ path('allNews')}}">
+                <button type="button" class="btn btn-primary ">Voir l'agenda complet</button>
+            </a>
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-md-12 align-self-center mb-5">
-        <h2 class="text-center">mon agenda</h2>
-    </div>
-</div>
-
-<div class="row">
-    {% for news in news|slice(0, 2) %}
-    <div class="col-md-4 offset-1 carte_agenda">
-        <div class="row">
-            <div class="col-md-4 no-gutter">
-                <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
-            </div>
-
-            <div class="col-md-8 contenu_agenda">
-                <h4 class="mb-3">{{ news.title|e }}</h4>
-                <p class="mb-2">{{ news.content|e }}</p>
-                <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place|e }}</p>
-                <p class="dateParution"><i class="far fa-clock"></i> : {{ news.date|e|date('d/m/Y à H:i')}}</p>
-            </div>
-            <a href="{{ path('news', {'id': news.id}) }}" id="btn" class="link"><i
-                    class="fas fa-eye fa-lg"></i><span></span></a>
-        </div>
-    </div>
-    {% endfor %}
-    <div class="col-md-3 offset-md-9 no-gutter mt-4 mb-5">
-        <!-- Lien à faire - créer la page -->
-        <a href="{{ path('allNews')}}">
-            <button type="button" class="btn btn-primary ">Voir l'agenda complet</button>
-        </a>
-    </div>
-</div>
-
 
 
 

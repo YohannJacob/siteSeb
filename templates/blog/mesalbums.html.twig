@@ -7,9 +7,9 @@
     <section class="mb-5">
         <h4>mes albums</h4>
     </section>
-    <div class="container-fluid">
+    <div class="container no-gutter ">
         <div class="row">
-            {% for album in albums |reverse %}
+            {% for album in albums %}
                 <div class="col-lg-3 mb-5 cover">
                     <a href="{{ path('album', {'id': album.id}) }}">
                         <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">

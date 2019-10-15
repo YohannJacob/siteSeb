@@ -24,6 +24,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Asset\Package;
 
 class BlogController extends AbstractController
 {
@@ -60,7 +61,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/albums/{id} ", name="album")
      */
-    public function album(Albums $album, DetailRepository $detailRepository) // au lieu de public function album($id)
+    public function album(Albums $album, DetailRepository $detailRepository, PressRepository $pressRepository) // au lieu de public function album($id)
 
     {
         // $repo = $this->getDoctrine()->getRepository(Albums::class);
@@ -68,6 +69,7 @@ class BlogController extends AbstractController
         return $this->render('blog/album.html.twig', [
             'album' => $album,
             'details' => $detailRepository->findAll(),
+            'presses' => $pressRepository->findAll(),
         ]);
     }
 
