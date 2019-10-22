@@ -1,18 +1,12 @@
 {% extends "baseBack.html.twig" %}
 
 {% form_theme formMakingOf 'bootstrap_4_layout.html.twig' %}
-{# use Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle; #}
+
 
 
 {% block title %}Créer un Making-Of{% endblock %}
 
 {% block body %}
-{{ tinymce_init({
-    theme: {'simple':{'language': app.request.locale, 'height': 500 }},
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-    autosave_ask_before_unload: false,
-    })
-}}
 
 <h1 class="mb-5">{% if editMode %}
     Modification
@@ -20,7 +14,17 @@
     Création
     {% endif %}d'un Making-Of</h1>
 <form method="post" enctype="multipart/form-data">
-    {{ form_rest(formMakingOf) }}
+    {# {{ form_rest(formMakingOf) }} #}
+     {{ form_start(formMakingOf)}}
+    {{ form_widget(formMakingOf.Content, {'id' : 'editor'}) }}
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 
     <button class="btn btn-primary" type="submit">
         {% if editMode %}

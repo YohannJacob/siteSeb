@@ -90,24 +90,23 @@ class Albums
     private $updated_at;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\MakingOf", mappedBy="album", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\MakingOf", mappedBy="album", orphanRemoval=true)
      */
     private $makingOf;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Slider", mappedBy="album")
+     * @ORM\OneToMany(targetEntity="App\Entity\Slider", mappedBy="album", orphanRemoval=true)
      */
     private $sliders;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Press", mappedBy="album")
+     * @ORM\OneToOne(targetEntity="App\Entity\Press", mappedBy="album", orphanRemoval=true)
      */
     private $presses;
 
     public function __construct()
     {
         $this->sliders = new ArrayCollection();
-        $this->presses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -283,6 +282,26 @@ class Albums
         return $this;
     }
 
+
+    public function getPresses(): ?Press
+    {
+        return $this->presses;
+    }
+
+    public function setPress(?Press $presses): self
+    {
+        $this->makingOf = $presses;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newAlbum = $presses === null ? null : $this;
+        if ($newAlbum !== $presses->getAlbum()) {
+            $presses->setAlbum($newAlbum);
+        }
+
+        return $this;
+    }
+
+
     /**
      * @return Collection|Slider[]
      */
@@ -308,37 +327,6 @@ class Albums
             // set the owning side to null (unless already changed)
             if ($slider->getAlbum() === $this) {
                 $slider->setAlbum(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Press[]
-     */
-    public function getPresses(): Collection
-    {
-        return $this->presses;
-    }
-
-    public function addPress(Press $press): self
-    {
-        if (!$this->presses->contains($press)) {
-            $this->presses[] = $press;
-            $press->setAlbum($this);
-        }
-
-        return $this;
-    }
-
-    public function removePress(Press $press): self
-    {
-        if ($this->presses->contains($press)) {
-            $this->presses->removeElement($press);
-            // set the owning side to null (unless already changed)
-            if ($press->getAlbum() === $this) {
-                $press->setAlbum(null);
             }
         }
 

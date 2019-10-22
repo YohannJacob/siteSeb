@@ -11,6 +11,9 @@ body {
     color: var(--black);
 }
 
+a:hover {
+    text-decoration: none !important;
+}
 /* .container{
     height: 100vh;
 } */
@@ -23,20 +26,6 @@ body {
 .no-gutter {
     padding-right: 0;
     padding-left: 0;
-}
-
-.btn-primary {
-    width: 100%;
-    background-color: var(--red) !important;
-    border: var(--red) !important;
-    font-weight: 800;
-}
-
-.btn-dark {
-    width: 100%;
-    background-color: var(--black) !important;
-    border: var(--black) !important;
-    font-weight: 800;
 }
 
 .trait {
@@ -101,6 +90,90 @@ p {
 
 .bold {
     font-weight: 800;
+}
+
+/* Css boutons */
+
+.btnBlack{
+    min-width: 80px;
+    height: 40px;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+    padding: 10px 20px;
+    color: #FFF;
+    transition-duration: 0.2s;
+    background: var(--black);
+    border: var(--black) !important;
+    font-weight: 800;
+    border-radius: .25rem;
+
+}
+.btnBlack:hover {
+    color: #FFF;
+    box-shadow: 0 4 2px var(--black);
+    z-index: 3;
+    text-decoration: none;
+}
+
+.btnBlack span {
+    content: "";
+    border-radius: 50%;
+    width: 0px;
+    height: 0px;
+    transform: translate(-40%, -50%);
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.1s;
+    background: var(--red);
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.btnBlack:hover span {
+    width: 800px;
+    height: 800px;
+    opacity: 1;
+}
+
+.btnRed{
+    min-width: 100px;
+    height: 40px;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+    padding: 10px 20px;
+    color: #FFF;
+    transition-duration: 0.2s;
+    background: var(--red);
+    border: var(--red) !important;
+    font-weight: 800;
+    border-radius: .25rem;
+
+}
+.btnRed:hover {
+    color: #FFF;
+    box-shadow: 0 4 2px var(--red);
+    z-index: 3;
+    text-decoration: none;
+}
+
+.btnRed span {
+    content: "";
+    border-radius: 50%;
+    width: 0px;
+    height: 0px;
+    transform: translate(-40%, -50%);
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.1s;
+    background: var(--black);
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.btnRed:hover span {
+    width: 800px;
+    height: 800px;
+    opacity: 1;
 }
 
 /* CSS des types de paragraphes */
@@ -289,6 +362,9 @@ p {
     flex-direction: column;
     align-items: center;
 }
+.old_event {
+    opacity: 0.3;
+}
 
 .link {
     width: 60px;
@@ -303,20 +379,61 @@ p {
     right: -2px;
     bottom: -2px;
     transition-duration: 0.2s;
+    background: var(--black);
+}
+
+
+
+.link:hover {
+    color: #FFF;
+    box-shadow: 0 4 2px var(--black);
+    z-index: 3;
+}
+
+.link span {
+    content: "";
+    border-radius: 50%;
+    width: 0px;
+    height: 0px;
+    transform: translate(-40%, -50%);
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out, opacity 0.1s;
+    background: var(--red);
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+}
+
+.link:hover span {
+    width: 300px;
+    height: 300px;
+    opacity: 1;
+}
+
+.link2 {
+    width: 60px;
+    height: 60px;
+    border-radius: 0 0 0 100%;
+    text-decoration: none;
+    padding: 10px 30px;
+    color: #FFF !important;
+    padding: 15px 0 0 30px;
+    overflow: hidden;
+    position: absolute;
+    right: -3px;
+    top: -27px;
+    transition-duration: 0.2s;
     background: var(--red);
 }
 
-.old_event {
-    opacity: 0.3;
-}
 
-.link:hover {
+
+.link2:hover {
     color: #FFF;
     box-shadow: 0 4 2px var(--red);
     z-index: 3;
 }
 
-.link span {
+.link2 span {
     content: "";
     border-radius: 50%;
     width: 0px;
@@ -329,12 +446,11 @@ p {
     opacity: 0;
 }
 
-.link:hover span {
+.link2:hover span {
     width: 300px;
     height: 300px;
     opacity: 1;
 }
-
 
 /* CSS de l'espace press */
 .press {

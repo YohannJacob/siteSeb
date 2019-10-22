@@ -14,7 +14,7 @@ Administration du site
         <div class="col-md-12">
             <div class="col-md-4 offset-md-4 mb-4">
                 <a class="d-flex align-items-center" href="{{ path('newAlbum')}}">
-                    <button type="button" class="btn btn-dark mb-2">Ajouter un nouvel album</button>
+                    <button type="button" class="btnBlack mb-2">Ajouter un nouvel album<span></span></button>
                 </a>
             </div>
         </div>
@@ -25,7 +25,10 @@ Administration du site
                 <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
             </a>
             <a href="{{ path('editAlbum', {'id': album.id}) }}">
-                <button type="button" class="btn btn-primary mt-2 mb-2">Modifier l'album</button>
+                <button type="button" class="btnRed mt-2 mb-2">Modifier l'album<span></span></button>
+            </a>
+            <a href="{{ path('deleteAlbum', {'id': album.id}) }}">
+                <button type="button" class="btnRed mt-2 mb-2">Supprimer l'album<span></span></button>
             </a>
         </div>
 
@@ -36,9 +39,35 @@ Administration du site
     <div class="row mb-5">
         <div class="col-md-12">
             <h2 class="text-center mb-4">Le slider</h2>
+            {% if sliders| length < 3 %}
+            <a class="d-flex align-items-center" href="{{ path('newSlider')}}">
+                <button type="button" class="btnBlack mb-2">Ajouter un slider<span></span></button>
+            </a>
+            {% endif %}
         </div>
-        
+
         {% for slider in sliders %}
+        {% if slider.position == 1 %}
+        <div class="d-flex align-items-center col-md-12 ml-5 mb-4 carte_agenda">
+            <div class="row">
+                <div class="col-md-4 no-gutter">
+                    <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                </div>
+
+                <div class="col-md-8 contenu_agenda">
+                    <h4 class="mb-3">Image N°{{ slider.position }}</h4>
+                    <h4 class="mb-3">Titre : {{ slider.title }}</h4>
+                    <p class="mb-2">Sous-titre : {{ slider.subTitle }}</p>
+
+                </div>
+                <a href="{{ path('editSlider', {'id': slider.id}) }}" id="btn" class="link"><i
+                        class="fas fa-pencil-alt"></i><span></span></a>
+            </div>
+        </div>
+
+        {% endif %}
+
+        {% if slider.position == 2 %}
         <div class="col-md-12 ml-5 mb-4 carte_agenda">
             <div class="row">
                 <div class="col-md-4 no-gutter">
@@ -51,10 +80,49 @@ Administration du site
                     <p class="mb-2">Sous-titre : {{ slider.subTitle }}</p>
 
                 </div>
-                <a href="{{ path('editSlider', {'id': slider.id}) }}" id="btn" class="link"><i class="fas fa-pencil-alt"></i><span></span></a>
+                <a href="{{ path('editSlider', {'id': slider.id}) }}" id="btn" class="link"><i
+                        class="fas fa-pencil-alt"></i><span></span></a>
             </div>
         </div>
+
+        {% endif %}
+
+        {% if slider.position == 3 %}
+        <div class="col-md-12 ml-5 mb-4 carte_agenda">
+            <div class="row">
+                <div class="col-md-4 no-gutter">
+                    <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                </div>
+
+                <div class="col-md-8 contenu_agenda">
+                    <h4 class="mb-3">Image N°{{ slider.position }}</h4>
+                    <h4 class="mb-3">Titre : {{ slider.title }}</h4>
+                    <p class="mb-2">Sous-titre : {{ slider.subTitle }}</p>
+
+                </div>
+                <a href="{{ path('editSlider', {'id': slider.id}) }}" id="btn" class="link"><i
+                        class="fas fa-pencil-alt"></i><span></span></a>
+            </div>
+        </div>
+
+        {% endif %}
         {% endfor %}
+
+
+        {# <a class="d-flex align-items-center" href="{{ path('newSlider', {'position':3})}}">
+                <button type="button" class="btn btn-dark mb-2">Ajouter le slider</button>
+            </a> #}
+
+        {# <a class="d-flex align-items-center" href="{{ path('newSlider', {'position':1})}}">
+            <button type="button" class="btn btn-dark mb-2">Ajouter le slider</button>
+        </a> #}
+
+
+        {# <a class="d-flex align-items-center" href="{{ path('newSlider', {'position':2})}}">
+            <button type="button" class="btn btn-dark mb-2">Ajouter le slider</button>
+        </a> #}
+
+
     </div>
 
     {# L'Agenda #}
@@ -65,7 +133,7 @@ Administration du site
         <div class="col-md-12">
             <div class="col-md-4 offset-md-4 mb-4">
                 <a class="d-flex align-items-center" href="{{ path('createNews')}}">
-                    <button type="button" class="btn btn-dark mb-2">Ajouter un évènement</button>
+                    <button type="button" class="mt-4 btnBlack">Ajouter un évènement<span></span></button>
                 </a>
             </div>
         </div>
@@ -81,13 +149,20 @@ Administration du site
                     <h4 class="mb-3">{{ news.title|e }}</h4>
                     <p class="mb-2">{{ news.content|e }}</p>
                     <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place|e }}</p>
-                    <p class="dateParution"><i class="far fa-clock"></i> :
-                        {{ news.date|e|date('d/m/Y à H:i')}}
-                    </p>
+                    <p class="dateParution"><i class="far fa-clock"></i> :{{ news.date|e|date('d/m/Y à H:i')}} </p>
+                    <a href="{{ path('deleteNews', {'id': news.id}) }}" id="btn" class="link2">
+                            <i class="fas fa-trash-alt"></i>
+                            <span></span>
+                        </a>
                 </div>
-                <a href="{{ path('editNews', {'id': news.id}) }}" id="btn" class="link"><i class="fas fa-pencil-alt"></i><span></span></a>
+                <a href="{{ path('editNews', {'id': news.id}) }}" id="btn" class="link">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span></span>
+                </a>
+
             </div>
         </div>
+
         {% endfor %}
     </div>
 
@@ -99,7 +174,7 @@ Administration du site
         <div class="col-md-12">
             <div class="col-md-4 offset-md-4 mb-4">
                 <a class="d-flex align-items-center" href="{{ path('newMakingOf')}}">
-                    <button type="button" class="btn btn-dark mb-2">Ajouter un making-Of</button>
+                    <button type="button" class="btnBlack mb-2">Ajouter un making-Of<span></span></button>
                 </a>
             </div>
         </div>
@@ -111,7 +186,10 @@ Administration du site
                     src="{{ vich_uploader_asset(allMakingOf.album, 'coverFile')}}">
             </a>
             <a href="{{ path('editMakingOf', {'id': allMakingOf.id}) }}">
-                <button type="button" class="btn btn-primary mt-2 mb-2">Modifier le Making-Of</button>
+                <button type="button" class="btnRed mt-2 mb-2">Modifier le Making-Of<span></span></button>
+            </a>
+            <a href="{{ path('deleteMakingOf', {'id': allMakingOf.id}) }}">
+                <button type="button" class="btnRed mt-2 mb-2">Supprimer le Making-Of<span></span></button>
             </a>
         </div>
         {% endfor %}
@@ -125,42 +203,45 @@ Administration du site
         <div class="col-md-12">
             <div class="col-md-4 offset-md-4 mb-4">
                 <a class="d-flex align-items-center" href="{{ path('createPress')}}">
-                    <button type="button" class="btn btn-dark mb-2">Ajouter une critique</button>
+                    <button type="button" class="btnBlack mb-2">Ajouter une critique<span></span></button>
                 </a>
             </div>
         </div>
 
         {% for press in press %}
         <div class="col-md-2 mb-5 cover">
-                <img alt="{{ press.album.title }}" class="mini"
-                    src="{{ vich_uploader_asset(press.album, 'coverFile')}}">
+            <img alt="{{ press.album.title }}" class="mini" src="{{ vich_uploader_asset(press.album, 'coverFile')}}">
             <h3 class="text-center mt-2">{{press.journal}}</h3>
             <a href="{{ path('editPress', {'id': press.id}) }}">
-                <button type="button" class="btn btn-primary mt-2 mb-2">Modifier la critique</button>
+                <button type="button" class="btnRed mt-2 mb-2">Modifier<span></span></button>
+            </a>
+            <a href="{{ path('deletePress', {'id': press.id}) }}">
+                <button type="button" class="btnRed mt-2 mb-2">Supprimer<span></span></button>
             </a>
         </div>
         {% endfor %}
     </div>
 
-        {# Personaliser le site #}
-        <div class="row mb-5">
-            <div class="col-md-12">
-                <h2 class="text-center">Divers</h2>
-                <p class="text-center mb-4">Ici vous pouvez, changer la biographie, la photo, le contact presse ainsi que les
-                    liens Instagram, facebook et Twitter</p>
-            </div>
-            <div class="col-md-12">
-                <div class="col-md-4 offset-md-4 mb-4">
-                    {% for detail in details %}
-    
-                    <a class="d-flex align-items-center" href="{{ path('editDetail', {'id': detail.id}) }}">
-                        <button type="button" class="btn btn-dark mb-2">Personaliser le site</button>
-    
-                    </a>
-                    {% endfor %}
-                </div>
+    {# Personaliser le site #}
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="text-center">Divers</h2>
+            <p class="text-center mb-4">Ici vous pouvez, changer la biographie, la photo, le contact presse ainsi que
+                les
+                liens Instagram, facebook et Twitter</p>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4 offset-md-4 mb-4">
+                {% for detail in details %}
+
+                <a class="d-flex align-items-center" href="{{ path('editDetail', {'id': detail.id}) }}">
+                    <button type="button" class="btnBlack mb-2">Personaliser le site<span></span></button>
+
+                </a>
+                {% endfor %}
             </div>
         </div>
+    </div>
 
 </div>
 

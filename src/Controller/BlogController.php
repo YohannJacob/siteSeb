@@ -61,15 +61,20 @@ class BlogController extends AbstractController
     /**
      * @Route("/albums/{id} ", name="album")
      */
-    public function album(Albums $album, DetailRepository $detailRepository, PressRepository $pressRepository) // au lieu de public function album($id)
+    public function album($id)
 
     {
-        // $repo = $this->getDoctrine()->getRepository(Albums::class);
-        // $album = $repo->find($id);
+        $repo = $this->getDoctrine()->getRepository(Albums::class);
+        $albums = $repo->find($id);
+        $repo2 = $this->getDoctrine()->getRepository(Detail::class);
+        $details = $repo2->findAll();
+        $repo3 = $this->getDoctrine()->getRepository(Press::class);
+        $presses = $repo3->find($id);
+
         return $this->render('blog/album.html.twig', [
-            'album' => $album,
-            'details' => $detailRepository->findAll(),
-            'presses' => $pressRepository->findAll(),
+            'albums' => $albums,
+            'details' => $details,
+            'presses' => $presses,
         ]);
     }
 
@@ -199,6 +204,27 @@ class BlogController extends AbstractController
 
         ]);
     }
+/**
+* @Route("/deleteAlbum/{id}",  name="deleteAlbum")
+*/ 
+public function deleteAlbum($id) {
+
+
+    $managerAlbum = $this->getDoctrine()->getManager();
+    $album = $managerAlbum->getRepository(Albums::class)->find($id);
+  
+    if (!$album) {
+      throw $this->createNotFoundException(
+      'There are no albums with the following id: ' . $id
+      );
+    }
+  
+    $managerAlbum->remove($album);
+    $managerAlbum->flush();
+  
+    return $this->redirect('/admin');
+  
+  }
 
     /**
      * @Route("newAlbum", name="newAlbum")
@@ -225,6 +251,28 @@ class BlogController extends AbstractController
     }
 
     /**
+    * @Route("/deleteNews/{id}",  name="deleteNews")
+    */ 
+    public function deleteNews($id) {
+
+
+        $manager = $this->getDoctrine()->getManager();
+        $news = $manager->getRepository(News::class)->find($id);
+    
+        if (!$news) {
+        throw $this->createNotFoundException(
+        'There are no news with the following id: ' . $id
+        );
+        }
+    
+        $manager->remove($news);
+        $manager->flush();
+    
+        return $this->redirect('/admin');
+    
+    }
+
+    /**
      * @Route("/createNews", name="createNews")
      * @Route("/news/{id}/edit", name="editNews")
      */
@@ -247,6 +295,28 @@ class BlogController extends AbstractController
             'formNews' => $form->createView(),
             'editMode' => $news->getId() !== null,
         ]);
+    }
+
+    /**
+    * @Route("/deleteMakingOf/{id}",  name="deleteMakingOf")
+    */ 
+    public function deleteMakingOf($id) {
+
+
+        $manager = $this->getDoctrine()->getManager();
+        $makingOf = $manager->getRepository(MakingOf::class)->find($id);
+    
+        if (!$makingOf) {
+        throw $this->createNotFoundException(
+        'There are no makingOf with the following id: ' . $id
+        );
+        }
+    
+        $manager->remove($makingOf);
+        $manager->flush();
+    
+        return $this->redirect('/admin');
+    
     }
 
     /**
@@ -301,6 +371,28 @@ class BlogController extends AbstractController
             'formDetail' => $form->createView(),
             'editMode' => $detail->getId() !== null,
         ]);
+    }
+
+    /**
+    * @Route("/deletePress/{id}",  name="deletePress")
+    */ 
+    public function deletePress($id) {
+
+
+        $manager = $this->getDoctrine()->getManager();
+        $press = $manager->getRepository(Press::class)->find($id);
+    
+        if (!$press) {
+        throw $this->createNotFoundException(
+        'There are no press with the following id: ' . $id
+        );
+        }
+    
+        $manager->remove($press);
+        $manager->flush();
+    
+        return $this->redirect('/admin');
+    
     }
 
 /**

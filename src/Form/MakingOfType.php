@@ -17,7 +17,7 @@ class MakingOfType extends AbstractType
     {
         $builder
             ->add('Content', TextareaType::class, [
-                'attr' => ['class' => 'tinymce'],
+                'attr' => ['class' => 'editor'],
                 ])
 
             ->add('album', EntityType::class,[

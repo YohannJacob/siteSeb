@@ -22,13 +22,13 @@ class SliderType extends AbstractType
             ->add('ImageFile', FileType::class, array('data_class' => null))
             ->add('Title')
             ->add('SubTitle')
-            // ->add('Position', ChoiceType::class, [
-            //     'choices'  => [
-            //         '1' => 1,
-            //         '2' => 2,
-            //         '3' => 3,
-            //     ],
-            // ])
+            ->add('Position', ChoiceType::class, [
+                'choices'  => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                ],
+            ])
             ->add('album', EntityType::class,[
                 'class' => Albums::class,
                 'choice_label' => 'title',
