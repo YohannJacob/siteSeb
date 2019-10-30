@@ -569,6 +569,34 @@ footer p {
     z-index: 15;
  }
 
+ /* CSS contact */
+.contact{
+        margin: 0 0 25px 0;
+        padding: 20px 20px 20px 20px;
+        border: 2px solid var(--red); 
+
+}
+ #contact_message{
+     min-height: 350px;
+ }
+
+ .contact .form-control{
+     border: none;
+ }
+
+.separator{
+    border-bottom: 2px solid var(--red);
+
+}
+.contact_box{
+    padding-right: 20px;
+}
+.separator_vertical{
+    border-left: 2px solid var(--red); 
+    padding-left: 20px;
+}
+
+
 /* ------ RESPONSIVE entre 1024px et 1200px ------ */
 @media screen and (min-width: 1024px) and (max-width:1200px) {}
 

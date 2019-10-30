@@ -9,6 +9,7 @@
         "knplabs/knp-menu-bundle": "^2.0",
         "sensio/framework-extra-bundle": "^5.1",
         "stfalcon/tinymce-bundle": "^2.4",
+        "swiftmailer/swiftmailer": "^6.0",
         "symfony/asset": "4.3.*",
         "symfony/console": "4.3.*",
         "symfony/dotenv": "4.3.*",

@@ -3,17 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Albums;
+use App\Entity\Contact;
 use App\Entity\Detail;
 use App\Entity\MakingOf;
 use App\Entity\News;
 use App\Entity\Press;
 use App\Entity\Slider;
+use App\Entity\ContactNotification;
+
+use App\Form\ContactType;
 use App\Form\DetailType;
 use App\Form\MakingOfType;
 use App\Form\NewAlbumType;
 use App\Form\NewsType;
 use App\Form\PressType;
 use App\Form\SliderType;
+
 use App\Repository\AlbumsRepository;
 use App\Repository\DetailRepository;
 use App\Repository\MakingOfRepository;
@@ -24,14 +29,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Asset\Package;
 
 class BlogController extends AbstractController
 {
     // Route en front
 
 /**
- * @Route("/", name="home")
+ * @Route("/home", name="home")
  */
     public function index(AlbumsRepository $albumsRepository, SliderRepository $sliderRepository, NewsRepository $newsRepository, DetailRepository $detailRepository)
     {
@@ -62,7 +66,6 @@ class BlogController extends AbstractController
      * @Route("/albums/{id} ", name="album")
      */
     public function album($id)
-
     {
         $repo = $this->getDoctrine()->getRepository(Albums::class);
         $albums = $repo->find($id);
@@ -148,13 +151,42 @@ class BlogController extends AbstractController
     /**
      * @Route("/contact", name="contact")
      */
-    public function contact(DetailRepository $detailRepository)
+    public function formContact(Contact $contact = null, \Swift_Mailer $mailer, Request $request, ObjectManager $manager)
     {
-        return $this->render('blog/contact.html.twig', [
-            'controller_name' => 'BlogController',
-            'details' => $detailRepository->findAll(),
-        ]);
 
+        $repo2 = $this->getDoctrine()->getRepository(Detail::class);
+        $details = $repo2->findAll();
+
+        $contact = new Contact();
+        // var_dump($details);
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $message = (new \Swift_Message('Demande de contact de : ' .$contact->getFirstName().' '. $contact->getLastName()))
+                ->setTo('jacob.yohann@gmail.com')
+                ->setFrom($contact->getEmail())
+                ->setBody(
+                $this->renderView(
+                    'emails/mailContact.html.twig',
+                    ['contact' => $contact,
+                ]),
+                'text/html'
+            )
+        ;
+
+        $mailer->send($message);
+        $this->addFlash('add-advertisement', 'Votre annonce à bien été ajouté, vous aller recevoir un mail de confirmation !');
+        return $this->redirectToRoute('home');
+        return $this->render($message);
+        }
+
+        return $this->render('blog/contact.html.twig', [
+            'formContact' => $form->createView(),
+            'details' => $details,
+        ]);
+        
     }
 
     ///////////////////////////////////////////
@@ -205,26 +237,26 @@ class BlogController extends AbstractController
         ]);
     }
 /**
-* @Route("/deleteAlbum/{id}",  name="deleteAlbum")
-*/ 
-public function deleteAlbum($id) {
+ * @Route("/deleteAlbum/{id}",  name="deleteAlbum")
+ */
+    public function deleteAlbum($id)
+    {
 
+        $managerAlbum = $this->getDoctrine()->getManager();
+        $album = $managerAlbum->getRepository(Albums::class)->find($id);
 
-    $managerAlbum = $this->getDoctrine()->getManager();
-    $album = $managerAlbum->getRepository(Albums::class)->find($id);
-  
-    if (!$album) {
-      throw $this->createNotFoundException(
-      'There are no albums with the following id: ' . $id
-      );
+        if (!$album) {
+            throw $this->createNotFoundException(
+                'There are no albums with the following id: ' . $id
+            );
+        }
+
+        $managerAlbum->remove($album);
+        $managerAlbum->flush();
+
+        return $this->redirect('/admin');
+
     }
-  
-    $managerAlbum->remove($album);
-    $managerAlbum->flush();
-  
-    return $this->redirect('/admin');
-  
-  }
 
     /**
      * @Route("newAlbum", name="newAlbum")
@@ -251,25 +283,25 @@ public function deleteAlbum($id) {
     }
 
     /**
-    * @Route("/deleteNews/{id}",  name="deleteNews")
-    */ 
-    public function deleteNews($id) {
-
+     * @Route("/deleteNews/{id}",  name="deleteNews")
+     */
+    public function deleteNews($id)
+    {
 
         $manager = $this->getDoctrine()->getManager();
         $news = $manager->getRepository(News::class)->find($id);
-    
+
         if (!$news) {
-        throw $this->createNotFoundException(
-        'There are no news with the following id: ' . $id
-        );
+            throw $this->createNotFoundException(
+                'There are no news with the following id: ' . $id
+            );
         }
-    
+
         $manager->remove($news);
         $manager->flush();
-    
+
         return $this->redirect('/admin');
-    
+
     }
 
     /**
@@ -298,25 +330,25 @@ public function deleteAlbum($id) {
     }
 
     /**
-    * @Route("/deleteMakingOf/{id}",  name="deleteMakingOf")
-    */ 
-    public function deleteMakingOf($id) {
-
+     * @Route("/deleteMakingOf/{id}",  name="deleteMakingOf")
+     */
+    public function deleteMakingOf($id)
+    {
 
         $manager = $this->getDoctrine()->getManager();
         $makingOf = $manager->getRepository(MakingOf::class)->find($id);
-    
+
         if (!$makingOf) {
-        throw $this->createNotFoundException(
-        'There are no makingOf with the following id: ' . $id
-        );
+            throw $this->createNotFoundException(
+                'There are no makingOf with the following id: ' . $id
+            );
         }
-    
+
         $manager->remove($makingOf);
         $manager->flush();
-    
+
         return $this->redirect('/admin');
-    
+
     }
 
     /**
@@ -374,25 +406,25 @@ public function deleteAlbum($id) {
     }
 
     /**
-    * @Route("/deletePress/{id}",  name="deletePress")
-    */ 
-    public function deletePress($id) {
-
+     * @Route("/deletePress/{id}",  name="deletePress")
+     */
+    public function deletePress($id)
+    {
 
         $manager = $this->getDoctrine()->getManager();
         $press = $manager->getRepository(Press::class)->find($id);
-    
+
         if (!$press) {
-        throw $this->createNotFoundException(
-        'There are no press with the following id: ' . $id
-        );
+            throw $this->createNotFoundException(
+                'There are no press with the following id: ' . $id
+            );
         }
-    
+
         $manager->remove($press);
         $manager->flush();
-    
+
         return $this->redirect('/admin');
-    
+
     }
 
 /**

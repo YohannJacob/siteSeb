@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -23,7 +22,6 @@ class Albums
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      * * @Assert\Length(
@@ -34,48 +32,39 @@ class Albums
      * )
      */
     private $title;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $Subtitle;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $Scenario;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $Dessin;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $Couleur;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $buyLink;
-
     /**
      * @ORM\Column(type="date")
      */
     private $date;
-
     /**
      * @ORM\Column(type="text")
      */
     private $content;
-
     /**
-     * @var string|null 
+     * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $coverName;
-
     /**
      * @var File
      * @Vich\UploadableField(mapping="cover_image", fileNameProperty="coverName")
@@ -83,121 +72,94 @@ class Albums
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
      */
     private $coverFile;
-
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
-
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\MakingOf", mappedBy="album", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\MakingOf", mappedBy="album", cascade={"persist", "remove"})
      */
     private $makingOf;
-
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Slider", mappedBy="album", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Slider", mappedBy="album")
      */
     private $sliders;
-
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Press", mappedBy="album", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Press", mappedBy="album")
      */
     private $presses;
-
     public function __construct()
     {
         $this->sliders = new ArrayCollection();
+        $this->presses = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getTitle(): ?string
     {
         return $this->title;
     }
-
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
-
     public function getSubtitle(): ?string
     {
         return $this->Subtitle;
     }
-
     public function setSubtitle(string $Subtitle): self
     {
         $this->Subtitle = $Subtitle;
-
         return $this;
     }
-
     public function getScenario(): ?string
     {
         return $this->Scenario;
     }
-
     public function setScenario(string $Scenario): self
     {
         $this->Scenario = $Scenario;
-
         return $this;
     }
-
     public function getDessin(): ?string
     {
         return $this->Dessin;
     }
-
     public function setDessin(string $Dessin): self
     {
         $this->Dessin = $Dessin;
-
         return $this;
     }
-
     public function getCouleur(): ?string
     {
         return $this->Couleur;
     }
-
     public function setCouleur(string $Couleur): self
     {
         $this->Couleur = $Couleur;
-
         return $this;
     }
-
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
-
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
         return $this;
     }
-
     public function getContent(): ?string
     {
         return $this->content;
     }
-
     public function setContent(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
-
     /**
      * @return File|UploadedFile
      */
@@ -205,16 +167,13 @@ class Albums
     {
         return $this->coverFile;
     }
-
     /**
      * @param null|string $coverFile
      * @return Albums
      */
-
-    public function setCoverFile(?File $coverFile= null) : void
+    public function setCoverFile(?File $coverFile = null): void
     {
         $this->coverFile = $coverFile;
-
         if (null !== $coverFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
@@ -224,12 +183,10 @@ class Albums
     /**
      * @return null|string
      */
-
     public function getCoverName()
     {
         return $this->coverName;
     }
-
     /**
      * @param null|string $coverName
      * @return Albums
@@ -239,69 +196,38 @@ class Albums
         $this->coverName = $coverName;
         return $this;
     }
-
     public function getBuyLink(): ?string
     {
         return $this->buyLink;
     }
-
     public function setBuyLink(string $buyLink): self
     {
         $this->buyLink = $buyLink;
-
         return $this;
     }
-
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updated_at;
     }
-
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
-
         return $this;
     }
-
     public function getMakingOf(): ?MakingOf
     {
         return $this->makingOf;
     }
-
     public function setMakingOf(?MakingOf $makingOf): self
     {
         $this->makingOf = $makingOf;
-
         // set (or unset) the owning side of the relation if necessary
         $newAlbum = $makingOf === null ? null : $this;
         if ($newAlbum !== $makingOf->getAlbum()) {
             $makingOf->setAlbum($newAlbum);
         }
-
         return $this;
     }
-
-
-    public function getPresses(): ?Press
-    {
-        return $this->presses;
-    }
-
-    public function setPress(?Press $presses): self
-    {
-        $this->makingOf = $presses;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newAlbum = $presses === null ? null : $this;
-        if ($newAlbum !== $presses->getAlbum()) {
-            $presses->setAlbum($newAlbum);
-        }
-
-        return $this;
-    }
-
-
     /**
      * @return Collection|Slider[]
      */
@@ -309,17 +235,14 @@ class Albums
     {
         return $this->sliders;
     }
-
     public function addSlider(Slider $slider): self
     {
         if (!$this->sliders->contains($slider)) {
             $this->sliders[] = $slider;
             $slider->setAlbum($this);
         }
-
         return $this;
     }
-
     public function removeSlider(Slider $slider): self
     {
         if ($this->sliders->contains($slider)) {
@@ -329,7 +252,32 @@ class Albums
                 $slider->setAlbum(null);
             }
         }
-
+        return $this;
+    }
+    /**
+     * @return Collection|Press[]
+     */
+    public function getPresses(): Collection
+    {
+        return $this->presses;
+    }
+    public function addPress(Press $press): self
+    {
+        if (!$this->presses->contains($press)) {
+            $this->presses[] = $press;
+            $press->setAlbum($this);
+        }
+        return $this;
+    }
+    public function removePress(Press $press): self
+    {
+        if ($this->presses->contains($press)) {
+            $this->presses->removeElement($press);
+            // set the owning side to null (unless already changed)
+            if ($press->getAlbum() === $this) {
+                $press->setAlbum(null);
+            }
+        }
         return $this;
     }
 }

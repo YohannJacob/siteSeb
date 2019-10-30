@@ -2,5 +2,62 @@
 {% block title %} Me contacter {% endblock %}
 
 {% block body %}
+<section class="mb-5">
+    <h4>me contacter</h4>
+</section>
+<div class="container no-gutter ">
+    <div class="row mb-5">
+        <div class="col-md-12" id="some-custom-id">
+            <form method="post" enctype="multipart/form-data">
+                {{ form_start(formContact)}}
 
+                <div class="row contact d-flex align-items-center">
+                    <div class="col-md-6 mb-1 contact_box no-gutter ">
+                        <div class="col-md-12 mb-5 separator">
+                            {{ form_widget(formContact.firstName, {'attr': {'placeholder': "Prénom"}}) }}
+                        </div>
+                        <div class="col-md-12 mb-5 separator">
+                            {{ form_widget(formContact.lastName, {'attr': {'placeholder': "Nom"}}) }}
+                        </div>
+                        <div class="col-md-12 mb-5 separator">
+                            {{ form_widget(formContact.email, {'attr': {'placeholder': "email"}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-1 separator_vertical no-gutter">
+
+                        <div class="col-md-12 message">
+                            <h3>Message</h3>
+                            {{ form_widget(formContact.message, {'attr': {'placeholder': "Votre message ici ..."}}) }}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 offset-md-9">
+                        <button class="btn btnRed" type="submit">
+                            Envoyer
+                        </button>
+                    </div>
+                </div>
+                {{ form_end(formContact) }}
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<section class="mb-5">
+    <h4>contact presse</h4>
+</section>
+
+<div class="container no-gutter ">
+    <div class="row">
+        <div class="col-md-12 mb-5 cover">
+            {% for detail in details %}
+            <p>{{ detail.pressContact }}</p>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
 {% endblock %}
