@@ -42,6 +42,9 @@
         <a class="navbar-brand ml-2" href="{{ path('home')}}">
             <img alt="bulles" src="../../img/logo-bulles.png">
         </a>
+               <h3 class="text-center ml-5">Administration du site</h3>
+
+
         <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation"
             class="navbar-toggler" data-target="#navbarColor03" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
@@ -75,7 +78,15 @@
         </footer>
     </div>
 
-    {% block javascripts %}{% endblock %}
+    {% block javascripts %}
+        <!-- JQuery Plugin -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Bootstrap JQuery Plugin -->
+    
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        {% endblock %}
 </body>
 
 </html>

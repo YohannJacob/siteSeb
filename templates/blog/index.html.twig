@@ -6,7 +6,7 @@
 <div class="trait"></div>
 
 <!-- Slider Bannière -->
-<div class="row mb-5">
+<div class="row mb-5 home">
     <div class="col-md-9 offset-2 slider">
         {% for slider in sliders %}
         {% if slider.position == 1 %}
@@ -118,6 +118,20 @@
 </div>
 
 
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Bootstrap JQuery Plugin -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Ajouter plusieurs images -->
+<script src="js/zoomOut.js"></script>
 
 <!-- Slider tuto en haut de page -->
 <script src="js/slider.js"></script>

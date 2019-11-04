@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Albums;
+use App\Entity\AlbumImage;
 use App\Entity\Contact;
 use App\Entity\Detail;
 use App\Entity\MakingOf;
@@ -15,11 +16,13 @@ use App\Form\ContactType;
 use App\Form\DetailType;
 use App\Form\MakingOfType;
 use App\Form\NewAlbumType;
+use App\Form\AlbumImageType;
 use App\Form\NewsType;
 use App\Form\PressType;
 use App\Form\SliderType;
 
 use App\Repository\AlbumsRepository;
+use App\Repository\AlbumImageRepository;
 use App\Repository\DetailRepository;
 use App\Repository\MakingOfRepository;
 use App\Repository\NewsRepository;
@@ -35,7 +38,7 @@ class BlogController extends AbstractController
     // Route en front
 
 /**
- * @Route("/home", name="home")
+ * @Route("/", name="home")
  */
     public function index(AlbumsRepository $albumsRepository, SliderRepository $sliderRepository, NewsRepository $newsRepository, DetailRepository $detailRepository)
     {
@@ -271,6 +274,12 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $albumImages = $album->getAlbumImages();
+            foreach($albumImages as $key => $albumImage){
+                $albumImage->setAlbum($album);
+                $albumImages->set($key,$albumImage);
+            }
             $manager->persist($album);
             $manager->flush();
             return $this->redirectToRoute('admin');
@@ -281,6 +290,8 @@ class BlogController extends AbstractController
             'editMode' => $album->getId() !== null,
         ]);
     }
+
+    
 
     /**
      * @Route("/deleteNews/{id}",  name="deleteNews")

@@ -36,6 +36,7 @@
 </head>
 
 <body>
+
     {# Mise en place de la navbar au dessus du block body#}
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
         <a class="navbar-brand ml-2" href="{{ path('home')}}">
@@ -49,19 +50,28 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto col-md-10 offset-md-2 align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
+                    <a class="nav-link" href="{{ path('mesAlbums')}}" {% if app.request.attributes.get( '_route' ) in [
+                        'mesAlbums',
+                        'album',
+                    ] %} id='active'{% endif %}>Albums</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('biographie')}}">Biographie</a>
+                    <a class="nav-link" href="{{ path('biographie')}}" {% if app.request.attributes.get( '_route' ) == 'biographie' %} id='active'{% endif %}>Biographie</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('allNews')}}">Agenda</a>
+                    <a class="nav-link" href="{{ path('allNews')}}" {% if app.request.attributes.get( '_route' ) in [
+                        'allNews',
+                        'news',
+                    ] %} id='active'{% endif %}>Agenda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('allMakingOf')}}">Making-Of</a>
+                    <a class="nav-link" href="{{ path('allMakingOf')}}"{% if app.request.attributes.get( '_route' ) in [
+                        'allMakingOf',
+                        'makingOf',
+                    ] %} id='active'{% endif %}>Making-Of</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('contact')}}">Contact</a>
+                    <a class="nav-link" href="{{ path('contact')}}" {% if app.request.attributes.get( '_route' ) == 'contact' %} id='active'{% endif %}>Contact</a>
                 </li>
 
                 {% for detail in details %}
@@ -159,8 +169,7 @@
     <!-- Bootstrap JQuery Plugin -->
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
-
+    
     {% endblock %}
 </body>
 

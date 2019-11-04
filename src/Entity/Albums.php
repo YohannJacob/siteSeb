@@ -88,10 +88,16 @@ class Albums
      * @ORM\OneToMany(targetEntity="App\Entity\Press", mappedBy="album")
      */
     private $presses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AlbumImage", mappedBy="Album")
+     */
+    private $albumImages;
     public function __construct()
     {
         $this->sliders = new ArrayCollection();
         $this->presses = new ArrayCollection();
+        $this->albumImages = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -278,6 +284,37 @@ class Albums
                 $press->setAlbum(null);
             }
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection|AlbumImage[]
+     */
+    public function getAlbumImages(): Collection
+    {
+        return $this->albumImages;
+    }
+
+    public function addAlbumImage(AlbumImage $albumImage): self
+    {
+        if (!$this->albumImages->contains($albumImage)) {
+            $this->albumImages[] = $albumImage;
+            $albumImage->setAlbum($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlbumImage(AlbumImage $albumImage): self
+    {
+        if ($this->albumImages->contains($albumImage)) {
+            $this->albumImages->removeElement($albumImage);
+            // set the owning side to null (unless already changed)
+            if ($albumImage->getAlbum() === $this) {
+                $albumImage->setAlbum(null);
+            }
+        }
+
         return $this;
     }
 }

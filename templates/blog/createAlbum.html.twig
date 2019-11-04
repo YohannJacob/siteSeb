@@ -1,22 +1,32 @@
 {% extends "baseBack.html.twig" %}
-{% form_theme formAlbum 'bootstrap_4_layout.html.twig' %}
+{% form_theme formAlbum 'blog/form_theme.html.twig' %}
 
 {% block title %}
-    Créer un album
+Créer un album
 {% endblock %}
 
 {% block body %}
 <h1 class="mb-5">{% if editMode %}
-        Modification
+    Modification
     {% else %}
-        Création
+    Création
     {% endif %} d'un album</h1>
 
 
-    <form method="post" enctype="multipart/form-data">
+    {{ form_start(formAlbum) }}
+        {{ form_widget(formAlbum) }}
 
-    {{ form_rest(formAlbum) }}
-        {# {{ form_start(formAlbum)}}
+        <button class="btn btnRed" id="test" type="submit">
+            {% if editMode %}
+            Modifier
+            {% else %}
+            Publier
+            {% endif %}
+        </button>
+    {{ form_end(formAlbum) }}
+
+
+{# {{ form_start(formAlbum)}}
 
         <div class="row">
             <div class="col" id="some-custom-id">
@@ -36,13 +46,16 @@
         {{ form_row(formAlbum.buyLink, {'attr': {'placeholder': "Lien Bamboo de vente"}}) }}
         {{ form_row(formAlbum.coverFile, {'attr': {'placeholder': "Lien de l'image"}}) }} #}
 
-        <button class="btn btn-primary" type="submit">
-            {% if editMode %}
-                Modifier
-            {% else %}
-                Publier
-            {% endif %}
-        </button>
-    </form>
+{% endblock %}
 
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Bootstrap JQuery Plugin -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Ajouter plusieurs images -->
+<script src="js/albumImage.js"></script>
 {% endblock %}

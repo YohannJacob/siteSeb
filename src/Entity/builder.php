@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Entity;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Knp\Menu\Renderer\ListRenderer;
 
 
 class Builder implements ContainerAwareInterface
@@ -26,8 +28,6 @@ class Builder implements ContainerAwareInterface
         // access services from the container!
         $em = $this->container->get('doctrine')->getManager();
     
-
-
         return $menu;
     }
 }
