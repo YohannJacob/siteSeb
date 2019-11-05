@@ -3,26 +3,21 @@
 namespace App\Controller;
 
 use App\Entity\Albums;
-use App\Entity\AlbumImage;
 use App\Entity\Contact;
 use App\Entity\Detail;
 use App\Entity\MakingOf;
 use App\Entity\News;
 use App\Entity\Press;
 use App\Entity\Slider;
-use App\Entity\ContactNotification;
-
+use App\Entity\User;
 use App\Form\ContactType;
 use App\Form\DetailType;
 use App\Form\MakingOfType;
 use App\Form\NewAlbumType;
-use App\Form\AlbumImageType;
 use App\Form\NewsType;
 use App\Form\PressType;
 use App\Form\SliderType;
-
 use App\Repository\AlbumsRepository;
-use App\Repository\AlbumImageRepository;
 use App\Repository\DetailRepository;
 use App\Repository\MakingOfRepository;
 use App\Repository\NewsRepository;
@@ -32,6 +27,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
+
 
 class BlogController extends AbstractController
 {
@@ -42,6 +39,14 @@ class BlogController extends AbstractController
  */
     public function index(AlbumsRepository $albumsRepository, SliderRepository $sliderRepository, NewsRepository $newsRepository, DetailRepository $detailRepository)
     {
+        // // usually you'll want to make sure the user is authenticated first
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
             'albums' => $albumsRepository->findAll(),
@@ -56,6 +61,11 @@ class BlogController extends AbstractController
      */
     public function mesAlbums(AlbumsRepository $albumsRepository, DetailRepository $detailRepository)
     {
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         return $this->render('blog/mesalbums.html.twig', [
             'controller_name' => 'BlogController',
             'albums' => $albumsRepository->findAll(),
@@ -70,12 +80,19 @@ class BlogController extends AbstractController
      */
     public function album($id)
     {
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         $repo = $this->getDoctrine()->getRepository(Albums::class);
         $albums = $repo->find($id);
+     
         $repo2 = $this->getDoctrine()->getRepository(Detail::class);
         $details = $repo2->findAll();
         $repo3 = $this->getDoctrine()->getRepository(Press::class);
-        $presses = $repo3->find($id);
+        $presses = $repo3->findBy(
+            ['album' => $albums->getId()],);
 
         return $this->render('blog/album.html.twig', [
             'albums' => $albums,
@@ -87,11 +104,25 @@ class BlogController extends AbstractController
     /**
      * @Route("/allNews  ", name="allNews")
      */
-    public function allNews(NewsRepository $newsRepository, DetailRepository $detailRepository)
+    public function allNews(Request $request, DetailRepository $detailRepository, PaginatorInterface $paginator)
     {
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $repo = $this->getDoctrine()->getRepository(News::class);
+        $newsRepository = $repo->findAll();
+
+        $articles = $paginator->paginate(
+            $newsRepository, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+
         return $this->render('blog/allNews.html.twig', [
             'controller_name' => 'BlogController',
-            'news' => $newsRepository->findAll(),
+            'news' => $articles,
             'details' => $detailRepository->findAll(),
         ]);
     }
@@ -101,6 +132,12 @@ class BlogController extends AbstractController
      */
     public function news($id)
     {
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         $repo = $this->getDoctrine()->getRepository(News::class);
         $news = $repo->find($id);
         $repo2 = $this->getDoctrine()->getRepository(Detail::class);
@@ -116,6 +153,12 @@ class BlogController extends AbstractController
      */
     public function biographie(DetailRepository $detailRepository)
     {
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         return $this->render('blog/biographie.html.twig', [
             'controller_name' => 'BlogController',
             'details' => $detailRepository->findAll(),
@@ -128,6 +171,11 @@ class BlogController extends AbstractController
      */
     public function allMakingOf(MakingOfRepository $allMakingOfRepository, AlbumsRepository $albumsRepository, DetailRepository $detailRepository)
     {
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         return $this->render('blog/allMakingOf.html.twig', [
             'controller_name' => 'BlogController',
             'allMakingOfs' => $allMakingOfRepository->findAll(),
@@ -141,6 +189,11 @@ class BlogController extends AbstractController
      */
     public function makingOf($id)
     {
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         $repo = $this->getDoctrine()->getRepository(MakingOf::class);
         $makingOfs = $repo->find($id);
         $repo2 = $this->getDoctrine()->getRepository(Detail::class);
@@ -156,6 +209,10 @@ class BlogController extends AbstractController
      */
     public function formContact(Contact $contact = null, \Swift_Mailer $mailer, Request $request, ObjectManager $manager)
     {
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         $repo2 = $this->getDoctrine()->getRepository(Detail::class);
         $details = $repo2->findAll();
@@ -167,29 +224,29 @@ class BlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $message = (new \Swift_Message('Demande de contact de : ' .$contact->getFirstName().' '. $contact->getLastName()))
+            $message = (new \Swift_Message('Demande de contact de : ' . $contact->getFirstName() . ' ' . $contact->getLastName()))
                 ->setTo('jacob.yohann@gmail.com')
                 ->setFrom($contact->getEmail())
                 ->setBody(
-                $this->renderView(
-                    'emails/mailContact.html.twig',
-                    ['contact' => $contact,
-                ]),
-                'text/html'
-            )
-        ;
+                    $this->renderView(
+                        'emails/mailContact.html.twig',
+                        ['contact' => $contact,
+                        ]),
+                    'text/html'
+                )
+            ;
 
-        $mailer->send($message);
-        $this->addFlash('add-advertisement', 'Votre annonce à bien été ajouté, vous aller recevoir un mail de confirmation !');
-        return $this->redirectToRoute('home');
-        return $this->render($message);
+            $mailer->send($message);
+            $this->addFlash('add-advertisement', 'Votre annonce à bien été ajouté, vous aller recevoir un mail de confirmation !');
+            return $this->redirectToRoute('home');
+            return $this->render($message);
         }
 
         return $this->render('blog/contact.html.twig', [
             'formContact' => $form->createView(),
             'details' => $details,
         ]);
-        
+
     }
 
     ///////////////////////////////////////////
@@ -201,6 +258,14 @@ class BlogController extends AbstractController
      */
     public function admin(AlbumsRepository $albumsRepository, SliderRepository $sliderRepository, NewsRepository $newsRepository, DetailRepository $detailRepository, MakingOfRepository $allMakingOfRepository, PressRepository $pressRepository)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         return $this->render('blog/admin.html.twig', [
             'controller_name' => 'BlogController',
             'albums' => $albumsRepository->findAll(),
@@ -219,6 +284,13 @@ class BlogController extends AbstractController
      */
     public function formSlider(Slider $slider = null, Request $request, ObjectManager $manager)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         if (!$slider) {
             $slider = new Slider();
@@ -244,6 +316,13 @@ class BlogController extends AbstractController
  */
     public function deleteAlbum($id)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         $managerAlbum = $this->getDoctrine()->getManager();
         $album = $managerAlbum->getRepository(Albums::class)->find($id);
@@ -267,6 +346,14 @@ class BlogController extends AbstractController
      */
     public function formAlbum(Albums $album = null, Request $request, ObjectManager $manager)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         if (!$album) {
             $album = new Albums();
         }
@@ -276,9 +363,9 @@ class BlogController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $albumImages = $album->getAlbumImages();
-            foreach($albumImages as $key => $albumImage){
+            foreach ($albumImages as $key => $albumImage) {
                 $albumImage->setAlbum($album);
-                $albumImages->set($key,$albumImage);
+                $albumImages->set($key, $albumImage);
             }
             $manager->persist($album);
             $manager->flush();
@@ -291,13 +378,18 @@ class BlogController extends AbstractController
         ]);
     }
 
-    
-
     /**
      * @Route("/deleteNews/{id}",  name="deleteNews")
      */
     public function deleteNews($id)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         $manager = $this->getDoctrine()->getManager();
         $news = $manager->getRepository(News::class)->find($id);
@@ -321,6 +413,14 @@ class BlogController extends AbstractController
      */
     public function createNews(News $news = null, Request $request, ObjectManager $manager)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         if (!$news) {
             $news = new News();
         }
@@ -345,6 +445,13 @@ class BlogController extends AbstractController
      */
     public function deleteMakingOf($id)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         $manager = $this->getDoctrine()->getManager();
         $makingOf = $manager->getRepository(MakingOf::class)->find($id);
@@ -368,6 +475,13 @@ class BlogController extends AbstractController
      */
     public function createMakingOf(MakingOf $makingOf = null, Request $request, ObjectManager $manager)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         if (!$makingOf) {
             $makingOf = new MakingOf();
@@ -395,6 +509,13 @@ class BlogController extends AbstractController
      */
     public function createDetail(Detail $detail = null, Request $request, ObjectManager $manager)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         if (!$detail) {
             $detail = new Detail();
@@ -421,6 +542,13 @@ class BlogController extends AbstractController
      */
     public function deletePress($id)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         $manager = $this->getDoctrine()->getManager();
         $press = $manager->getRepository(Press::class)->find($id);
@@ -444,6 +572,13 @@ class BlogController extends AbstractController
  */
     public function formPress(Press $press = null, Request $request, ObjectManager $manager)
     {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
 
         if (!$press) {
             $press = new Press();

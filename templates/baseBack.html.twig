@@ -39,16 +39,43 @@
 <body>
     {# Mise en place de la navbar au dessus du block body#}
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-        <a class="navbar-brand ml-2" href="{{ path('home')}}">
+        <a class="navbar-brand ml-2" href="{{ path('admin')}}">
             <img alt="bulles" src="../../img/logo-bulles.png">
         </a>
-               <h3 class="text-center ml-5">Administration du site</h3>
-
-
         <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation"
             class="navbar-toggler" data-target="#navbarColor03" data-toggle="collapse" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto col-md-12 align-items-center">
+                <li class="nav-item">
+                    <p class="text-center">
+                        Bonjour
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {{ app.user.userName }},
+                        {% endif %}
+                        bienvenue sur l'administration de votre site</p>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand ml-2" href="{{ path('home')}}">
+                        <button class="btnRed">Retour site<span></span></button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a class="nav-link" href="{{ path('app_logout')}}">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                    {% endif %}
+                </li>
+
+            </ul>
+
+            <button aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-target="#navbarColor03" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
     </nav>
     <div class="container">
         {# body #}
@@ -79,14 +106,14 @@
     </div>
 
     {% block javascripts %}
-        <!-- JQuery Plugin -->
+    <!-- JQuery Plugin -->
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <!-- Bootstrap JQuery Plugin -->
-    
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        {% endblock %}
+    <!-- Bootstrap JQuery Plugin -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    {% endblock %}
 </body>
 
 </html>

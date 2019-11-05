@@ -53,25 +53,28 @@
                     <a class="nav-link" href="{{ path('mesAlbums')}}" {% if app.request.attributes.get( '_route' ) in [
                         'mesAlbums',
                         'album',
-                    ] %} id='active'{% endif %}>Albums</a>
+                    ] %} id='active' {% endif %}>Albums</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('biographie')}}" {% if app.request.attributes.get( '_route' ) == 'biographie' %} id='active'{% endif %}>Biographie</a>
+                    <a class="nav-link" href="{{ path('biographie')}}"
+                        {% if app.request.attributes.get( '_route' ) == 'biographie' %} id='active'
+                        {% endif %}>Biographie</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('allNews')}}" {% if app.request.attributes.get( '_route' ) in [
                         'allNews',
                         'news',
-                    ] %} id='active'{% endif %}>Agenda</a>
+                    ] %} id='active' {% endif %}>Agenda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('allMakingOf')}}"{% if app.request.attributes.get( '_route' ) in [
+                    <a class="nav-link" href="{{ path('allMakingOf')}}" {% if app.request.attributes.get( '_route' ) in [
                         'allMakingOf',
                         'makingOf',
-                    ] %} id='active'{% endif %}>Making-Of</a>
+                    ] %} id='active' {% endif %}>Making-Of</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('contact')}}" {% if app.request.attributes.get( '_route' ) == 'contact' %} id='active'{% endif %}>Contact</a>
+                    <a class="nav-link" href="{{ path('contact')}}"
+                        {% if app.request.attributes.get( '_route' ) == 'contact' %} id='active' {% endif %}>Contact</a>
                 </li>
 
                 {% for detail in details %}
@@ -96,6 +99,13 @@
                         <i class="fas fa-user-circle"></i>
                     </a>
                 </li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li class="nav-item">
+                    <a class="nav-link" id="active" href="{{ path('app_logout')}}">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </li>
+                {% endif %}
 
             </ul>
         </div>
@@ -169,7 +179,7 @@
     <!-- Bootstrap JQuery Plugin -->
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    
+
     {% endblock %}
 </body>
 

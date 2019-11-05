@@ -7,7 +7,6 @@ Album :
 {% block body %}
 
 <div class="container no-gutter album">
-
   <div class="row">
     <div class="col-md-4 coverBig">
       <img alt="{{ albums.title }}" class="mini" src="{{ vich_uploader_asset(albums, 'coverFile')}}">
@@ -86,18 +85,17 @@ Album :
       <div id="carousel" class="carousel slide mt-3 mb-2" data-ride="carousel">
         <i class="fas fa-quote-right"></i>
         <ol class="carousel-indicators">
-          {% for album in albums %}
+          {% for presse in presses %}
           <li data-target=".carousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %} class="active" {% endif %}>
           </li>
           {% endfor %}
         </ol>
         <div class="col-md-12 carousel-inner align-items-center">
-          {% for album in albums %}
+          {% for presse in presses %}
           <div class="col-md-12 carousel-item {% if loop.first %} active {% endif %}">
 
-            <p class="journal mb-5">??{{ album.presses.journal }}</p>
-            <p class="critique">{{ album.presses.content }}</p>
-
+            <p class="journal mb-5">{{ presse.journal }}</p>
+            <p class="critique">{{ presse.content }}</p>
           </div>
           {% endfor %}
         </div>
@@ -109,15 +107,21 @@ Album :
         </a>
       </div>
     </div>
-    {# {% else %}
-    <div class="row justify-content-center">
-      <div class="d-inline-block text-center no-medias">
-        <p class="mt-3 ml-3 mr-3">Pas de médias pour ce trick</p>
-      </div>
-    </div>
-    {% endif %} #}
+
 
     <!-- End Carousel -->
   </div>
 </div>
+{% endblock %}
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Bootstrap JQuery Plugin -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Ajouter plusieurs images -->
+<script src="../js/zoomOut.js"></script>
+
 {% endblock %}

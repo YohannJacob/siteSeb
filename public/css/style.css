@@ -14,6 +14,7 @@ body {
 a:hover {
     text-decoration: none !important;
 }
+
 /* .container{
     height: 100vh;
 } */
@@ -94,7 +95,7 @@ p {
 
 /* Css boutons */
 
-.btnBlack{
+.btnBlack {
     min-width: 80px;
     height: 40px;
     text-decoration: none;
@@ -109,6 +110,7 @@ p {
     border-radius: .25rem;
 
 }
+
 .btnBlack:hover {
     color: #FFF;
     box-shadow: 0 4 2px var(--black);
@@ -135,7 +137,7 @@ p {
     opacity: 1;
 }
 
-.btnRed{
+.btnRed {
     min-width: 100px;
     height: 40px;
     text-decoration: none;
@@ -150,6 +152,7 @@ p {
     border-radius: .25rem;
 
 }
+
 .btnRed:hover {
     color: #FFF;
     box-shadow: 0 4 2px var(--red);
@@ -366,6 +369,7 @@ p {
     flex-direction: column;
     align-items: center;
 }
+
 .old_event {
     opacity: 0.3;
 }
@@ -530,33 +534,36 @@ footer p {
 /* CSS du slider press */
 .carousel-inner {
     display: flex;
-    justify-content: space-between;
     background-color: #FFF;
     min-height: 380px;
     padding: 50px;
 }
-.carousel-item p{
+
+.carousel-item p {
     text-align: center;
 }
 
-.carousel-indicators{
+.carousel-indicators {
     bottom: -40px;
 
 }
+
 .carousel-control-prev {
     left: -15%;
 }
+
 .carousel-control-next {
     right: -15%;
 }
 
-.critique{
-        font-family: 'Arvo', serif;
-        font-weight: 400;
-        font-size: 22px;
-        color: var(--black);
+.critique {
+    font-family: 'Arvo', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--black);
 }
-.journal{
+
+.journal {
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 18px;
@@ -564,39 +571,84 @@ footer p {
     text-transform: uppercase;
 }
 
-.fa-quote-right{
+.fa-quote-right {
     position: absolute;
     top: 35px;
-    left:35px;
+    left: 35px;
     font-size: 65px;
-    color:var(--red);
+    color: var(--red);
     z-index: 15;
- }
+}
 
- /* CSS contact */
-.contact{
-        margin: 0 0 25px 0;
-        padding: 20px 20px 20px 20px;
-        border: 2px solid var(--red); 
+/* CSS pagination */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination span, a {
+    color: var(--red);
+    text-transform: uppercase;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination .current {
+    color: var(--red);
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--red);
+}
+
+.pagination .page a {
+    color: var(--red);
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--red);
+    opacity: 40%;
+}
+
+.pagination .page a:hover,
+.pagination .page span:hover,
+.pagination .page a:focus,
+.pagination .page span:focus {
+    background-color: var(--red);
+    color: #FFF;
+    opacity: 100%;
+}
+
+
+/* CSS contact */
+.contact {
+    margin: 0 0 25px 0;
+    padding: 20px 20px 20px 20px;
+    border: 2px solid var(--red);
 
 }
- #contact_message{
-     min-height: 350px;
- }
 
- .contact .form-control{
-     border: none;
- }
+#contact_message {
+    min-height: 350px;
+}
 
-.separator{
+.contact .form-control {
+    border: none;
+}
+
+.separator {
     border-bottom: 2px solid var(--red);
 
 }
-.contact_box{
+
+.contact_box {
     padding-right: 20px;
 }
-.separator_vertical{
-    border-left: 2px solid var(--red); 
+
+.separator_vertical {
+    border-left: 2px solid var(--red);
     padding-left: 20px;
 }
 
