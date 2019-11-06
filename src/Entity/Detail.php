@@ -21,13 +21,17 @@ class Detail
      */
     private $id;
 
-    /**
+   /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner la biographie")
+     * @Assert\Length(min = 5, minMessage = "La biographie doit contenir au minimum {{ limit }} caractères")
      */
     private $bio;
 
-    /**
+   /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner le contact")
+     * @Assert\Length(min = 5, minMessage = "Le contact doit contenir au minimum {{ limit }} caractères")
      */
     private $press_contact;
 

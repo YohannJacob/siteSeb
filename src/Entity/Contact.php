@@ -7,29 +7,29 @@ class Contact
 {
     /**
      * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Length(min=2, max=100)
+     * @Assert\NotBlank(message="Merci de renseigner un prénom")
+     * @Assert\Length(min = 1, max = 70, minMessage = "Le prénom doit contenir au minimum {{ limit }} caractères", maxMessage = "Le prénom doit contenir au maximum {{ limit }} caractères")
      */
     private $firstName;
 
     /**
      * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Length(min=2, max=100)
+     * @Assert\NotBlank(message="Merci de renseigner un nom")
+     * @Assert\Length(min = 1, max = 70, minMessage = "Le nom doit contenir au minimum {{ limit }} caractères", maxMessage = "Le nom doit contenir au maximum {{ limit }} caractères")
      */
     private $lastName;
 
     /**
      * @var string|null
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="Merci de renseigner un email")
      * @Assert\Email()
      */
     private $email;
 
     /**
      * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Length(min=10)
+     * @Assert\NotBlank(message="Merci de renseigner un message")
+     * @Assert\Length(min = 5,minMessage = "Le contenu doit contenir au minimum {{ limit }} caractères")
      */
     private $message;
 

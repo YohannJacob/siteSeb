@@ -22,49 +22,67 @@ class Albums
      * @ORM\Column(type="integer")
      */
     private $id;
-    /**
+
+     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\Length(
-     *      min = 2,
-     *      max = 70,
-     *      minMessage = "Le titre de l'album dit contenir au minimum {{ limit }} caractères",
-     *      maxMessage = "Le titre de l'album dit contenir au maximum {{ limit }} caractères"
-     * )
+     * @Assert\NotBlank(message="Merci de renseigner un titre")
+     * @Assert\Length(min = 5, max = 50, minMessage = "Le titre doit contenir au minimum {{ limit }} caractères", maxMessage = "Le titre doit contenir au maximum {{ limit }} caractères")
      */
     private $title;
-    /**
+    
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un sous-titre")
+     * @Assert\Length(min = 5, max = 50, minMessage = "Le sous-titre doit contenir au minimum {{ limit }} caractères", maxMessage = "Le sous-titre doit contenir au maximum {{ limit }} caractères")
      */
     private $Subtitle;
-    /**
+
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un scénariste")
+     * @Assert\Length(min = 1, max = 20, minMessage = "Le scénariste doit contenir au minimum {{ limit }} caractères", maxMessage = "Le scénariste doit contenir au maximum {{ limit }} caractères")
      */
     private $Scenario;
-    /**
+
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un déssinateur")
+     * @Assert\Length(min = 1, max = 20, minMessage = "Le déssinateur doit contenir au minimum {{ limit }} caractères", maxMessage = "Le déssinateur doit contenir au maximum {{ limit }} caractères")
      */
     private $Dessin;
-    /**
+    
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un coloriste")
+     * @Assert\Length(min = 1, max = 20, minMessage = "Le coloriste doit contenir au minimum {{ limit }} caractères", maxMessage = "Le coloriste doit contenir au maximum {{ limit }} caractères")
      */
     private $Couleur;
-    /**
+
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un lien (faire un copier depuis le site de Bamboo")
+     * @Assert\Length(min = 1, max = 250, minMessage = "Le lien doit contenir au minimum {{ limit }} caractères", maxMessage = "Le lien doit contenir au maximum {{ limit }} caractères")
      */
     private $buyLink;
+
     /**
      * @ORM\Column(type="date")
      */
     private $date;
+
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner un contenu")
+     * @Assert\Length(min = 5, max = 850, minMessage = "Le contenu doit contenir au minimum {{ limit }} caractères", maxMessage = "Le contenu doit contenir au maximum {{ limit }} caractères")
      */
     private $content;
+
     /**
      * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $coverName;
+
     /**
      * @var File
      * @Vich\UploadableField(mapping="cover_image", fileNameProperty="coverName")
@@ -72,18 +90,22 @@ class Albums
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
      */
     private $coverFile;
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\MakingOf", mappedBy="album", cascade={"persist", "remove"})
      */
     private $makingOf;
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Slider", mappedBy="album")
      */
     private $sliders;
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Press", mappedBy="album")
      */
@@ -93,6 +115,7 @@ class Albums
      * @ORM\OneToMany(targetEntity="App\Entity\AlbumImage", mappedBy="Album")
      */
     private $albumImages;
+    
     public function __construct()
     {
         $this->sliders = new ArrayCollection();
@@ -107,7 +130,7 @@ class Albums
     {
         return $this->title;
     }
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
         return $this;

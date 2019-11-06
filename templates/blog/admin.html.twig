@@ -149,8 +149,8 @@ Administration du site
                 <div class="col-md-8 contenu_agenda">
                     <h4 class="mb-3">{{ news.title|e }}</h4>
                     <p class="mb-2">{{ news.content|e }}</p>
-                    <p class="dateParution"><i class="fas fa-map-marker-alt"></i> : {{ news.place|e }}</p>
-                    <p class="dateParution"><i class="far fa-clock"></i> :{{ news.date|e|date('d/m/Y à H:i')}} </p>
+                    <p class="dateParution"><i class="fas fa-map-marker-alt"></i> {{ news.place|e }}</p>
+                    <p class="dateParution"><i class="far fa-clock"></i>{{ news.date|e|date('d/m/Y à H:i')}} </p>
                     <a href="{{ path('deleteNews', {'id': news.id}) }}" id="btn" class="link2">
                         <i class="fas fa-trash-alt"></i>
                         <span></span>

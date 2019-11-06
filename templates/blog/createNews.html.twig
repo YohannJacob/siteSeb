@@ -4,11 +4,11 @@
 {% block title %} Créer une news {% endblock %}
 
 {% block body %}
-    <h1 class="mb-5">{% if editMode %}
+    <h4 class="mb-5">{% if editMode %}
             Modification
         {% else %}
             Création
-        {% endif %} d'une News</h1>
+        {% endif %} d'une News</h4>
     <form method="post" enctype="multipart/form-data">
         {{ form_rest(formNews) }}
 

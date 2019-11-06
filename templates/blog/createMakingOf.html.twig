@@ -8,11 +8,11 @@
 
 {% block body %}
 
-<h1 class="mb-5">{% if editMode %}
+<h4 class="mb-5">{% if editMode %}
     Modification
     {% else %}
     Création
-    {% endif %}d'un Making-Of</h1>
+    {% endif %}d'un Making-Of</h4>
 <form method="post" enctype="multipart/form-data">
     {# {{ form_rest(formMakingOf) }} #}
      {{ form_start(formMakingOf)}}

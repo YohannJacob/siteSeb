@@ -39,13 +39,17 @@ class Slider
      */
     private $updated_at;
 
-    /**
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un titre")
+     * @Assert\Length(min = 5, max = 50, minMessage = "Le titre doit contenir au minimum {{ limit }} caractères", maxMessage = "Le titre doit contenir au maximum {{ limit }} caractères")
      */
     private $Title;
 
-    /**
+     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un sous-titre")
+     * @Assert\Length(min = 5, max = 50, minMessage = "Le sous-titre doit contenir au minimum {{ limit }} caractères", maxMessage = "Le sous-titre doit contenir au maximum {{ limit }} caractères")
      */
     private $SubTitle;
 

@@ -63,6 +63,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('allNews')}}" {% if app.request.attributes.get( '_route' ) in [
                         'allNews',
+                        'allNewsOld',
                         'news',
                     ] %} id='active' {% endif %}>Agenda</a>
                 </li>

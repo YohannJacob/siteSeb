@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block body %}
-<h1 class="mb-5">{% if editMode %}
+<h4 class="mb-5">{% if editMode %}
         Modification d'
     {% else %}
         Ajouter
-    {% endif %} une critique Presse</h1>
+    {% endif %} une critique Presse</h4>
     <form method="post" enctype="multipart/form-data">
         {{ form_rest(formPress) }}
 

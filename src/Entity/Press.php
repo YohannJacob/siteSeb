@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PressRepository")
@@ -18,11 +19,15 @@ class Press
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner le journal")
+     * @Assert\Length(min = 1, max = 70, minMessage = "Le journal doit contenir au minimum {{ limit }} caractères", maxMessage = "Le journal doit contenir au maximum {{ limit }} caractères")
      */
     private $journal;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner un contenu")
+     * @Assert\Length(min = 5, max = 200, minMessage = "Le contenu doit contenir au minimum {{ limit }} caractères", maxMessage = "Le contenu doit contenir au maximum {{ limit }} caractères")
      */
     private $content;
 

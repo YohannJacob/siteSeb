@@ -23,11 +23,15 @@ class News
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Merci de renseigner un titre")
+     * @Assert\Length(min = 5, max = 30, minMessage = "Le titre de l'évènement doit contenir au minimum {{ limit }} caractères", maxMessage = "Le titre de l'évènement doit contenir au maximum {{ limit }} caractères")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner un contenu")
+     * @Assert\Length(min = 5, max = 550, minMessage = "Le contenu de l'évènement doit contenir au minimum {{ limit }} caractères", maxMessage = "Le contenu de l'évènement doit contenir au maximum {{ limit }} caractères")
      */
     private $content;
 
@@ -40,6 +44,7 @@ class News
      * @var File
      * @Vich\UploadableField(mapping="news_image", fileNameProperty="ImageName")
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message="Merci de choisir une image")
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
      */
     private $ImageFile;
@@ -56,6 +61,8 @@ class News
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner le lieu")
+     * @Assert\Length(min = 5, max = 80, minMessage = "Le lieu de l'évènement doit contenir au minimum {{ limit }} caractères", maxMessage = "Le lieu de l'évènement doit contenir au maximum {{ limit }} caractères")
      */
     private $Place;
 
@@ -69,7 +76,7 @@ class News
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 

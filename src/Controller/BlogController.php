@@ -128,6 +128,33 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @Route("/allNewsOld  ", name="allNewsOld")
+     */
+    public function allNewsOld(Request $request, DetailRepository $detailRepository, PaginatorInterface $paginator)
+    {
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $repo = $this->getDoctrine()->getRepository(News::class);
+        $newsRepository = $repo->findAll();
+
+        $articles = $paginator->paginate(
+            $newsRepository, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+
+        return $this->render('blog/allNewsOld.html.twig', [
+            'controller_name' => 'BlogController',
+            'news' => $articles,
+            'details' => $detailRepository->findAll(),
+        ]);
+    }
+
+
+    /**
      * @Route("/news/{id}  ", name="news")
      */
     public function news($id)

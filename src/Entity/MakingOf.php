@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MakingOfRepository")
@@ -18,6 +19,8 @@ class MakingOf
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Merci de renseigner un contenu")
+     * @Assert\Length(min = 5, minMessage = "Le contenu doit contenir au minimum {{ limit }} caractères")
      */
     private $Content;
 
