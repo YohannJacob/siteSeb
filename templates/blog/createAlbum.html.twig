@@ -1,11 +1,10 @@
 {% extends "baseBack.html.twig" %}
-{% form_theme formAlbum 'blog/form_theme.html.twig' %}
 
 {% block title %}
 Créer un album
 {% endblock %}
 
-{% block body %}
+{% block body %} 
 <h4 class="mb-5">{% if editMode %}
     Modification
     {% else %}
@@ -13,17 +12,40 @@ Créer un album
     {% endif %} d'un album</h4>
 
 
-    {{ form_start(formAlbum) }}
-        {{ form_widget(formAlbum) }}
+{% form_theme formAlbum 'blog/_form_theme.html.twig' %}
+{{ form_start(formAlbum) }}
+{{ form_widget(formAlbum) }}
 
-        <button class="btn btnRed" id="test" type="submit">
+<button class="btn btn-info btn-sm btnRed">{{ button_label|default('Enregistrer') }}</button>
+
+{# <button class="btn btnRed" id="test" type="submit">
             {% if editMode %}
             Modifier
             {% else %}
             Publier
-            {% endif %}
-        </button>
-    {{ form_end(formAlbum) }}
+            {% endif %} qs
+        </button> #}
+
+{{ form_end(formAlbum) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Bootstrap JQuery Plugin -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Ajouter plusieurs images -->
+<script src="js/albumImage.js"></script>
+{% endblock %}
+
+
+
+
+
 
 
 {# {{ form_start(formAlbum)}}
@@ -45,17 +67,3 @@ Créer un album
         {{ form_row(formAlbum.content, {'attr': {'placeholder': "Texte de présentation"}}) }}
         {{ form_row(formAlbum.buyLink, {'attr': {'placeholder': "Lien Bamboo de vente"}}) }}
         {{ form_row(formAlbum.coverFile, {'attr': {'placeholder': "Lien de l'image"}}) }} #}
-
-{% endblock %}
-
-{% block javascripts %}
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Bootstrap JQuery Plugin -->
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-
-<!-- Ajouter plusieurs images -->
-<script src="js/albumImage.js"></script>
-{% endblock %}

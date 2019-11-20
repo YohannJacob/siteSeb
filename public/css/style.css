@@ -1,3 +1,8 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     --red: #ea1053;
     --black: #2C2C2C;
@@ -251,7 +256,10 @@ p {
 .cover img {
     width: 270px;
     height: auto;
-    border: 1px solid #2C2C2C;
+    border: 1px solid var(--black);
+}
+.cover img:hover {
+    border: 4px solid var(--black);
 }
 
 .coverBig img {
@@ -259,6 +267,25 @@ p {
     height: auto;
     border: 1px solid #2C2C2C;
 }
+
+/********* Hover image et texte *******/
+/* Overlay */
+/* .cover img .hoverImage{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 270px;
+    opacity: 0;
+    transition: .5s ease;
+    box-shadow: 2px 2px 10px var(--black);
+} */
+
+
+/* Apparition overlay sur passage souris */
+/* .cover:hover .hoverImage {
+
+    opacity: 1;
+} */
 
 /* CSS du slider photo */
 
@@ -469,11 +496,21 @@ p {
     width: 100%;
 }
 
+.logo img {
+    height: 55px;
+    width: auto;
+    margin-bottom: 40px;
+    position: relative;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
 /* CSS du footer */
 
 footer {
     width: 100%;
-    height: 150px;
 }
 
 footer ul {
@@ -585,10 +622,12 @@ footer p {
     justify-content: center;
     align-items: center;
 }
-.pagination a{
+
+.pagination a {
     color: var(--red);
 }
-.pagination a:hover{
+
+.pagination a:hover {
     color: var(--black);
 }
 
@@ -668,7 +707,57 @@ footer p {
 @media screen and (min-width: 768px) and (max-width: 1023px) {}
 
 /* ------ RESPONSIVE mobile et tablette en dessous de 768px ------ */
-@media screen and (max-width: 769px) {}
+@media screen and (max-width: 769px) {
+    .container {
+        text-align: center;
+    }
+}
 
 /* ------ RESPONSIVE mobile en dessous de 425px ------ */
-@media screen and (max-width: 426px) {}
+@media screen and (max-width: 426px) {
+
+    .textSlide {
+        top: 20%;
+        left: -80px;
+
+    }
+
+    .navigation {
+        bottom: 315px;
+    }
+    .trait{
+        display: none;
+    }
+    .titre {
+        position: absolute;
+        bottom: -60px;
+        padding: 0px;
+        text-align: center;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: 100vw;
+    }
+
+    .mesAlbums{
+        margin-top: -315px;
+    }
+
+    .contenu_agenda {
+        margin: 40px 0 40px 0;
+    }
+
+    .w3-left,
+    .w3-right {
+        display: none;
+    }
+
+    #titre {
+        font-size: 18px;
+    }
+
+    #logo {
+        margin-left: 25px;
+        margin-right: 55px;
+        width: 320px;
+    }
+}

@@ -4,10 +4,14 @@ namespace App\Form;
 
 use App\Entity\Press;
 use App\Entity\Albums;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class PressType extends AbstractType
 {
@@ -15,11 +19,12 @@ class PressType extends AbstractType
     {
         $builder
             ->add('journal')
+            ->add('ImageFile', FileType::class, array('data_class' => null))
             ->add('content')
             ->add('album', EntityType::class,[
                 'class' => Albums::class,
                 'choice_label' => 'title',
-            ])    
+            ])
         ;
     }
 

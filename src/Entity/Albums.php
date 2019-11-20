@@ -112,7 +112,7 @@ class Albums
     private $presses;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AlbumImage", mappedBy="Album")
+     * @ORM\OneToMany(targetEntity="App\Entity\AlbumImage", mappedBy="album")
      */
     private $albumImages;
     

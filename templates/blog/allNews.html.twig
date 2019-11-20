@@ -12,7 +12,7 @@
         <div class="col-md-5 carte_agenda mb-5 ">
             <div class="row">
                 <div class="col-md-4 no-gutter">
-                    <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+                    <img alt="Sébastien Mao : {{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
                 </div>
 
                 <div class="col-md-8 contenu_agenda">
@@ -29,6 +29,7 @@
 
         {% endif %}
         {% endfor %}
+</div>
     </div>
     <div class="col-md-12 text-center mb-5">
         {{ knp_pagination_render(news) }}

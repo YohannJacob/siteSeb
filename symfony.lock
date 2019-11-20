@@ -1,6 +1,12 @@
 {
+    "aws/aws-sdk-php": {
+        "version": "3.115.0"
+    },
     "behat/transliterator": {
         "version": "v1.2.0"
+    },
+    "ckfinder/ckfinder-symfony-bundle": {
+        "version": "3.5.1"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -126,6 +132,15 @@
             "config/packages/fos_ckeditor.yaml"
         ]
     },
+    "guzzlehttp/guzzle": {
+        "version": "6.4.1"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.6.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -144,8 +159,20 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v4.0.0"
     },
+    "league/flysystem": {
+        "version": "1.0.57"
+    },
+    "league/flysystem-aws-s3-v3": {
+        "version": "1.0.23"
+    },
+    "league/flysystem-cached-adapter": {
+        "version": "1.0.9"
+    },
     "monolog/monolog": {
         "version": "1.24.0"
+    },
+    "mtdowling/jmespath.php": {
+        "version": "2.4.0"
     },
     "nikic/php-parser": {
         "version": "v4.2.2"
@@ -165,17 +192,26 @@
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
     },
+    "pimple/pimple": {
+        "version": "v3.2.3"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.0"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",

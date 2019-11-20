@@ -7,7 +7,7 @@
 
 <!-- Slider Bannière -->
 <div class="row mb-5 home">
-    <div class="col-md-9 offset-2 slider">
+    <div class="col-md-9 offset-md-2 col-12 slider">
         {% for slider in sliders %}
         {% if slider.position == 1 %}
 
@@ -17,7 +17,7 @@
                     <h1>{{slider.title | upper}}</h1>
                     <h2>{{slider.subtitle | upper }}</h2>
                 </div>
-                <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
             </div>
         </a>
         {% endif %}
@@ -32,7 +32,7 @@
                     <h1>{{slider.title | upper}}</h1>
                     <h2>{{slider.subtitle | upper }}</h2>
                 </div>
-                <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
             </div>
         </a>
         {% endif %}
@@ -46,14 +46,14 @@
                     <h1>{{slider.title | upper}}</h1>
                     <h2>{{slider.subtitle | upper }}</h2>
                 </div>
-                <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
             </div>
         </a>
         {% endif %}
         {% endfor %}
     </div>
 
-    <div class="col-md-2 offset-8 navigation ">
+    <div class="col-4 offset-4 col-md-2 offset-md-8 navigation ">
         <!-- <span class="badge hover-white" onclick="sliderPhoto.currentDiv()"></span> -->
         <span class="bulle hover-white" onclick="sliderPhoto.current(0)"></span>
         <span class="bulle hover-white" onclick="sliderPhoto.current(1)"></span>
@@ -62,18 +62,21 @@
 </div>
 
 </div>
-<div class="container">
+<div class="container mesAlbums">
     <div class="row mb-5">
         <div class="col-md-3 align-self-center">
             <h2 class="text-center">mes albums</h2>
         </div>
-        <div class="col-md-9 ">
+        <div class="col-md-9">
             <div class="row mt-5">
                 {% for album in albums |reverse %}
 
                 <div class="col-md-4 mb-5 cover">
-                    <a href="{{ path('album', {'id': album.id}) }}">
-                        <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
+                    <a href="{{ path('album', {'id': album.id}) }}" class="cover" >
+                        <img alt="Sébastien Mao : {{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
+                        <div class="hoverImage">
+                        </div>
+
                     </a>
                 </div>
                 {% endfor %}
@@ -91,10 +94,10 @@
 
     <div class="row agenda">
         {% for news in news|slice(0, 2) %}
-        <div class="col-md-5 carte_agenda">
+        <div class="col-md-5 col-9 mb-2 carte_agenda">
             <div class="row">
                 <div class="col-md-4 no-gutter">
-                    <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+                    <img alt="Sébastien Mao : {{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
                 </div>
 
                 <div class="col-md-8 contenu_agenda">
@@ -109,9 +112,8 @@
         </div>
         {% endfor %}
         <div class="col-md-3 offset-md-8 mt-4 mb-5">
-            <!-- Lien à faire - créer la page -->
-            <a href="{{ path('allNews')}}">
-                <button type="button" class="btn btnRed ">Voir l'agenda complet<span></span></button>
+                        <a href="{{ path('allNews')}}">
+                <button type="button" class="btn btnRed mb-5 ">Voir l'agenda complet<span></span></button>
             </a>
         </div>
     </div>
@@ -135,4 +137,25 @@
 
 <!-- Slider tuto en haut de page -->
 <script src="js/slider.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+    window.cookieconsent.initialise({
+        "palette": {
+            "popup": {
+                "background": "#2c2c2c"
+            },
+            "button": {
+                "background": "#ea1053"
+            }
+        },
+        "theme": "edgeless",
+        "content": {
+            "message": "En poursuivant la navigation sur le site, vous acceptez l'utilisation des cookies. Ils sont nécessaires au bon fonctionnement du site.",
+            "dismiss": "J'accepte",
+            "link": "En savoir plus",
+            "href": "/mentionsLegales"
+        }
+    });
+</script>
 {% endblock %}

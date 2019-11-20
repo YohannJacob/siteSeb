@@ -5,11 +5,10 @@ Album :
 {% endblock %}
 
 {% block body %}
-
 <div class="container no-gutter album">
   <div class="row">
     <div class="col-md-4 coverBig">
-      <img alt="{{ albums.title }}" class="mini" src="{{ vich_uploader_asset(albums, 'coverFile')}}">
+      <img alt="Sébastien Mao : {{ albums.title }}" class="mini" src="{{ vich_uploader_asset(albums, 'coverFile')}}">
     </div>
     <div class="col-md-7 offset-md-1">
       <h4>{{ albums.title }}</h4>
@@ -33,7 +32,8 @@ Album :
       </p>
       <p class="contenu pb-3">{{ albums.content | raw }}</p>
       <div class="col-md-3 offset-md-9">
-        <a name="" id="" class="btn btnRed" href="{{ albums.buyLink }}" target="blank" role="button">Acheter<span></span></a>
+        <a name="" id="" class="btn btnRed" href="{{ albums.buyLink }}" target="blank"
+          role="button">Acheter<span></span></a>
       </div>
     </div>
 
@@ -51,11 +51,14 @@ Album :
   <div class="row mt-5">
     <div class="col-md-12 align-self-center mb-5">
       <h2 class="text-center">making-of</h2>
+
     </div>
 
     {% if albums.makingOf.content is defined %}
     <div class="col-md-12 text-center ">
       {{albums.makingOf.content|raw }}
+
+
     </div>
     {% endif %}
   </div>
@@ -68,8 +71,9 @@ Album :
 {% block press %}
 <div class="row">
   <div class="row press">
+
     <div class="col-md-12 mb-5">
-      <img alt="bulles" src="../img/bulles.png">
+      <img alt="Sébastien Mao : " src="../img/bulles.png">
     </div>
 
     {# Slider press #}
@@ -78,10 +82,10 @@ Album :
 
     <!-- Start Carousel -->
 
-
-    {# {% if albums.presses|length != 0 %} #}
-
     <div class="col-md-6 offset-3">
+      <div class="col-md-8 offset-md-2 align-self-center mt-5 mb-5">
+        <H3 class="text-center">CE QU'ILS EN DISENT...</H3>
+      </div>
       <div id="carousel" class="carousel slide mt-3 mb-2" data-ride="carousel">
         <i class="fas fa-quote-right"></i>
         <ol class="carousel-indicators">
@@ -92,10 +96,16 @@ Album :
         </ol>
         <div class="col-md-12 carousel-inner align-items-center">
           {% for presse in presses %}
-          <div class="col-md-12 carousel-item {% if loop.first %} active {% endif %}">
+          <div class="col-md-12 carousel-item  {% if loop.first %} active {% endif %}">
+            <div class="row">
+              <div class="col-md-12 logo">
+                <img alt="Sébastien Mao : {{ presse.journal }}" class="mini" src="{{ vich_uploader_asset(presse, 'ImageFile')}}">
+              </div>
+              <div class="col-md-12">
+                <p class="critique">{{ presse.content }}</p>
+              </div>
 
-            <p class="journal mb-5">{{ presse.journal }}</p>
-            <p class="critique">{{ presse.content }}</p>
+            </div>
           </div>
           {% endfor %}
         </div>

@@ -28,11 +28,15 @@
     <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
     <link rel="stylesheet" href="{{ asset('css/base.css') }}" type="text/css" />
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
 
     <title>
         {% block title %}{% endblock %}
     </title>
     {% block stylesheets %}{% endblock %}
+
+
 </head>
 
 <body>
@@ -128,48 +132,117 @@
 
     {# Footer #}
     <div class="container-fluid">
-        <footer class="redFooter" id="sticky-footer">
-            <ul class="col-md-10 offset-md-1 align-self-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('biographie')}}">Biographie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('allNews')}}">Agenda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('allMakingOf')}}">Making-Of</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('contact')}}">Contact</a>
-                </li>
-                {% for detail in details %}
-                <li class="nav-item pl-5">
-                    <a class="nav-link" href="{{ detail.facebook }}" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ detail.twitter }}" target="_blank">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ detail.instagram }}" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </li>
-                {% endfor %}
-                <li class="nav-item">
+
+
+
+        <!-- Footer A remplacer-->
+        <footer class="page-footer font-small indigo redFooter">
+            
+
+            <!-- Footer Links -->
+            <div class="container">
+
+                <!-- Grid row-->
+                <div class="row text-center d-flex justify-content-center pt-4 mb-1">
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mb-3">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a class="nav-link" href="{{ path('home')}}">Home</a>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mb-3">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a class="nav-link" href="{{ path('mesAlbums')}}">Albums</a>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mb-3">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a class="nav-link" href="{{ path('biographie')}}">Biographie</a>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mb-3">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a class="nav-link" href="{{ path('allNews')}}">Agenda</a>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mb-3">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a class="nav-link" href="{{ path('allMakingOf')}}">Making-Of</a>
+                        </h6>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 mb-3">
+                        <h6 class="text-uppercase font-weight-bold">
+                            <a class="nav-link" href="{{ path('contact')}}">Contact</a>
+                        </h6>
+                    </div>
+
+                    {% for detail in details %}
+                    <!-- Facebook -->
+                    <div class="col-md-1 mb-3">
+                        <a class="nav-link" href="{{ detail.facebook }}" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                    <!-- Twitter -->
+                    <div class="col-md-1 mb-3">
+                        <a class="nav-link" href="{{ detail.twitter }}" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+
+                    <!--Instagram-->
+                    <div class="col-md-1 mb-3">
+                        <a class="nav-link" href="{{ detail.instagram }}" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    {% endfor %}
+
+
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row-->
+                {# <hr class="rgba-white-light" style="margin: 0 15%;"> #}
+
+                <!-- Grid row-->
+                <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+
+                    <!-- Grid column -->
+                    <div class="col-md-10 col-12">
+                        <p style="color: white">Bienvenue sur le site de Sébastien Mao, auteur de Bande déssinée. Vous retrouverez ici tout ses albums ainsi que ses news. Il vous partagera également ses secrets de fabrication dans la rubrique Making-of. </p>
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Footer Links -->
+
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">
                     <a class="nav-link copi" href="http://www.studio-yaho.fr" target="_blank">
                         <small>&copy; Studio-Yaho.fr 2019</small>
                     </a>
-                </li>
-            </ul>
+                </div>
+                <!-- Copyright -->
 
         </footer>
+        <!-- Footer -->
     </div>
 
     {% block javascripts %}
@@ -182,6 +255,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
     {% endblock %}
+
+
 </body>
 
 </html>

@@ -52,7 +52,7 @@ Administration du site
             <div class="d-flex align-items-center col-md-12 mb-4 carte_agenda">
                 <div class="row">
                     <div class="col-md-4 no-gutter">
-                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
 
                     <div class="col-md-8 contenu_agenda">
@@ -72,7 +72,7 @@ Administration du site
             <div class="col-md-12 mb-4 carte_agenda">
                 <div class="row">
                     <div class="col-md-4 no-gutter">
-                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
 
                     <div class="col-md-8 contenu_agenda">
@@ -92,7 +92,7 @@ Administration du site
             <div class="col-md-12 mb-4 carte_agenda">
                 <div class="row">
                     <div class="col-md-4 no-gutter">
-                        <img alt="{{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
 
                     <div class="col-md-8 contenu_agenda">
@@ -143,7 +143,7 @@ Administration du site
         <div class="col-md-5 d-flex justify-content-between ml-5 mb-4 carte_agenda">
             <div class="row">
                 <div class="col-md-4 no-gutter">
-                    <img alt="{{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+                    <img alt="Sébastien Mao : {{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
                 </div>
 
                 <div class="col-md-8 contenu_agenda">
@@ -183,7 +183,7 @@ Administration du site
         {% for allMakingOf in allMakingOfs %}
         <div class="col-md-3 mb-5 cover">
             <a href="{{ path('editMakingOf', {'id': allMakingOf.id}) }}">
-                <img alt="{{ allMakingOf.album.title }}" class="mini"
+                <img alt="Sébastien Mao : {{ allMakingOf.album.title }}" class="mini"
                     src="{{ vich_uploader_asset(allMakingOf.album, 'coverFile')}}">
             </a>
             <a href="{{ path('editMakingOf', {'id': allMakingOf.id}) }}">
@@ -211,7 +211,7 @@ Administration du site
 
         {% for press in press %}
         <div class="col-md-2 mb-5 cover">
-            <img alt="{{ press.album.title }}" class="mini" src="{{ vich_uploader_asset(press.album, 'coverFile')}}">
+            <img alt="Sébastien Mao : {{ press.album.title }}" class="mini" src="{{ vich_uploader_asset(press.album, 'coverFile')}}">
             <h3 class="text-center mt-2">{{press.journal}}</h3>
             <a href="{{ path('editPress', {'id': press.id}) }}">
                 <button type="button" class="btnBlack col-md-12 mt-2 mb-2">Modifier<span></span></button>
