@@ -286,6 +286,78 @@ p {
 
     opacity: 1;
 } */
+/* css du slider albums image*/
+.fifthSection {
+    background-color: #FFF;
+    max-height: 450px;
+    overflow: hidden;
+}
+
+.temoignages {
+    padding: 60px 0 60px 0;
+    z-index: 17;
+    text-align: center;
+    position: relative;
+}
+
+.fifthSection .row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.testimonial {
+    min-height: 250px;
+    background-color: #FFF;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .4);
+    border-radius: 15px;
+    color: #263f5b;
+    text-align: right;
+    box-sizing: border-box;
+    margin: 30px 15px 0 15px;
+    padding: 30px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+
+.hidden {
+    position: absolute;
+    top: 106px;
+    left: -556px;
+    display: none;
+}
+
+.prev,
+.next {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+        border: #263f5b;
+    border-radius: 50%;
+    /* text-indent: 100%; */
+    white-space: nowrap;
+    overflow: hidden;
+    top: 50%;
+}
+
+.prev {
+    background-image: url(atoms-icons-arrow.svg);
+    left: -90px;
+    transform: rotate(180deg);
+}
+
+.next {
+    background-image: url(atoms-icons-arrow.svg);
+    right: 30px;
+}
+
+.prev:hover,
+.next:hover {
+    background-image: url(atoms-icons-arrow_hover.svg);
+}
+
 
 /* CSS du slider photo */
 

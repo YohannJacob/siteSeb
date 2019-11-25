@@ -1,0 +1,68 @@
+{% extends "baseBack.html.twig" %}
+
+{% block title %}
+Ajouter une image
+{% endblock %}
+
+{% block body %} 
+<h4 class="mb-5">{% if editMode %}
+    Modification
+    {% else %}
+    Création
+    {% endif %} d'un album</h4>
+
+
+{{ form_start(formAlbumImage) }}
+{{ form_widget(formAlbumImage) }}
+
+<button class="btn btn-info btn-sm btnRed">{{ button_label|default('Enregistrer') }}</button>
+
+{# <button class="btn btnRed" id="test" type="submit">
+            {% if editMode %}
+            Modifier
+            {% else %}
+            Publier
+            {% endif %} qs
+        </button> #}
+
+{{ form_end(formAlbumImage) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Bootstrap JQuery Plugin -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Ajouter plusieurs images -->
+<script src="js/albumImage.js"></script>
+{% endblock %}
+
+
+
+
+
+
+
+{# {{ form_start(formAlbum)}}
+
+        <div class="row">
+            <div class="col" id="some-custom-id">
+                {{ form_row(formAlbum.title, {'attr': {'placeholder': "Titre de l'album"}}) }}
+                {{ form_errors(formAlbum.title) }}
+            </div>
+        </div>
+
+        <div class="my-custom-class-for-errors"></div>
+
+        {{ form_row(formAlbum.subtitle, {'attr': {'placeholder': "Sous-titre de l'album"}}) }}
+        {{ form_row(formAlbum.scenario, {'attr': {'placeholder': "Scénariste"}}) }}
+        {{ form_row(formAlbum.dessin, {'attr': {'placeholder': "Déssinateur"}}) }}
+        {{ form_row(formAlbum.Couleur, {'attr': {'placeholder': "Coloriste"}}) }}
+        {{ form_row(formAlbum.date) }}
+        {{ form_row(formAlbum.content, {'attr': {'placeholder': "Texte de présentation"}}) }}
+        {{ form_row(formAlbum.buyLink, {'attr': {'placeholder': "Lien Bamboo de vente"}}) }}
+        {{ form_row(formAlbum.coverFile, {'attr': {'placeholder': "Lien de l'image"}}) }} #}

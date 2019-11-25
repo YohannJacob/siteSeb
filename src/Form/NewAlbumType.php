@@ -22,10 +22,7 @@ class NewAlbumType extends AbstractType
     {
         $builder
             ->add('coverFile', FileType::class, array('data_class' => null))
-            ->add('title', TextType::class, [
-                'block_prefix' => 'wrapped_text',
-                'block_name' => 'custom_name',
-            ])
+            ->add('title')
             ->add('subtitle')
             ->add('scenario')
             ->add('dessin')
@@ -33,12 +30,14 @@ class NewAlbumType extends AbstractType
             ->add('date')
             ->add('content')
             ->add('buyLink')
-            ->add('Album_images', CollectionType::class, [
-                'entry_type' => AlbumImageType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true
-            ])
+            ->add('image1File', FileType::class, array('data_class' => null))
+            ->add('image2File', FileType::class, array('data_class' => null))
+            ->add('image3File', FileType::class, array('data_class' => null))
+            ->add('image4File', FileType::class, array('data_class' => null))
+            ->add('image5File', FileType::class, array('data_class' => null))
+            ->add('image6File', FileType::class, array('data_class' => null))
+            ->add('image7File', FileType::class, array('data_class' => null))
+          
         ;
     }
 

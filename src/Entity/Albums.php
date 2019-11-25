@@ -22,67 +22,49 @@ class Albums
      * @ORM\Column(type="integer")
      */
     private $id;
-
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de renseigner un titre")
-     * @Assert\Length(min = 5, max = 50, minMessage = "Le titre doit contenir au minimum {{ limit }} caractères", maxMessage = "Le titre doit contenir au maximum {{ limit }} caractères")
+     * * @Assert\Length(
+     *      min = 2,
+     *      max = 70,
+     *      minMessage = "Le titre de l'album dit contenir au minimum {{ limit }} caractères",
+     *      maxMessage = "Le titre de l'album dit contenir au maximum {{ limit }} caractères"
+     * )
      */
     private $title;
-    
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de renseigner un sous-titre")
-     * @Assert\Length(min = 5, max = 50, minMessage = "Le sous-titre doit contenir au minimum {{ limit }} caractères", maxMessage = "Le sous-titre doit contenir au maximum {{ limit }} caractères")
      */
     private $Subtitle;
-
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de renseigner un scénariste")
-     * @Assert\Length(min = 1, max = 20, minMessage = "Le scénariste doit contenir au minimum {{ limit }} caractères", maxMessage = "Le scénariste doit contenir au maximum {{ limit }} caractères")
      */
     private $Scenario;
-
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de renseigner un déssinateur")
-     * @Assert\Length(min = 1, max = 20, minMessage = "Le déssinateur doit contenir au minimum {{ limit }} caractères", maxMessage = "Le déssinateur doit contenir au maximum {{ limit }} caractères")
      */
     private $Dessin;
-    
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de renseigner un coloriste")
-     * @Assert\Length(min = 1, max = 20, minMessage = "Le coloriste doit contenir au minimum {{ limit }} caractères", maxMessage = "Le coloriste doit contenir au maximum {{ limit }} caractères")
      */
     private $Couleur;
-
-     /**
+    /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Merci de renseigner un lien (faire un copier depuis le site de Bamboo")
-     * @Assert\Length(min = 1, max = 250, minMessage = "Le lien doit contenir au minimum {{ limit }} caractères", maxMessage = "Le lien doit contenir au maximum {{ limit }} caractères")
      */
     private $buyLink;
-
     /**
      * @ORM\Column(type="date")
      */
     private $date;
-
     /**
      * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Merci de renseigner un contenu")
-     * @Assert\Length(min = 5, max = 850, minMessage = "Le contenu doit contenir au minimum {{ limit }} caractères", maxMessage = "Le contenu doit contenir au maximum {{ limit }} caractères")
      */
     private $content;
-
     /**
      * @var string|null
      * @ORM\Column(type="string", length=255)
      */
     private $coverName;
-
     /**
      * @var File
      * @Vich\UploadableField(mapping="cover_image", fileNameProperty="coverName")
@@ -90,37 +72,125 @@ class Albums
      * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
      */
     private $coverFile;
-
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
-
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\MakingOf", mappedBy="album", cascade={"persist", "remove"})
      */
     private $makingOf;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Slider", mappedBy="album")
      */
     private $sliders;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Press", mappedBy="album")
      */
     private $presses;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\AlbumImage", mappedBy="album")
+   /**
+     * @var File
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image1Name")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
      */
-    private $albumImages;
-    
+    private $image1File;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image1Name;
+
+   /**
+     * @var File
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image2Name")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
+     */
+    private $image2File;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image2Name;
+
+   /**
+     * @var File
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image3Name")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
+     */
+    private $image3File;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image3Name;
+
+   /**
+     * @var File
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image4Name")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
+     */
+    private $image4File;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image4Name;
+
+   /**
+     * @var File
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image5Name")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
+     */
+    private $image5File;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image5Name;
+
+   /**
+     * @var File
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image6Name")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
+     */
+    private $image6File;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image6Name;
+
+   /**
+     * @var File
+     * @Vich\UploadableField(mapping="album_image", fileNameProperty="image7Name")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Image(mimeTypes={"image/png", "image/jpeg", "image/jpg", "image/gif"})
+     */
+    private $image7File;
+
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image7Name;
+
     public function __construct()
     {
         $this->sliders = new ArrayCollection();
         $this->presses = new ArrayCollection();
-        $this->albumImages = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -130,7 +200,7 @@ class Albums
     {
         return $this->title;
     }
-    public function setTitle(?string $title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
@@ -311,32 +381,254 @@ class Albums
     }
 
     /**
-     * @return Collection|AlbumImage[]
+     * @return File|UploadedFile
      */
-    public function getAlbumImages(): Collection
+    public function getImage1File()
     {
-        return $this->albumImages;
+        return $this->image1File;
     }
 
-    public function addAlbumImage(AlbumImage $albumImage): self
+    public function setImage1File(?File $image1File = null): void
     {
-        if (!$this->albumImages->contains($albumImage)) {
-            $this->albumImages[] = $albumImage;
-            $albumImage->setAlbum($this);
+        $this->image1File = $image1File;
+        if (null !== $image1File) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
         }
+    }
+    
+    /**
+     * @return null|string
+     */
+    public function getImage1Name()
+    {
+        return $this->image1Name;
+    }
+    /**
+     * @param null|string $image1Name
+     * @return Albums
+     */
+    public function setImage1Name($image1Name)
+    {
+        $this->image1Name = $image1Name;
+
+        return $this;
+    }
+    /**
+     * @return File|UploadedFile
+     */
+    public function getImage2File()
+    {
+        return $this->image2File;
+    }
+
+    public function setImage2File(?File $image2File = null): void
+    {
+        $this->image2File = $image2File;
+        if (null !== $image2File) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getImage2Name()
+    {
+        return $this->image2Name;
+    }
+    /**
+     * @param null|string $image2Name
+     * @return Albums
+     */
+    public function setImage2Name($image2Name)
+    {
+        $this->image2Name = $image2Name;
+
+        return $this;
+    }
+    /**
+     * @return File|UploadedFile
+     */
+    public function getImage3File()
+    {
+        return $this->image3File;
+    }
+
+    public function setImage3File(?File $image3File = null): void
+    {
+        $this->image3File = $image3File;
+        if (null !== $image3File) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    /**
+     * @return null|string
+     */
+    public function getImage3Name()
+    {
+        return $this->image3Name;
+    }
+    /**
+     * @param null|string $image3Name
+     * @return Albums
+     */
+    public function setImage3Name($image3Name)
+    {
+        $this->image3Name = $image3Name;
+
+        return $this;
+    }
+    /**
+     * @return File|UploadedFile
+     */
+    public function getImage4File()
+    {
+        return $this->image4File;
+    }
+
+    public function setImage4File(?File $image4File = null): void
+    {
+        $this->image4File = $image4File;
+        if (null !== $image4File) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    /**
+     * @return null|string
+     */
+    public function getImage4Name()
+    {
+        return $this->image4Name;
+    }
+    /**
+     * @param null|string $image4Name
+     * @return Albums
+     */
+    public function setImage4Name($image4Name)
+    {
+        $this->image4Name = $image4Name;
+
+        return $this;
+    }
+    /**
+     * @return File|UploadedFile
+     */
+    public function getImage5File()
+    {
+        return $this->image5File;
+    }
+
+    public function setImage5File(?File $image5File = null): void
+    {
+        $this->image5File = $image5File;
+        if (null !== $image5File) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    /**
+     * @return null|string
+     */
+    public function getImage5Name(): ?string
+    {
+        return $this->image5Name;
+    }
+    /**
+     * @param null|string $image5Name
+     * @return Albums
+     */
+    public function setImage5Name($image5Name)
+    {
+        $this->image5Name = $image5Name;
+
+        return $this;
+    }
+    /**
+     * @return File|UploadedFile
+     */
+    public function getImage6File()
+    {
+        return $this->image6File;
+    }
+
+    public function setImage6File(?File $image6File = null): void
+    {
+        $this->image6File = $image6File;
+        if (null !== $image6File) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    /**
+     * @return null|string
+     */
+    public function getImage6Name()
+    {
+        return $this->image6Name;
+    }
+    /**
+     * @param null|string $image6Name
+     * @return Albums
+     */
+    public function setImage6Name($image6Name)
+    {
+        $this->image6Name = $image6Name;
+
+        return $this;
+    }
+    /**
+     * @return File|UploadedFile
+     */
+    public function getImage7File()
+    {
+        return $this->image7File;
+    }
+
+    public function setImage7File(?File $image7File = null): void
+    {
+        $this->image7File = $image7File;
+        if (null !== $image7File) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+    /**
+     * @return null|string
+     */
+    public function getImage7Name()
+    {
+        return $this->image7Name;
+    }
+    /**
+     * @param null|string $image7Name
+     * @return Albums
+     */
+    public function setImage7Name($image7Name)
+    {
+        $this->image7Name = $image7Name;
 
         return $this;
     }
 
-    public function removeAlbumImage(AlbumImage $albumImage): self
+    public function getImage8file(): ?string
     {
-        if ($this->albumImages->contains($albumImage)) {
-            $this->albumImages->removeElement($albumImage);
-            // set the owning side to null (unless already changed)
-            if ($albumImage->getAlbum() === $this) {
-                $albumImage->setAlbum(null);
-            }
-        }
+        return $this->Image8file;
+    }
+
+    public function setImage8file(?string $Image8file): self
+    {
+        $this->Image8file = $Image8file;
 
         return $this;
     }

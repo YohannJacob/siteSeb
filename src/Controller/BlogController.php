@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Albums;
 use App\Entity\AlbumImage;
+use App\Entity\Albums;
 use App\Entity\Contact;
 use App\Entity\Detail;
 use App\Entity\MakingOf;
@@ -11,26 +11,31 @@ use App\Entity\News;
 use App\Entity\Press;
 use App\Entity\Slider;
 use App\Entity\User;
+
 use App\Form\ContactType;
 use App\Form\DetailType;
 use App\Form\MakingOfType;
 use App\Form\NewAlbumType;
-use App\Form\AlbumImageType;
 use App\Form\NewsType;
 use App\Form\PressType;
 use App\Form\SliderType;
+use App\Form\AlbumImageType;
+
 use App\Repository\AlbumsRepository;
+use App\Repository\AlbumImageRepository;
 use App\Repository\DetailRepository;
 use App\Repository\MakingOfRepository;
 use App\Repository\NewsRepository;
 use App\Repository\PressRepository;
 use App\Repository\SliderRepository;
+
 use Doctrine\Common\Persistence\ObjectManager;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface; // Nous appelons le bundle KNP Paginator
 
+// Nous appelons le bundle KNP Paginator
 
 class BlogController extends AbstractController
 {
@@ -89,12 +94,12 @@ class BlogController extends AbstractController
 
         $repo = $this->getDoctrine()->getRepository(Albums::class);
         $albums = $repo->find($id);
-     
+
         $repo2 = $this->getDoctrine()->getRepository(Detail::class);
         $details = $repo2->findAll();
         $repo3 = $this->getDoctrine()->getRepository(Press::class);
         $presses = $repo3->findBy(
-            ['album' => $albums->getId()],);
+            ['album' => $albums->getId()], );
 
         return $this->render('blog/album.html.twig', [
             'albums' => $albums,
@@ -119,7 +124,7 @@ class BlogController extends AbstractController
         $articles = $paginator->paginate(
             $newsRepository, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            8 // Nombre de résultats par page
+            8// Nombre de résultats par page
         );
 
         return $this->render('blog/allNews.html.twig', [
@@ -145,7 +150,7 @@ class BlogController extends AbstractController
         $articles = $paginator->paginate(
             $newsRepository, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            8 // Nombre de résultats par page
+            8// Nombre de résultats par page
         );
 
         return $this->render('blog/allNewsOld.html.twig', [
@@ -154,7 +159,6 @@ class BlogController extends AbstractController
             'details' => $detailRepository->findAll(),
         ]);
     }
-
 
     /**
      * @Route("/news/{id}  ", name="news")
@@ -247,7 +251,7 @@ class BlogController extends AbstractController
         $details = $repo2->findAll();
 
         $contact = new Contact();
-        // var_dump($details);
+
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
@@ -370,8 +374,10 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("newAlbum", name="newAlbum"), methods={"GET","POST"})
-    */
+     * @Route("newAlbum", name="newAlbum")
+     * @Route("/albums/{id}/edit", name="editAlbum")
+     *
+     */
     public function formAlbum(Albums $album = null, Request $request, ObjectManager $manager)
     {
         // usually you'll want to make sure the user is authenticated first
@@ -384,39 +390,32 @@ class BlogController extends AbstractController
 
         if (!$album) {
             $album = new Albums();
-            $albumImage = new AlbumImage();
         }
         $form = $this->createForm(NewAlbumType::class, $album);
         $form->handleRequest($request);
 
-        $formImage = $this->createForm(AlbumImageType::class, $albumImage);
-        $formImage->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $albumImages = $album->getAlbumImages();
-            foreach ($albumImages as $key => $albumImage) {
-                $albumImage->setAlbum($album);
-                $albumImages->set($key, $albumImage);
-            }
-            $manager = $this->getDoctrine()->getManager();
             $manager->persist($album);
             $manager->flush();
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('AlbumImage');
         }
-
         return $this->render('blog/createAlbum.html.twig', [
+            'controller_name' => 'BlogController',
             'album' => $album,
             'formAlbum' => $form->createView(),
-            'formAlbumImage' => $formImage->createView(),
             'editMode' => $album->getId() !== null,
         ]);
     }
+    
+
+
+
 
     /**
-     * @Route("/albums/{id}/edit", name="editAlbum"), methods={"GET","POST"})
+     * @Route("addAlbumImage", name="addAlbumImage")
      */
-    public function editAlbum(Albums $album, Request $request ): Response
+    public function AddAlbumImage(AlbumImage $albumImage = null, AlbumImageRepository $albumImageRepository, AlbumsRepository $albumsRepository)
     {
         // usually you'll want to make sure the user is authenticated first
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -426,31 +425,25 @@ class BlogController extends AbstractController
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
-        $form = $this->createForm(NewAlbumType::class, $album);
+        if (!$albumImage) {
+            $albumImage = new AlbumImage();
+        }
+        $form = $this->createForm(AlbumImageType::class, $albumImage);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $albumImages = $album->getAlbumImages();
-            foreach ($albumImages as $key => $albumImage) {
-                $albumImage->setAlbum($album);
-                $albumImages->set($key, $albumImage);
-            }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($album);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin', [
-                'id' => $product->getId(),
-            ]);
+            $manager->persist($albumImage);
+            $manager->flush();
+            return $this->redirectToRoute('addAlbumImage');
         }
-
-        return $this->render('blog/createAlbum.html.twig', [
-            'album' => $album,
-            'formAlbum' => $form->createView(),
-            'editMode' => $album->getId() !== null,
+        return $this->render('blog/addMakingOfImage.html.twig', [
+            'controller_name' => 'BlogController',
+            'albumImage' => $albumImage,
+            'formMakingOfImage' => $form->createView(),
         ]);
     }
+
 
 
     /**

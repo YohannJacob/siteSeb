@@ -46,22 +46,51 @@ Album :
     </div>
     <div class="col-md-12 text-center ">
       Les photos
+
+
+      <div class="row carouselAlbum">
+        <div>
+          <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image1File')}}">
+        </div>
+        <div>
+          <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image2File')}}">
+        </div>
+        <div>
+          <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image3File')}}">
+        </div>
+        <div>
+          <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image4File')}}">
+        </div>
+        <div>
+          <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image5File')}}">
+        </div>
+        <div>
+          <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image6File')}}">
+        </div>
+        <div>
+          <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image7File')}}">
+        </div>
+      </div>
+  
     </div>
+
+
   </div>
-  <div class="row mt-5">
-    <div class="col-md-12 align-self-center mb-5">
-      <h2 class="text-center">making-of</h2>
+</div>
+<div class="row mt-5">
+  <div class="col-md-12 align-self-center mb-5">
+    <h2 class="text-center">making-of</h2>
 
-    </div>
-
-    {% if albums.makingOf.content is defined %}
-    <div class="col-md-12 text-center ">
-      {{albums.makingOf.content|raw }}
-
-
-    </div>
-    {% endif %}
   </div>
+
+  {% if albums.makingOf.content is defined %}
+  <div class="col-md-12 text-center ">
+    {{albums.makingOf.content|raw }}
+
+
+  </div>
+  {% endif %}
+</div>
 
 </div>
 
@@ -99,7 +128,8 @@ Album :
           <div class="col-md-12 carousel-item  {% if loop.first %} active {% endif %}">
             <div class="row">
               <div class="col-md-12 logo">
-                <img alt="Sébastien Mao : {{ presse.journal }}" class="mini" src="{{ vich_uploader_asset(presse, 'ImageFile')}}">
+                <img alt="Sébastien Mao : {{ presse.journal }}" class="mini"
+                  src="{{ vich_uploader_asset(presse, 'ImageFile')}}">
               </div>
               <div class="col-md-12">
                 <p class="critique">{{ presse.content }}</p>
@@ -134,4 +164,18 @@ Album :
 <!-- Ajouter plusieurs images -->
 <script src="../js/zoomOut.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('.carouselAlbum').slick({
+      infinite: true,
+      slidesToShow: 2,
+      slidesToScroll: 2
+    });
+  });
+
+
+</script>
 {% endblock %}

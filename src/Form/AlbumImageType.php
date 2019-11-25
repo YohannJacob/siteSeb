@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\AlbumImage;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -13,11 +14,16 @@ class AlbumImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('imageFile',VichImageType::class, [
-                'required' => false,
-                'download_uri' => true,
-                'image_uri' => true
-            ]);
+            ->add('Album_images', CollectionType::class, [
+                'entry_type' => AlbumImageType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true
+            ])
+            ->add('album', EntityType::class,[
+                'class' => Albums::class,
+                'choice_label' => 'title',
+            ])
         ;
     }
 
