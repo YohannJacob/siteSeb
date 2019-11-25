@@ -1,27 +1,21 @@
 {% extends "baseBack.html.twig" %}
-{% form_theme formAlbumImage 'bootstrap_4_layout.html.twig' %}
+{% form_theme formMakingOfImage 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}
 Ajouter des photos à un MakingOf
 {% endblock %}
 
 {% block body %}
-<h4 class="mb-5">{% if editMode %}
-    Modifier les
-    {% else %}
-    Ajouter les
-    {% endif %} photos d'un making Of</h4>
+
+<h4 class="mb-5">
+    Ajouter les photos d'un making Of</h4>
 
 {{ form_start(formMakingOfImage) }}
 {{ form_widget(formMakingOfImage) }}
+
+
+<button class="btn btn-primary" type="submit">Publier</button>
 {{ form_end(formMakingOfImage)}}
-
-{% endfor %}
-</ul>
-
-<button type="button" id="add-another-collection-widget"
-    data-list-selector="#album-images-fields-list">Sauvegarder</button>
-
 {% endblock %}
 
 {% block javascripts %}

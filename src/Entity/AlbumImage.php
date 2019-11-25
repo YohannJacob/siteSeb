@@ -38,7 +38,7 @@ class AlbumImage
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="albumimagebis", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="makingOf_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File
      */

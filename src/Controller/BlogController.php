@@ -409,13 +409,10 @@ class BlogController extends AbstractController
     }
     
 
-
-
-
     /**
      * @Route("addAlbumImage", name="addAlbumImage")
      */
-    public function AddAlbumImage(AlbumImage $albumImage = null, AlbumImageRepository $albumImageRepository, AlbumsRepository $albumsRepository)
+    public function AddAlbumImage(AlbumImage $albumImage = null, Request $request, ObjectManager $manager)
     {
         // usually you'll want to make sure the user is authenticated first
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -435,44 +432,14 @@ class BlogController extends AbstractController
 
             $manager->persist($albumImage);
             $manager->flush();
+
             return $this->redirectToRoute('addAlbumImage');
         }
+
         return $this->render('blog/addMakingOfImage.html.twig', [
             'controller_name' => 'BlogController',
-            'albumImage' => $albumImage,
             'formMakingOfImage' => $form->createView(),
         ]);
-    }
-
-
-
-    /**
-     * @Route("/deleteNews/{id}",  name="deleteNews")
-     */
-    public function deleteNews($id)
-    {
-        // usually you'll want to make sure the user is authenticated first
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
-        // returns your User object, or null if the user is not authenticated
-        // use inline documentation to tell your editor your exact User class
-        /** @var \App\Entity\User $user */
-        $user = $this->getUser();
-
-        $manager = $this->getDoctrine()->getManager();
-        $news = $manager->getRepository(News::class)->find($id);
-
-        if (!$news) {
-            throw $this->createNotFoundException(
-                'There are no news with the following id: ' . $id
-            );
-        }
-
-        $manager->remove($news);
-        $manager->flush();
-
-        return $this->redirect('/admin');
-
     }
 
     /**
@@ -507,6 +474,37 @@ class BlogController extends AbstractController
             'editMode' => $news->getId() !== null,
         ]);
     }
+
+    /**
+     * @Route("/deleteNews/{id}",  name="deleteNews")
+     */
+    public function deleteNews($id)
+    {
+        // usually you'll want to make sure the user is authenticated first
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // returns your User object, or null if the user is not authenticated
+        // use inline documentation to tell your editor your exact User class
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $manager = $this->getDoctrine()->getManager();
+        $news = $manager->getRepository(News::class)->find($id);
+
+        if (!$news) {
+            throw $this->createNotFoundException(
+                'There are no news with the following id: ' . $id
+            );
+        }
+
+        $manager->remove($news);
+        $manager->flush();
+
+        return $this->redirect('/admin');
+
+    }
+
+
 
     /**
      * @Route("/deleteMakingOf/{id}",  name="deleteMakingOf")

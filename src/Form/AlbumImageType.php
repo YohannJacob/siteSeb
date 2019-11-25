@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\AlbumImage;
+use App\Entity\Albums;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,13 +17,8 @@ class AlbumImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Album_images', CollectionType::class, [
-                'entry_type' => AlbumImageType::class,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true
-            ])
-            ->add('album', EntityType::class,[
+        ->add('ImageFile', FileType::class, array('data_class' => null))
+        ->add('album', EntityType::class,[
                 'class' => Albums::class,
                 'choice_label' => 'title',
             ])
