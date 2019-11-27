@@ -7,17 +7,23 @@
 {% block title %}Créer un Making-Of{% endblock %}
 
 {% block body %}
-{% include  " @ CKSourceCKFinder / setup.html.twig " %}
+
+{{ tinymce_init({
+    theme: {'simple':{'language': app.request.locale, 'height': 500 }},
+toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist
+numlist outdent indent | link image",
+autosave_ask_before_unload: false,
+})
+}}
 <h4 class="mb-5">{% if editMode %}
     Modification
     {% else %}
     Création
     {% endif %}d'un Making-Of</h4>
 <form method="post" enctype="multipart/form-data">
-    {# {{ form_rest(formMakingOf) }} #}
-     {{ form_start(formMakingOf)}}
-    {{ form_widget(formMakingOf.Content) }}
-    {{ form_widget(formMakingOf.album) }}
+    {% form_theme formMakingOf 'blog/_form_theme.html.twig' %}
+    {{ form_rest(formMakingOf) }}
+
 
     <button class="btn btn-primary" type="submit">
         {% if editMode %}

@@ -55,7 +55,7 @@
     <div class="row">
         <div class="col-md-12 mb-5 cover">
             {% for detail in details %}
-            <p>{{ detail.pressContact }}</p>
+            <p>{{ detail.pressContact|raw }}</p>
             {% endfor %}
         </div>
 

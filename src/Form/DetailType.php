@@ -4,12 +4,10 @@ namespace App\Form;
 
 use App\Entity\Detail;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-
 
 class DetailType extends AbstractType
 {
@@ -18,8 +16,10 @@ class DetailType extends AbstractType
         $builder
             ->add('bio', TextareaType::class, [
                 'attr' => ['class' => 'tinymce'],
-                ])
-            ->add('press_contact')
+            ])
+            ->add('press_contact', TextareaType::class, [
+                'attr' => ['class' => 'tinymce'],
+            ])
             ->add('twitter')
             ->add('facebook')
             ->add('instagram')

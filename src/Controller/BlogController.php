@@ -11,7 +11,7 @@ use App\Entity\News;
 use App\Entity\Press;
 use App\Entity\Slider;
 use App\Entity\User;
-
+use App\Form\AlbumImageType;
 use App\Form\ContactType;
 use App\Form\DetailType;
 use App\Form\MakingOfType;
@@ -19,23 +19,19 @@ use App\Form\NewAlbumType;
 use App\Form\NewsType;
 use App\Form\PressType;
 use App\Form\SliderType;
-use App\Form\AlbumImageType;
-
-use App\Repository\AlbumsRepository;
 use App\Repository\AlbumImageRepository;
+use App\Repository\AlbumsRepository;
 use App\Repository\DetailRepository;
 use App\Repository\MakingOfRepository;
 use App\Repository\NewsRepository;
 use App\Repository\PressRepository;
 use App\Repository\SliderRepository;
-
 use Doctrine\Common\Persistence\ObjectManager;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
-// Nous appelons le bundle KNP Paginator
 
 class BlogController extends AbstractController
 {
@@ -97,14 +93,20 @@ class BlogController extends AbstractController
 
         $repo2 = $this->getDoctrine()->getRepository(Detail::class);
         $details = $repo2->findAll();
+
         $repo3 = $this->getDoctrine()->getRepository(Press::class);
         $presses = $repo3->findBy(
             ['album' => $albums->getId()], );
+
+        $repo4 = $this->getDoctrine()->getRepository(AlbumImage::class);
+        $makingOfs = $repo4->findBy(
+            ['Album' => $albums->getId()], );
 
         return $this->render('blog/album.html.twig', [
             'albums' => $albums,
             'details' => $details,
             'presses' => $presses,
+            'makingOfs' => $makingOfs,
         ]);
     }
 
@@ -124,7 +126,7 @@ class BlogController extends AbstractController
         $articles = $paginator->paginate(
             $newsRepository, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            8// Nombre de résultats par page
+            7// Nombre de résultats par page
         );
 
         return $this->render('blog/allNews.html.twig', [
@@ -150,7 +152,7 @@ class BlogController extends AbstractController
         $articles = $paginator->paginate(
             $newsRepository, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            8// Nombre de résultats par page
+            7// Nombre de résultats par page
         );
 
         return $this->render('blog/allNewsOld.html.twig', [
@@ -173,6 +175,7 @@ class BlogController extends AbstractController
 
         $repo = $this->getDoctrine()->getRepository(News::class);
         $news = $repo->find($id);
+
         $repo2 = $this->getDoctrine()->getRepository(Detail::class);
         $details = $repo2->findAll();
         return $this->render('blog/news.html.twig', [
@@ -332,6 +335,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'La modification du slider a bien été prise en compte. ');
+
             $manager->persist($slider);
             $manager->flush();
 
@@ -344,10 +349,11 @@ class BlogController extends AbstractController
 
         ]);
     }
+
 /**
- * @Route("/deleteAlbum/{id}",  name="deleteAlbum")
+ * @Route("/deleteAlbum/{id}", name="deleteAlbum", methods={"POST"})
  */
-    public function deleteAlbum($id)
+    public function deleteAlbum(Request $request)
     {
         // usually you'll want to make sure the user is authenticated first
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -356,20 +362,16 @@ class BlogController extends AbstractController
         // use inline documentation to tell your editor your exact User class
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
+        if ($request->isXmlHttpRequest()) {
+            $id = $request->get('entityId');
+            $manager = $this->getDoctrine()->getManager();
 
-        $managerAlbum = $this->getDoctrine()->getManager();
-        $album = $managerAlbum->getRepository(Albums::class)->find($id);
+            $evenement = $manager->getRepository(Albums::class)->find($id);
 
-        if (!$album) {
-            throw $this->createNotFoundException(
-                'There are no albums with the following id: ' . $id
-            );
+            $manager->remove($evenement);
+            $manager->flush();
+            return new JsonResponse('good');
         }
-
-        $managerAlbum->remove($album);
-        $managerAlbum->flush();
-
-        return $this->redirect('/admin');
 
     }
 
@@ -395,10 +397,11 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Vous venez de publier un nouvel album. ');
 
             $manager->persist($album);
             $manager->flush();
-            return $this->redirectToRoute('AlbumImage');
+            return $this->redirectToRoute('admin');
         }
         return $this->render('blog/createAlbum.html.twig', [
             'controller_name' => 'BlogController',
@@ -407,12 +410,11 @@ class BlogController extends AbstractController
             'editMode' => $album->getId() !== null,
         ]);
     }
-    
 
     /**
      * @Route("addAlbumImage", name="addAlbumImage")
      */
-    public function AddAlbumImage(AlbumImage $albumImage = null, Request $request, ObjectManager $manager)
+    public function AddAlbumImage(AlbumImage $albumImage = null, AlbumImageRepository $albumImageRepository, AlbumsRepository $albumsRepository, Request $request, ObjectManager $manager)
     {
         // usually you'll want to make sure the user is authenticated first
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
@@ -424,22 +426,48 @@ class BlogController extends AbstractController
 
         if (!$albumImage) {
             $albumImage = new AlbumImage();
+
         }
         $form = $this->createForm(AlbumImageType::class, $albumImage);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() && $form->get('saveAndClose')->isClicked()) {
+            $this->addFlash('success', 'Vous venez d\'ajouter une ou des images au making-Of. ');
 
             $manager->persist($albumImage);
             $manager->flush();
+            return $this->redirectToRoute('admin');
+        }
 
+        if ($form->isSubmitted() && $form->isValid() && $form->get('saveAndAdd')->isClicked()) {
+            $this->addFlash('success', 'Vous avez ajouté une photo, vous pouvez en ajouter une autre');
+            $manager->persist($albumImage);
+            $manager->flush();
             return $this->redirectToRoute('addAlbumImage');
         }
 
         return $this->render('blog/addMakingOfImage.html.twig', [
             'controller_name' => 'BlogController',
+            'makingOfImages' => $albumImageRepository->findAll(),
             'formMakingOfImage' => $form->createView(),
         ]);
+    }
+/**
+ * @Route("/deleteAlbumImage/{id}", name="deleteAlbumImage", methods={"POST"})
+ */
+    public function deleteImageMakingOf(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $id = $request->get('entityId');
+            $manager = $this->getDoctrine()->getManager();
+
+            $evenement = $manager->getRepository(AlbumImage::class)->find($id);
+
+            $manager->remove($evenement);
+            $manager->flush();
+            return new JsonResponse('good');
+        }
+
     }
 
     /**
@@ -463,6 +491,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Vous venez d\'ajouter une news. ');
+
             $manager->persist($news);
             $manager->flush();
 
@@ -503,8 +533,6 @@ class BlogController extends AbstractController
         return $this->redirect('/admin');
 
     }
-
-
 
     /**
      * @Route("/deleteMakingOf/{id}",  name="deleteMakingOf")
@@ -556,10 +584,12 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Vous venez d\'ajouter un making-Of. ');
+
             $manager->persist($makingOf);
             $manager->flush();
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('addAlbumImage');
         }
 
         return $this->render('blog/createMakingOf.html.twig', [
@@ -590,6 +620,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Vous venez de modifier les détails de votre site. ');
+
             $manager->persist($detail);
             $manager->flush();
 
@@ -653,6 +685,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Vous venez d\'ajouter une critique presse. ');
+
             $manager->persist($press);
             $manager->flush();
 

@@ -10,12 +10,33 @@ Ajouter des photos à un MakingOf
 <h4 class="mb-5">
     Ajouter les photos d'un making Of</h4>
 
+{% for message in app.flashes('success') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+{% form_theme formMakingOfImage 'blog/_form_theme.html.twig' %}
 {{ form_start(formMakingOfImage) }}
 {{ form_widget(formMakingOfImage) }}
-
-
-<button class="btn btn-primary" type="submit">Publier</button>
 {{ form_end(formMakingOfImage)}}
+
+
+<div class="row">
+
+    {% for makingOfImage in makingOfImages %}
+    <div class="col-md-3 mb-5 text-center mt-5">
+        <div id="delete-{{makingOfImage.id}}">
+            <img alt="Sébastien Mao" class="mini carte_agenda"
+                src="{{ vich_uploader_asset(makingOfImage, 'imageFile')}}">
+            <a href="{{ path('deleteAlbumImage', {'id': makingOfImage.id}) }}" class="btn btn-sm js-delete-image mt-4"
+                id="{{ makingOfImage.id }}">
+                <button class="btnRed">Supprimer l'image<span></span></button>
+            </a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
 {% endblock %}
 
 {% block javascripts %}
@@ -26,6 +47,4 @@ Ajouter des photos à un MakingOf
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
-<!-- Ajouter plusieurs images -->
-<script src="js/albumImage.js"></script>
 {% endblock %}

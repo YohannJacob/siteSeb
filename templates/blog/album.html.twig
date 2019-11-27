@@ -10,7 +10,7 @@ Album :
     <div class="col-md-4 coverBig">
       <img alt="Sébastien Mao : {{ albums.title }}" class="mini" src="{{ vich_uploader_asset(albums, 'coverFile')}}">
     </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-7 offset-md-1 mt-3">
       <h4>{{ albums.title }}</h4>
       <p class="subTitle pt-3 pb-3">{{ albums.Subtitle }}</p>
       <p>Scénario :
@@ -41,56 +41,77 @@ Album :
   </div>
 
   <div class="row mt-5">
-    <div class="col-md-12 align-self-center mb-5">
+    <div class="col-md-12 align-self-center mb-4">
       <h2 class="text-center">Extraits de l’album</h2>
     </div>
-    <div class="col-md-12 text-center ">
-      Les photos
-
+    <div class="col-10 offset-1 text-center ">
 
       <div class="row carouselAlbum">
+        {% if albums.image1file is not null %}
         <div>
           <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image1File')}}">
         </div>
+        {% endif %}
+
+        {% if albums.image2file is not null %}
         <div>
           <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image2File')}}">
         </div>
+        {% endif %}
+
+        {% if albums.image3File is not null %}
         <div>
           <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image3File')}}">
         </div>
+        {% endif %}
+        {% if albums.image4File is not null %}
         <div>
           <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image4File')}}">
         </div>
+        {% endif %}
+        {% if albums.image5File is not null %}
         <div>
           <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image5File')}}">
         </div>
+        {% endif %}
+        {% if albums.image6File is not null %}
         <div>
           <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image6File')}}">
         </div>
+        {% endif %}
+        {% if albums.image7File is not null %}
         <div>
           <img alt="Sébastien Mao" class="mini" src="{{ vich_uploader_asset(albums, 'image7File')}}">
         </div>
+        {% endif %}
       </div>
-  
+      {% if albums.image2File is null %}
+      <div class="col-md-6 text-center mb-5 ">Les visuels de cet album arrive prochainement.</div>
+      {% endif %}
     </div>
 
 
   </div>
 </div>
+
 <div class="row mt-5">
-  <div class="col-md-12 align-self-center mb-5">
+  <div class="col-md-12 align-self-center mb-3">
     <h2 class="text-center">making-of</h2>
-
   </div>
-
-  {% if albums.makingOf.content is defined %}
-  <div class="col-md-12 text-center ">
-    {{albums.makingOf.content|raw }}
-
-
-  </div>
-  {% endif %}
 </div>
+
+<div class="row mt-5">
+
+  <div class="col-md-8 text-center ">
+    {{albums.makingOf.content|raw }}
+  </div>
+
+  <div class="col-md-4 coverBig">
+    {% for makingOf in makingOfs %}
+    <img alt="Sébastien Mao" class="mini mb-2" src="{{ vich_uploader_asset(makingOf, 'imageFile')}}">
+    {% endfor %}
+  </div>
+
 
 </div>
 
@@ -98,33 +119,36 @@ Album :
 
 
 {% block press %}
-<div class="row">
-  <div class="row press">
 
+<div class="press">
+  <div class="row ">
     <div class="col-md-12 mb-5">
       <img alt="Sébastien Mao : " src="../img/bulles.png">
     </div>
 
     {# Slider press #}
-    <div class="col-md-12 align-self-center mt-5 mb-5">
+    <div class="col-md-12 align-self-center mt-5 mb-5 marge-press">
     </div>
 
     <!-- Start Carousel -->
 
-    <div class="col-md-6 offset-3">
+    <div class="col-8 offset-2 mb-5">
       <div class="col-md-8 offset-md-2 align-self-center mt-5 mb-5">
         <H3 class="text-center">CE QU'ILS EN DISENT...</H3>
       </div>
       <div id="carousel" class="carousel slide mt-3 mb-2" data-ride="carousel">
         <i class="fas fa-quote-right"></i>
         <ol class="carousel-indicators">
+
           {% for presse in presses %}
           <li data-target=".carousel" data-slide-to="{{ loop.index0 }}" {% if loop.first %} class="active" {% endif %}>
           </li>
           {% endfor %}
         </ol>
         <div class="col-md-12 carousel-inner align-items-center">
+
           {% for presse in presses %}
+
           <div class="col-md-12 carousel-item  {% if loop.first %} active {% endif %}">
             <div class="row">
               <div class="col-md-12 logo">
@@ -139,19 +163,19 @@ Album :
           </div>
           {% endfor %}
         </div>
-        <a class="carousel-control-prev" href="#carousel" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href="#carousel" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
       </div>
+      <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#carousel" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
     </div>
-
-
-    <!-- End Carousel -->
   </div>
 </div>
+
+<!-- End Carousel -->
+
 {% endblock %}
 {% block javascripts %}
 

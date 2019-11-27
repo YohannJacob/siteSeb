@@ -17,8 +17,8 @@ Créer un Slider
     {% endif %} d'un slider</h4>
 
 <form method="post" enctype="multipart/form-data">
-    {# {{ form_rest(formSlider) }} #}
 
+    {% form_theme formSlider 'blog/_form_theme.html.twig' %}
     {{ form_start(formSlider)}}
 
     <div class="row">

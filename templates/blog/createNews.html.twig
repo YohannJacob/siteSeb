@@ -4,21 +4,29 @@
 {% block title %} Créer une news {% endblock %}
 
 {% block body %}
-    <h4 class="mb-5">{% if editMode %}
-            Modification
-        {% else %}
-            Création
-        {% endif %} d'une News</h4>
-    <form method="post" enctype="multipart/form-data">
-        {{ form_rest(formNews) }}
+{{ tinymce_init({
+    theme: {'simple':{'language': app.request.locale, 'height': 300 }},
+toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist
+numlist outdent indent | link image",
+autosave_ask_before_unload: false,
+})
+}}
+<h4 class="mb-5">{% if editMode %}
+    Modification
+    {% else %}
+    Création
+    {% endif %} d'une News</h4>
+<form method="post" enctype="multipart/form-data">
+    {% form_theme formNews 'blog/_form_theme.html.twig' %}
+    {{ form_rest(formNews) }}
 
-        <button class="btn btn-primary" type="submit">
-                {% if editMode %}
-                    Modifier
-                {% else %}
-                    Publier
-                {% endif %}
-            </button>
-    </form>
+    <button class="btn btn-primary" type="submit">
+        {% if editMode %}
+        Modifier
+        {% else %}
+        Publier
+        {% endif %}
+    </button>
+</form>
 
 {% endblock %}

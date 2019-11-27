@@ -28,7 +28,6 @@
     <script src="https://kit.fontawesome.com/2cdb4abbf9.js"></script>
     <link rel="stylesheet" href="{{ asset('css/base.css') }}" type="text/css" />
     <link href="{{ asset('css/style.css')}}" rel="stylesheet" type="text/css" />
-
     <title>
         {% block title %}{% endblock %}
     </title>
@@ -94,17 +93,13 @@
         <footer class="redFooter" id="sticky-footer">
             <ul class="col-md-10 offset-md-1 align-self-center">
                 <li class="nav-item">
-                    <a class="nav-link copi" href="http://studio-yaho.fr target=_blank">
+                    <a class="nav-link copi2" href="http://studio-yaho.fr target=_blank">
                         <small>&copy; Studio-Yaho.fr 2019</small>
                     </a>
                 </li>
             </ul>
-
-
         </footer>
     </div>
-
-    {% block javascripts %}
     <!-- JQuery Plugin -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -112,6 +107,10 @@
     <!-- Bootstrap JQuery Plugin -->
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="{{ asset('js/deleteImage.js')}}"></script>
+    <script src=" {{ asset('js/fileInput.js')}}"></script>
+
+    {% block javascripts %}
     {% endblock %}
 </body>
 

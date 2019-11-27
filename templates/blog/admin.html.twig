@@ -5,6 +5,13 @@ Administration du site
 
 {% block body %}
 <div class="container-fluid album">
+
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
     {# Les albums #}
     <div class="row mb-5">
         <div class="col-md-12">
@@ -19,14 +26,14 @@ Administration du site
         </div>
 
         {% for album in albums %}
-        <div class="col-md-3 mb-5 text-center cover">
-            <a href="{{ path('editAlbum', {'id': album.id}) }}">
+        <div class="col-md-3 mb-5 text-center cover" id="delete-{{album.id}}">
+            <a href=" {{ path('editAlbum', {'id': album.id}) }}">
                 <img alt="{{ album.title }}" class="mini" src="{{ vich_uploader_asset(album, 'coverFile')}}">
             </a>
             <a href="{{ path('editAlbum', {'id': album.id}) }}">
                 <button type="button" class="btnBlack col-md-12 mt-2 mb-2">Modifier l'album<span></span></button>
             </a>
-            <a href="{{ path('deleteAlbum', {'id': album.id}) }}">
+            <a href="{{ path('deleteAlbum', {'id': album.id}) }}" class="js-delete-image" id="{{ album.id }}">
                 <button type="button" class="btnRed col-md-12 mt-2 mb-2">Supprimer l'album<span></span></button>
             </a>
         </div>
@@ -52,7 +59,8 @@ Administration du site
             <div class="d-flex align-items-center col-md-12 mb-4 carte_agenda">
                 <div class="row">
                     <div class="col-md-4 no-gutter">
-                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini"
+                            src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
 
                     <div class="col-md-8 contenu_agenda">
@@ -72,7 +80,8 @@ Administration du site
             <div class="col-md-12 mb-4 carte_agenda">
                 <div class="row">
                     <div class="col-md-4 no-gutter">
-                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini"
+                            src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
 
                     <div class="col-md-8 contenu_agenda">
@@ -92,7 +101,8 @@ Administration du site
             <div class="col-md-12 mb-4 carte_agenda">
                 <div class="row">
                     <div class="col-md-4 no-gutter">
-                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini" src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
+                        <img alt="Sébastien Mao : {{ slider.title }}" class="mini"
+                            src="{{ vich_uploader_asset(slider, 'ImageFile')}}">
                     </div>
 
                     <div class="col-md-8 contenu_agenda">
@@ -108,20 +118,6 @@ Administration du site
 
             {% endif %}
             {% endfor %}
-
-
-            {# <a class="d-flex align-items-center" href="{{ path('newSlider', {'position':3})}}">
-                <button type="button" class="btn btn-dark mb-2">Ajouter le slider</button>
-            </a> #}
-
-            {# <a class="d-flex align-items-center" href="{{ path('newSlider', {'position':1})}}">
-            <button type="button" class="btn btn-dark mb-2">Ajouter le slider</button>
-        </a> #}
-
-
-            {# <a class="d-flex align-items-center" href="{{ path('newSlider', {'position':2})}}">
-            <button type="button" class="btn btn-dark mb-2">Ajouter le slider</button>
-        </a> #}
 
         </div>
     </div>
@@ -143,12 +139,13 @@ Administration du site
         <div class="col-md-5 d-flex justify-content-between ml-5 mb-4 carte_agenda">
             <div class="row">
                 <div class="col-md-4 no-gutter">
-                    <img alt="Sébastien Mao : {{ news.title }}" class="mini" src="{{ vich_uploader_asset(news, 'ImageFile')}}">
+                    <img alt="Sébastien Mao : {{ news.title }}" class="mini"
+                        src="{{ vich_uploader_asset(news, 'ImageFile')}}">
                 </div>
 
                 <div class="col-md-8 contenu_agenda">
                     <h4 class="mb-3">{{ news.title|e }}</h4>
-                    <p class="mb-2">{{ news.content|e }}</p>
+                    <p class="mb-2">{{ news.content|e|slice(0, 45) }}</p>
                     <p class="dateParution"><i class="fas fa-map-marker-alt"></i> {{ news.place|e }}</p>
                     <p class="dateParution"><i class="far fa-clock"></i>{{ news.date|e|date('d/m/Y à H:i')}} </p>
                     <a href="{{ path('deleteNews', {'id': news.id}) }}" id="btn" class="link2">
@@ -177,6 +174,9 @@ Administration du site
                 <a class="text-center" href="{{ path('newMakingOf')}}">
                     <button type="button" class="btnBlack mb-2">Ajouter un making-Of<span></span></button>
                 </a>
+                <a class="text-center" href="{{ path('addAlbumImage')}}">
+                    <button type="button" class="btnRed mb-2">Ajouter une ou des images<span></span></button>
+                </a>
             </div>
         </div>
 
@@ -196,6 +196,7 @@ Administration du site
         {% endfor %}
     </div>
 
+
     {# Les critiques press #}
     <div class="row mb-5">
         <div class="col-md-12">
@@ -211,7 +212,8 @@ Administration du site
 
         {% for press in press %}
         <div class="col-md-2 mb-5 cover">
-            <img alt="Sébastien Mao : {{ press.album.title }}" class="mini" src="{{ vich_uploader_asset(press.album, 'coverFile')}}">
+            <img alt="Sébastien Mao : {{ press.album.title }}" class="mini"
+                src="{{ vich_uploader_asset(press.album, 'coverFile')}}">
             <h3 class="text-center mt-2">{{press.journal}}</h3>
             <a href="{{ path('editPress', {'id': press.id}) }}">
                 <button type="button" class="btnBlack col-md-12 mt-2 mb-2">Modifier<span></span></button>
@@ -227,7 +229,8 @@ Administration du site
     <div class="row mb-5">
         <div class="col-md-12">
             <h2 class="text-center">Divers</h2>
-            <p class="text-center mb-4">Ici vous pouvez, changer la biographie, la photo, le contact presse ainsi que
+            <p class="text-center mb-4">Ici vous pouvez, changer la biographie, la photo, le contact presse ainsi
+                que
                 les
                 liens Instagram, facebook et Twitter</p>
         </div>

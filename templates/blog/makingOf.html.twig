@@ -9,9 +9,15 @@
     <div class="col-md-12 align-self-center mb-5">
         <h2 class="text-center">" {{ makingOfs.album.title }} "<br> le Making-Of</h2>
     </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-8 text-center ">
 
-    <div class="col-md-12 align-self-center mb-5">
         {{ makingOfs.content|raw }}
     </div>
-</div>
-{% endblock %}
+    <div class="col-md-4 coverBig">
+        {% for makingOfs in makingOfs %}
+        <img alt="Sébastien Mao" class="mini mb-2" src="{{ vich_uploader_asset(makingOfs.album, 'image1file')}}">
+        {% endfor %}
+    </div>
+    {% endblock %}

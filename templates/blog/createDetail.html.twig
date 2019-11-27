@@ -2,28 +2,31 @@
 {% form_theme formDetail 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}
-   Personaliser le site
+Personaliser le site
 {% endblock %}
 
 {% block body %}
 {{ tinymce_init({
     theme: {'simple':{'language': app.request.locale, 'height': 500 }},
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-    autosave_ask_before_unload: false,
-    })
+toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist
+numlist outdent indent | link image",
+autosave_ask_before_unload: false,
+})
 }}
-    <h4>Personaliser le site</h4>
 
-    <form method="post" enctype="multipart/form-data">
-        {{ form_rest(formDetail) }}
+<h4 class="mb-5">Personaliser le site</h4>
 
-        <button class="btn btn-primary" type="submit">
-                {% if editMode %}
-                    Modifier
-                {% else %}
-                    Publier
-                {% endif %}
-            </button>
-    </form>
+<form method="post" enctype="multipart/form-data">
+    {% form_theme formDetail 'blog/_form_theme.html.twig' %}
+    {{ form_rest(formDetail) }}
+
+    <button class="btn btn-primary" type="submit">
+        {% if editMode %}
+        Modifier
+        {% else %}
+        Publier
+        {% endif %}
+    </button>
+</form>
 
 {% endblock %}

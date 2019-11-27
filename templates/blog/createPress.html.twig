@@ -2,25 +2,26 @@
 {% form_theme formPress 'bootstrap_4_layout.html.twig' %}
 
 {% block title %}
-   Ajouter une critique Presse
+Ajouter une critique Presse
 {% endblock %}
 
 {% block body %}
 <h4 class="mb-5">{% if editMode %}
-        Modification d'
+    Modification d'
     {% else %}
-        Ajouter
+    Ajouter
     {% endif %} une critique Presse</h4>
-    <form method="post" enctype="multipart/form-data">
-        {{ form_rest(formPress) }}
+<form method="post" enctype="multipart/form-data">
+    {% form_theme formPress 'blog/_form_theme.html.twig' %}
+    {{ form_rest(formPress) }}
 
-        <button class="btn btn-primary" type="submit">
-                {% if editMode %}
-                    Modifier
-                {% else %}
-                    Publier
-                {% endif %}
-            </button>
-    </form>
+    <button class="btn btn-primary" type="submit">
+        {% if editMode %}
+        Modifier
+        {% else %}
+        Publier
+        {% endif %}
+    </button>
+</form>
 
 {% endblock %}

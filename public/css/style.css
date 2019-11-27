@@ -36,7 +36,7 @@ a:hover {
     height: 270px;
     background-color: var(--red);
     position: absolute;
-    top: 55%;
+    top: 22%;
     left: 50%;
     z-index: 15;
 
@@ -258,6 +258,7 @@ p {
     height: auto;
     border: 1px solid var(--black);
 }
+
 .cover img:hover {
     border: 4px solid var(--black);
 }
@@ -281,11 +282,6 @@ p {
 } */
 
 
-/* Apparition overlay sur passage souris */
-/* .cover:hover .hoverImage {
-
-    opacity: 1;
-} */
 /* css du slider albums image*/
 .fifthSection {
     background-color: #FFF;
@@ -327,14 +323,14 @@ p {
     display: none;
 }
 
-.prev,
-.next {
+.pagination .prev,
+.paginantion .next {
     position: absolute;
     display: block;
     box-sizing: border-box;
     width: 50px;
     height: 50px;
-        border: #263f5b;
+    border: #263f5b;
     border-radius: 50%;
     /* text-indent: 100%; */
     white-space: nowrap;
@@ -557,6 +553,11 @@ p {
 }
 
 /* CSS de l'espace press */
+
+.marge-press {
+    height: 150px;
+}
+
 .press {
     min-height: 790px;
     background-color: var(--red);
@@ -605,12 +606,23 @@ footer p {
     flex-shrink: none;
 }
 
-.copi {
+.copi1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 200;
     font-size: 12px;
     line-height: 15px;
     text-transform: lowercase;
+
+}
+
+
+.copi2 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: lowercase;
+    position: absolute;
 }
 
 .whiteFooter {
@@ -621,6 +633,7 @@ footer p {
 .redFooter {
     background-color: var(--red) !important;
     margin-top: auto;
+    min-height: 35px;
 }
 
 .redFooter .nav-link {
@@ -757,6 +770,11 @@ footer p {
     border: none;
 }
 
+.contact .form-control:focus {
+    border-color: #FFF;
+    box-shadow: 0 0 0 0.2rem #FFF;
+}
+
 .separator {
     border-bottom: 2px solid var(--red);
 
@@ -790,16 +808,18 @@ footer p {
 
     .textSlide {
         top: 20%;
-        left: -80px;
+        left: 0px;
 
     }
 
     .navigation {
         bottom: 315px;
     }
-    .trait{
+
+    .trait {
         display: none;
     }
+
     .titre {
         position: absolute;
         bottom: -60px;
@@ -810,7 +830,7 @@ footer p {
         width: 100vw;
     }
 
-    .mesAlbums{
+    .mesAlbums {
         margin-top: -315px;
     }
 
@@ -832,4 +852,17 @@ footer p {
         margin-right: 55px;
         width: 320px;
     }
-}
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 35px;
+        line-height: 30px;
+    }
+
+    .separator_vertical {
+        border-left: none;
+        padding-left: 0px;
+    }

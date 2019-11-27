@@ -3,25 +3,26 @@
 namespace App\Form;
 
 use App\Entity\News;
-use App\Entity\Albums;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class NewsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('content')
+            ->add('title', TextType::class, ['label' => 'Titre de la news'])
+            ->add('content', TextareaType::class, [
+                'attr' => ['class' => 'tinymce'],
+            ])
             ->add('Date')
-            ->add('Place')
+            ->add('Place', TextType::class, ['label' => 'Lieux'])
             ->add('ImageFile', FileType::class, array('data_class' => null))
-            ;
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

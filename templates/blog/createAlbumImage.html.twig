@@ -4,14 +4,14 @@
 Ajouter une image
 {% endblock %}
 
-{% block body %} 
+{% block body %}
 <h4 class="mb-5">{% if editMode %}
     Modification
     {% else %}
     Création
     {% endif %} d'un album</h4>
 
-
+{% form_theme formAlbumImage 'blog/_form_theme.html.twig' %}
 {{ form_start(formAlbumImage) }}
 {{ form_widget(formAlbumImage) }}
 

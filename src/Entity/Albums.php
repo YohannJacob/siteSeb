@@ -89,7 +89,7 @@ class Albums
      */
     private $presses;
 
-   /**
+    /**
      * @var File
      * @Vich\UploadableField(mapping="album_image", fileNameProperty="image1Name")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -99,11 +99,11 @@ class Albums
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image1Name;
 
-   /**
+    /**
      * @var File
      * @Vich\UploadableField(mapping="album_image", fileNameProperty="image2Name")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -113,11 +113,11 @@ class Albums
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image2Name;
 
-   /**
+    /**
      * @var File
      * @Vich\UploadableField(mapping="album_image", fileNameProperty="image3Name")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -127,11 +127,11 @@ class Albums
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image3Name;
 
-   /**
+    /**
      * @var File
      * @Vich\UploadableField(mapping="album_image", fileNameProperty="image4Name")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -141,11 +141,11 @@ class Albums
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image4Name;
 
-   /**
+    /**
      * @var File
      * @Vich\UploadableField(mapping="album_image", fileNameProperty="image5Name")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -155,11 +155,11 @@ class Albums
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image5Name;
 
-   /**
+    /**
      * @var File
      * @Vich\UploadableField(mapping="album_image", fileNameProperty="image6Name")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -169,11 +169,11 @@ class Albums
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image6Name;
 
-   /**
+    /**
      * @var File
      * @Vich\UploadableField(mapping="album_image", fileNameProperty="image7Name")
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -183,7 +183,7 @@ class Albums
 
     /**
      * @var string|null
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image7Name;
 
@@ -397,7 +397,7 @@ class Albums
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
-    
+
     /**
      * @return null|string
      */

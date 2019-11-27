@@ -2,17 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Slider;
 use App\Entity\Albums;
-use Symfony\Component\Form\AbstractType;
+use App\Entity\Slider;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
 
 class SliderType extends AbstractType
 {
@@ -20,16 +18,16 @@ class SliderType extends AbstractType
     {
         $builder
             ->add('ImageFile', FileType::class, array('data_class' => null))
-            ->add('Title')
-            ->add('SubTitle')
+            ->add('Title', TextType::class, ['label' => 'Titre rouge'])
+            ->add('SubTitle', TextType::class, ['label' => 'Sous-titre noir'])
             ->add('Position', ChoiceType::class, [
-                'choices'  => [
+                'choices' => [
                     '1' => 1,
                     '2' => 2,
                     '3' => 3,
                 ],
             ])
-            ->add('album', EntityType::class,[
+            ->add('album', EntityType::class, [
                 'class' => Albums::class,
                 'choice_label' => 'title',
             ])
